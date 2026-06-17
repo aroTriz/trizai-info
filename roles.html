@@ -259,14 +259,14 @@
       hamburger.classList.toggle('active');
       navLinks.classList.toggle('active');
       navOverlay.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+      document.body.classList.toggle('nav-open');
     }
 
     function closeMenu() {
       hamburger.classList.remove('active');
       navLinks.classList.remove('active');
       navOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.classList.remove('nav-open');
     }
 
     hamburger.addEventListener('click', toggleMenu);
