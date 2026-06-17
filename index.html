@@ -8,40 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
   <style>
-    .design-hero{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
-    .design-header{text-align:center;margin-bottom:60px}
-    .design-header h2{font-size:2.5rem;font-weight:800;margin-bottom:12px}
-    .design-header p{color:var(--gray-100);font-size:1rem;max-width:640px;margin:0 auto}
-    .swatch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:32px}
-    .swatch{border-radius:12px;padding:24px 16px;text-align:center;border:1px solid rgba(255,255,255,0.06);transition:transform .3s ease}
-    .swatch:hover{transform:translateY(-4px)}
-    .swatch .swatch-preview{width:48px;height:48px;border-radius:10px;margin:0 auto 12px;border:1px solid rgba(255,255,255,0.1)}
-    .swatch .swatch-name{font-size:.82rem;font-weight:600;color:var(--white);margin-bottom:4px}
-    .swatch .swatch-hex{font-size:.7rem;font-family:"JetBrains Mono",monospace;color:var(--gray-600)}
-    .type-sample{margin-top:32px}
-    .type-sample .type-row{display:flex;align-items:center;gap:24px;padding:16px 0;border-bottom:1px solid rgba(230,57,70,0.06)}
-    .type-sample .type-label{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--red);min-width:100px;text-transform:uppercase;letter-spacing:1px}
-    .type-sample .type-demo{flex:1;color:var(--white)}
-    .component-showcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:32px}
-    .component-card{background:var(--black);border:1px solid rgba(230,57,70,0.12);border-radius:14px;padding:28px;transition:all .4s cubic-bezier(0.34,1.56,0.64,1)}
-    .component-card:hover{border-color:var(--red);transform:translateY(-4px);box-shadow:0 12px 40px rgba(230,57,70,0.1)}
-    .component-card h4{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px}
-    .component-card p{font-size:.85rem;color:var(--gray-600);line-height:1.5}
-    .component-card .demo{margin-top:16px;padding:16px;background:var(--gray-900);border-radius:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .demo-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:var(--white);border:none;border-radius:50px;font-size:.82rem;font-weight:600;cursor:default;box-shadow:0 4px 16px var(--red-glow)}
-    .demo-btn-outline{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border:1px solid rgba(230,57,70,0.4);color:var(--red);border-radius:50px;font-size:.82rem;font-weight:600;cursor:default}
-    .demo-chip{display:inline-block;padding:4px 12px;background:rgba(230,57,70,0.1);color:var(--red);border-radius:100px;font-size:.72rem;font-family:"JetBrains Mono",monospace}
-    .demo-tag{display:inline-block;padding:2px 10px;background:var(--red);color:var(--white);border-radius:100px;font-size:.65rem;font-weight:700;font-family:"JetBrains Mono",monospace;text-transform:uppercase}
-    .effect-demo{margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-    .effect-card{padding:32px 24px;border-radius:14px;text-align:center;border:1px solid rgba(230,57,70,0.1);min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .4s ease}
-    .effect-card h5{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:4px}
-    .effect-card p{font-size:.78rem;color:var(--gray-600)}
-    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(230,57,70,0.3),transparent);margin:60px 0}
-    .toc-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;justify-content:center}
-    .toc-list a{padding:8px 18px;border:1px solid rgba(230,57,70,0.2);border-radius:100px;color:var(--gray-100);text-decoration:none;font-size:.82rem;transition:all .3s ease}
-    .toc-list a:hover{border-color:var(--red);color:var(--red);background:rgba(230,57,70,0.05)}
-    .code-block{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--gray-100);background:var(--black);border:1px solid rgba(230,57,70,0.12);border-radius:10px;padding:20px;line-height:1.6;overflow-x:auto;white-space:pre}
-    .code-block .highlight{color:var(--red);font-weight:600}
     .stash-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:.88rem}
     .stash-table th{text-align:left;padding:10px 12px;color:var(--red);font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--red)}
     .stash-table td{padding:10px 12px;border-bottom:1px solid rgba(230,57,70,0.08);color:var(--gray-100);vertical-align:top}
@@ -67,29 +33,12 @@
     .expertise-table td:first-child{font-family:"JetBrains Mono",monospace;color:var(--red)}
     .expertise-table tr:hover td{background:rgba(230,57,70,0.04)}
     .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
-    @media(max-width:767px){.design-header h2{font-size:1.6rem}.type-sample .type-row{flex-direction:column;align-items:flex-start;gap:4px}.type-sample .type-label{min-width:auto}.stash-cta{grid-template-columns:1fr}.code-block{font-size:.7rem;padding:14px}}
+    .code-block{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--gray-100);background:var(--black);border:1px solid rgba(230,57,70,0.12);border-radius:10px;padding:20px;line-height:1.6;overflow-x:auto;white-space:pre}
+    .code-block .highlight{color:var(--red);font-weight:600}
+    @media(max-width:767px){.stash-cta{grid-template-columns:1fr}.code-block{font-size:.7rem;padding:14px}}
   </style>
 </head>
 <body>
-  <nav>
-    <div class="container">
-      <div class="logo">TRI<span>ZAI</span></div>
-      <div class="nav-overlay" id="navOverlay"></div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#roles" class="nav-link">Roles</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#architecture" class="nav-link">Architecture</a></li>
-        <li><a href="#design" class="nav-link">Design</a></li>
-        <li><a href="#stack" class="nav-link">Stack</a></li>
-        <li><a href="#stash" class="nav-link">Stash</a></li>
-        <li><a href="https://discord.gg/CXe5pDHSG" target="_blank" style="color:var(--red);font-weight:600;"> Discord</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-  <div class="progress-bar" id="progressBar"></div>
-
   <!-- Hero -->
   <section class="hero hero-3d mesh-bg starfield" id="home">
     <div class="hero-content container">
@@ -130,7 +79,7 @@
   </section>
 
   <!-- Power Assessment -->
-  <section id="power" class="mesh-bg" style="background:var(--gray-900);scroll-margin-top:80px;">
+  <section id="power" class="mesh-bg" style="background:var(--gray-900);">
     <div class="container">
       <div class="assessment-header">
         <p class="section-label">Performance Analysis</p>
@@ -359,134 +308,6 @@
     </div>
   </section>
 
-  <!-- Design Hero -->
-  <section id="design" class="design-hero mesh-bg starfield" style="scroll-margin-top:80px;">
-    <div class="hero-content container">
-      <p class="section-label">Design System</p>
-      <h1 class="section-title gradient-text" style="font-size:3rem;">Trizai Design Language</h1>
-      <p class="section-desc" style="text-align:center;margin:0 auto;">A cohesive, dark-themed design system built around the Trizai red brand.</p>
-      <div class="toc-list">
-        <a href="#colors">Colors</a><a href="#typography">Typography</a><a href="#components">Components</a><a href="#effects">Effects</a><a href="#animations">Animations</a><a href="#responsive">Responsive</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Colors -->
-  <section id="colors" class="mesh-bg" style="padding:80px 0;scroll-margin-top:80px;">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Colors</p><h2 class="gradient-text">Brand Palette</h2><p>The Trizai design language is built on a single accent color - red.</p></div>
-      <h3 style="font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:16px;">Primary Accent - Red</h3>
-      <div class="swatch-grid">
-        <div class="swatch" style="background:#0D0D0D;"><div class="swatch-preview" style="background:#0D0D0D;"></div><div class="swatch-name">Black</div><div class="swatch-hex">#0D0D0D</div></div>
-        <div class="swatch" style="background:#1A1A1A;"><div class="swatch-preview" style="background:#1A1A1A;"></div><div class="swatch-name">Gray 900</div><div class="swatch-hex">#1A1A1A</div></div>
-        <div class="swatch" style="background:#2A2A2A;"><div class="swatch-preview" style="background:#2A2A2A;"></div><div class="swatch-name">Gray 800</div><div class="swatch-hex">#2A2A2A</div></div>
-        <div class="swatch" style="background:#757575;"><div class="swatch-preview" style="background:#757575;"></div><div class="swatch-name">Gray 600</div><div class="swatch-hex">#757575</div></div>
-        <div class="swatch" style="background:#9E9E9E;"><div class="swatch-preview" style="background:#9E9E9E;"></div><div class="swatch-name">Gray 300</div><div class="swatch-hex">#9E9E9E</div></div>
-        <div class="swatch" style="background:#E0E0E0;"><div class="swatch-preview" style="background:#E0E0E0;"></div><div class="swatch-name">Gray 100</div><div class="swatch-hex">#E0E0E0</div></div>
-        <div class="swatch" style="background:#F5F5F5;"><div class="swatch-preview" style="background:#F5F5F5;"></div><div class="swatch-name">Off White</div><div class="swatch-hex">#F5F5F5</div></div>
-        <div class="swatch" style="background:#FFFFFF;"><div class="swatch-preview" style="background:#FFFFFF;"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
-      </div>
-      <div class="swatch-grid" style="margin-top:40px;">
-        <div class="swatch" style="background:#E63946;"><div class="swatch-preview" style="background:#E63946;"></div><div class="swatch-name">Red</div><div class="swatch-hex">#E63946</div></div>
-        <div class="swatch" style="background:#B71C1C;"><div class="swatch-preview" style="background:#B71C1C;"></div><div class="swatch-name">Red Dark</div><div class="swatch-hex">#B71C1C</div></div>
-        <div class="swatch" style="background:linear-gradient(135deg,#E63946,#B71C1C);"><div class="swatch-preview" style="background:linear-gradient(135deg,#E63946,#ff6b6b);"></div><div class="swatch-name">Gradient</div><div class="swatch-hex">E63946 to ff6b6b</div></div>
-      </div>
-      <div style="margin-top:32px;background:var(--gray-900);border-radius:12px;padding:24px;">
-        <h4 style="font-size:0.95rem;font-weight:600;color:var(--white);margin-bottom:8px;">CSS Custom Properties</h4>
-        <div class="code-block">
-<span class="highlight">:root</span> {
-  --red: #E63946;  --red-dark: #B71C1C;
-  --red-glow: rgba(230,57,70,0.3);
-  --white: #FFFFFF;  --off-white: #F5F5F5;
-  --gray-100: #E0E0E0;  --gray-300: #9E9E9E;
-  --gray-600: #757575;  --gray-800: #2A2A2A;
-  --gray-900: #1A1A1A;  --black: #0D0D0D;
-  --nav-height: 72px;
-}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- Typography -->
-  <section id="typography" style="padding:80px 0;scroll-margin-top:80px;" class="mesh-bg">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Typography</p><h2 class="gradient-text">Font Stack</h2><p>Inter for UI, JetBrains Mono for code.</p></div>
-      <div class="type-sample">
-        <div class="type-row"><span class="type-label">Heading 1</span><span class="type-demo" style="font-size:3rem;font-weight:800;">Team Tris</span></div>
-        <div class="type-row"><span class="type-label">Heading 2</span><span class="type-demo" style="font-size:2.2rem;font-weight:700;">Section Title</span></div>
-        <div class="type-row"><span class="type-label">Heading 3</span><span class="type-demo" style="font-size:1.2rem;font-weight:700;font-family:JetBrains Mono,monospace;">Card Title</span></div>
-        <div class="type-row"><span class="type-label">Body</span><span class="type-demo" style="font-size:1rem;">The quick brown fox jumps over the lazy dog.</span></div>
-        <div class="type-row"><span class="type-label">Small</span><span class="type-demo" style="font-size:0.85rem;color:var(--gray-600);">Secondary text</span></div>
-        <div class="type-row"><span class="type-label">Mono</span><span class="type-demo" style="font-size:0.85rem;font-family:JetBrains Mono,monospace;"><span style="color:var(--red);">const</span> mastery <span style="color:var(--gray-100);">=</span> <span style="color:var(--gray-600);">true</span>;</span></div>
-        <div class="type-row"><span class="type-label">Label</span><span class="type-demo" style="font-size:0.78rem;text-transform:uppercase;letter-spacing:3px;color:var(--red);">Section Label</span></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- Components -->
-  <section id="components" style="padding:80px 0;scroll-margin-top:80px;" class="mesh-bg">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Components</p><h2 class="gradient-text">UI Component Library</h2><p>Reusable components with consistent styling, hover effects, and responsive behavior.</p></div>
-      <div class="component-showcase">
-        <div class="component-card"><h4>Primary Button</h4><p>Gradient-filled CTA with glow shadow.</p><div class="demo"><button class="demo-btn">Let's Build</button><button class="demo-btn-outline">Explore</button></div></div>
-        <div class="component-card"><h4>Info Card</h4><p>Content card with red top border and hover lift.</p><div class="demo" style="flex-direction:column;align-items:stretch;"><div style="background:var(--black);border-top:4px solid var(--red);border-radius:10px;padding:16px;"><div style="font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:4px;">Card Title</div><div style="font-size:0.78rem;color:var(--gray-600);">Card description text here.</div></div></div></div>
-        <div class="component-card"><h4>Chips &amp; Tags</h4><p>Inline metadata labels and status badges.</p><div class="demo"><span class="demo-chip">Roles/frontend.md</span><span class="demo-chip">config</span><span class="demo-tag">New</span></div></div>
-        <div class="component-card"><h4>Role Card</h4><p>Clickable role card with icon and hover effect.</p><div class="demo" style="flex-direction:column;"><div style="background:var(--black);border:1px solid rgba(230,57,70,0.15);border-radius:12px;padding:20px 16px;text-align:center;width:100%;"><div style="font-size:1.8rem;margin-bottom:8px;"></div><div style="font-size:0.9rem;font-weight:600;color:var(--white);">Frontend Developer</div></div></div></div>
-        <div class="component-card"><h4>Stat Card</h4><p>Metric display card with animated counter.</p><div class="demo"><div style="background:var(--black);border:1px solid rgba(230,57,70,0.2);border-radius:12px;padding:20px;text-align:center;min-width:120px;"><div style="font-size:1.5rem;font-weight:800;color:var(--red);">19</div><div style="font-size:0.78rem;color:var(--gray-600);">Roles</div></div></div></div>
-        <div class="component-card"><h4>Progress Bar</h4><p>Scroll progress indicator.</p><div class="demo" style="flex-direction:column;align-items:stretch;"><div style="height:6px;background:rgba(230,57,70,0.08);border-radius:3px;overflow:hidden;width:100%;"><div style="height:100%;width:65%;background:linear-gradient(90deg,var(--red),#ff6b6b);border-radius:3px;"></div></div><div style="font-size:0.7rem;color:var(--gray-600);text-align:center;">65% scroll progress</div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- Effects -->
-  <section id="effects" style="padding:80px 0;scroll-margin-top:80px;" class="mesh-bg">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Effects</p><h2 class="gradient-text">Visual Effects Library</h2><p>CSS-powered effects that give Trizai its distinctive visual identity.</p></div>
-      <div class="effect-demo">
-        <div class="effect-card glass-card tilt-card" style="cursor:default;"><h5>Glass Card</h5><p>backdrop-filter blur + semi-transparent bg</p></div>
-        <div class="effect-card" style="background:var(--black);border:1px solid rgba(230,57,70,0.2);"><div style="width:100%;position:relative;height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;"><div style="position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 50% 50%,rgba(230,57,70,0.15) 0%,transparent 60%);animation:pulse 3s ease-in-out infinite;"></div><h5 style="position:relative;z-index:1;">Mesh BG</h5></div><p style="margin-top:8px;">Animated radial gradients</p></div>
-        <div class="effect-card" style="background:var(--black);position:relative;overflow:hidden;"><div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 50%);border-radius:inherit;pointer-events:none;"></div><h5>Tilt Shine</h5><p>Hover-revealed diagonal highlight</p></div>
-        <div class="effect-card" style="background:var(--black);"><h5 style="text-shadow:0 0 7px var(--red),0 0 10px var(--red),0 0 21px var(--red),0 0 42px var(--red-glow);animation:neonPulse 2s ease-in-out infinite alternate;">Neon Glow</h5><p>Pulsing text glow effect</p></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- Animations -->
-  <section id="animations" style="padding:80px 0;scroll-margin-top:80px;" class="mesh-bg">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Animations</p><h2 class="gradient-text">Motion Design</h2><p>Smooth, purposeful animations that enhance the user experience.</p></div>
-      <div class="component-showcase">
-        <div class="component-card"><h4>Fade In Up</h4><p>Elements fade and slide up when scrolled into view.</p><div class="code-block" style="margin-top:12px;font-size:0.78rem;">.fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; } .fade-in.visible { opacity: 1; transform: translateY(0); }</div></div>
-        <div class="component-card"><h4>Hero Float</h4><p>Gentle 3D floating animation on the hero section.</p><div class="code-block" style="margin-top:12px;font-size:0.78rem;">@keyframes heroFloat { 0%, 100% { transform: translateZ(0) translateY(0); } 50% { transform: translateZ(30px) translateY(-10px); } }</div></div>
-        <div class="component-card"><h4>Mesh Shift</h4><p>Slow-moving radial gradients for depth.</p><div class="code-block" style="margin-top:12px;font-size:0.78rem;">@keyframes meshShift { 0% { transform: scale(1) rotate(0deg); } 33% { transform: scale(1.1) rotate(2deg); } 66% { transform: scale(0.95) rotate(-1deg); } 100% { transform: scale(1) rotate(0deg); } }</div></div>
-        <div class="component-card"><h4>Neon Pulse</h4><p>Pulsing text glow for highlighted elements.</p><div class="code-block" style="margin-top:12px;font-size:0.78rem;">@keyframes neonPulse { from { text-shadow: 0 0 7px var(--red), 0 0 10px var(--red); } to { text-shadow: 0 0 20px var(--red), 0 0 40px var(--red); } }</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- Responsive -->
-  <section id="responsive" style="padding:80px 0;scroll-margin-top:80px;" class="mesh-bg">
-    <div class="container">
-      <div class="design-header"><p class="section-label">Responsive</p><h2 class="gradient-text">Breakpoints &amp; Adaptations</h2><p>Three-tier responsive system with mobile-first approach.</p></div>
-      <div class="component-showcase">
-        <div class="component-card"><h4>Desktop &gt; 1024px</h4><p>Full 3-column layouts, multi-grid cards.</p><div class="demo"><div style="display:flex;gap:4px;"><div style="width:32px;height:24px;background:var(--red);border-radius:3px;"></div><div style="width:32px;height:24px;background:var(--red);border-radius:3px;opacity:0.7;"></div><div style="width:32px;height:24px;background:var(--red);border-radius:3px;opacity:0.5;"></div></div></div></div>
-        <div class="component-card"><h4>Tablet 768-1024px</h4><p>2-column grids, condensed spacing.</p><div class="demo"><div style="display:flex;gap:4px;"><div style="width:48px;height:24px;background:var(--red);border-radius:3px;"></div><div style="width:48px;height:24px;background:var(--red);border-radius:3px;opacity:0.7;"></div></div></div></div>
-        <div class="component-card"><h4>Mobile &lt; 768px</h4><p>Single column, slide-in nav drawer.</p><div class="demo"><div style="width:100%;height:24px;background:var(--red);border-radius:3px;opacity:0.7;"></div></div></div>
-      </div>
-    </div>
-  </section>
-
   <!-- Stack -->
   <section id="stack" class="mesh-bg starfield" style="scroll-margin-top:80px;">
     <div class="container">
@@ -645,32 +466,6 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const navOverlay = document.getElementById('navOverlay');
-
-    function toggleMenu() {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      navOverlay.classList.toggle('active');
-      document.body.classList.toggle('nav-open');
-    }
-
-    function closeMenu() {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
-      navOverlay.classList.remove('active');
-      document.body.classList.remove('nav-open');
-    }
-
-    hamburger.addEventListener('click', toggleMenu);
-    navOverlay.addEventListener('click', closeMenu);
-
-    // Close mobile menu when any nav link is clicked
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
     // Fade-in observer
     const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -684,30 +479,6 @@
       el.classList.add('fade-in');
       fadeObserver.observe(el);
     });
-
-    // Progress bar
-    const progressBar = document.getElementById('progressBar');
-    window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      progressBar.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
-    });
-
-    // Active nav tab - IntersectionObserver
-    const sections = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navAnchors.forEach(a => {
-            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-          });
-        }
-      });
-    }, { rootMargin: '-200px 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => sectionObserver.observe(s));
 
     // Toast
     const toast = document.getElementById('toast');
@@ -909,23 +680,6 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.dim-card').forEach(el => dimObserver.observe(el));
-
-    // Emoji particles in hero
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      const emojis = ['\u2699\uFE0F'];
-      for (let i = 0; i < 8; i++) {
-        const span = document.createElement('span');
-        span.className = 'emoji-particle';
-        span.textContent = emojis[0];
-        span.style.left = (Math.random() * 90 + 5) + '%';
-        span.style.top = (Math.random() * 60 + 20) + '%';
-        span.style.animationDelay = (Math.random() * 8) + 's';
-        span.style.animationDuration = (10 + Math.random() * 8) + 's';
-        span.style.fontSize = (1.2 + Math.random() * 1) + 'rem';
-        hero.appendChild(span);
-      }
-    }
 
     // Welcome toast
     setTimeout(() => {
