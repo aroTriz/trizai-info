@@ -105,7 +105,10 @@ nav .container {
   font-size: 0.88rem;
   font-weight: 500;
   transition: color 0.3s ease;
-  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 8px;
   white-space: nowrap;
 }
 
