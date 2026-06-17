@@ -52,7 +52,7 @@ nav .container {
 .logo a { color: inherit; text-decoration: none; }
 
 .nav-links {
-  display: flex; gap: 28px; list-style: none; align-items: center; height: 100%;
+  display: flex; gap: 28px; list-style: none; margin: 0; padding: 0;
 }
 .nav-links li {
   display: flex; align-items: center;
@@ -61,7 +61,7 @@ nav .container {
   color: var(--gray-100); text-decoration: none;
   font-size: 0.88rem; font-weight: 500;
   transition: color 0.3s ease; position: relative;
-  line-height: 1.2; padding: 6px 0;
+  display: block; line-height: var(--nav-height); padding: 0 6px;
 }
 .nav-links a::after {
   content: ''; position: absolute;
@@ -463,6 +463,7 @@ footer .footer-links a:hover { color: var(--red); }
     padding: 14px 16px;
     border-radius: 10px;
     font-size: 1rem;
+    line-height: normal;
   }
   .nav-links a:hover { background: rgba(230,57,70,0.1); }
   .nav-links a::after { display: none; }

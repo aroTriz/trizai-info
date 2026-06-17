@@ -65,15 +65,10 @@ nav .container {
 
 .nav-links {
   display: flex;
-  gap: 28px;
+  gap: 20px;
   list-style: none;
-  align-items: center;
-  height: 100%;
-}
-
-.nav-links li {
-  display: flex;
-  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
@@ -83,8 +78,9 @@ nav .container {
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
-  line-height: 1.2;
-  padding: 6px 0;
+  display: block;
+  line-height: var(--nav-height);
+  padding: 0 6px;
 }
 
 .nav-links a::after {
@@ -1598,6 +1594,7 @@ footer .footer-links a:hover { color: var(--red); }
     border-radius: 10px;
     font-size: 1rem;
     font-weight: 500;
+    line-height: normal;
   }
 
   .nav-links a:hover,
