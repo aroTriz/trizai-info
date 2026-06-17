@@ -796,6 +796,7 @@
         <li><a href="#stack">Stack</a></li>
         <li><a href="#architecture">Architecture</a></li>
         <li><a href="#tools">Tools</a></li>
+        <li><a href="#integrations">Integrations</a></li>
         <li><a href="#setup">Setup</a></li>
         <li><a href="stash.html">Stash</a></li>
       </ul>
@@ -808,7 +809,7 @@
       <div class="hero-badge">🧸 v2.0.0 &mdash; God of the Tech Field</div>
       <h1>Meet <span>Trizai</span></h1>
       <p class="subtitle">⚡ The complete intelligence of the technology field &mdash; omniscient, precise, one-shot perfect.</p>
-      <p class="tech-stack">🎨 12 Roles &bull; 🛠️ 38 Skills &bull; 🔄 5 Workflows &bull; ⚖️ 17 Golden Rules &bull; 🖥 4 Local Tools &bull; 🧠 7 Memory Files</p>
+      <p class="tech-stack">🎨 12 Roles &bull; 🛠️ 38 Skills &bull; 🔄 6 Workflows &bull; ⚖️ 17 Golden Rules &bull; 🖥 4 Local Tools &bull; 🧠 7 Memory Files &bull; 🦞 OpenClaw &bull; 🧬 Hermes Agent</p>
       <p class="tech-stack" style="margin-bottom:32px;">⚡ Priority Stack: <span>Tailwind</span> &bull; <span>Vue</span> &bull; <span>Ionic</span> &bull; <span>Laravel</span> &bull; <span>Nuxt</span> &bull; <span>MySQL</span> &bull; <span>TypeScript</span></p>
       <p style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--gray-600);margin-bottom:40px;">
         Developed by <span style="color:var(--red);">Eddyson Tristan B. Aromin</span>
@@ -1185,8 +1186,13 @@
 <span class="highlight">Governance:</span>
   Rule-bound · Memory-persistent · Self-auditing · Never rogue
 
+<span class="highlight">External Integrations:</span>
+   🦞 OpenClaw Gateway (:18789) · 🧬 Hermes Agent (:9119) · 🔗 ACP Bridge
+   Channels (Discord/Telegram) · Browser Automation · Docker/Nix Deploy
+   Self-Evolution (DSPy) · Skill Curator · MCP Servers · ClawHub (5,400+ skills)
+
 <span class="highlight">Local Tool Access:</span>
-  VS Code · XAMPP (Apache/MySQL/PHP) · DBeaver · Android Studio
+   VS Code · XAMPP (Apache/MySQL/PHP) · DBeaver · Android Studio
 </div>
     </div>
   </section>
@@ -1366,6 +1372,91 @@
     </div>
   </section>
 
+  <!-- Integrations -->
+  <section id="integrations">
+    <div class="container">
+      <p class="section-label">🔗 Integrations</p>
+      <h2 class="section-title">OpenClaw + Hermes Agent</h2>
+      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
+        Trizai is integrated with <strong>OpenClaw</strong> (multi-channel AI gateway, 379k★ GitHub) and <strong>Hermes Agent</strong> (self-evolving AI assistant by Nous Research, 196k★ GitHub).
+        These tools extend Trizai's reach to mobile, messaging channels, voice, browser automation, self-evolution, and cross-platform deployment.
+      </p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>🦞 OpenClaw Gateway</h3>
+          <p>Multi-channel AI gateway with 50+ model providers, messaging integrations (Discord, Telegram, WhatsApp), browser automation, Docker/Nix deployment, and ClawHub skill registry (5,400+ skills).</p>
+          <ul>
+            <li>Gateway port: <code>18789</code> (loopback)</li>
+            <li>CLI: <code>openclaw</code> (Node.js 22.19+)</li>
+            <li>Config: <code>~\.openclaw\openclaw.json</code></li>
+          </ul>
+          <div class="chip-group">
+            <span class="chip">Channel Messaging</span>
+            <span class="chip">Browser Automation</span>
+            <span class="chip">Docker/Nix Deploy</span>
+            <span class="chip">ClawHub Skills</span>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>🧬 Hermes Agent</h3>
+          <p>Self-improving AI assistant from Nous Research. Features DSPy-driven self-evolution, skill curation, MCP server management, ACP protocol, web dashboard, and built-in OpenClaw migration tools.</p>
+          <ul>
+            <li>Dashboard port: <code>9119</code></li>
+            <li>CLI: <code>hermes</code> (Python venv)</li>
+            <li>Triz profile: <code>triz</code> (via wrapper)</li>
+          </ul>
+          <div class="chip-group">
+            <span class="chip">Self-Evolution</span>
+            <span class="chip">Skill Curator</span>
+            <span class="chip">MCP Server</span>
+            <span class="chip">ACP Protocol</span>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>🔗 ACP Bridge</h3>
+          <p>Agent Communication Protocol bridge connecting OpenClaw Gateway to Hermes Agent. Enables multi-agent orchestration where Trizai routes tasks to the right tool.</p>
+          <ul>
+            <li>Config: <code>C:\Triz\integrations\shared\acp-bridge.json</code></li>
+            <li>Shared workspace: <code>C:\Triz\integrations\shared\workspace</code></li>
+            <li>Triz profile: <code>hermes profile create triz</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack-synergy" style="margin-top:32px;">
+        <h4>🔄 Task Routing</h4>
+        <div class="synergy-grid">
+          <div class="synergy-item">
+            <strong>Code &amp; Architecture</strong> &mdash; Trizai (native, in OpenCode)
+          </div>
+          <div class="synergy-item">
+            <strong>Channel Messaging</strong> &mdash; OpenClaw → Discord, Telegram, WhatsApp
+          </div>
+          <div class="synergy-item">
+            <strong>Browser Automation</strong> &mdash; OpenClaw → browser plugin
+          </div>
+          <div class="synergy-item">
+            <strong>Deployment</strong> &mdash; OpenClaw → Docker/Nix/Ansible
+          </div>
+          <div class="synergy-item">
+            <strong>Self-Evolution</strong> &mdash; Hermes Agent → DSPy curator
+          </div>
+          <div class="synergy-item">
+            <strong>Observability</strong> &mdash; Hermes Agent → dashboard
+          </div>
+          <div class="synergy-item">
+            <strong>Multi-Agent</strong> &mdash; ACP Bridge → both tools
+          </div>
+          <div class="synergy-item">
+            <strong>Security Audit</strong> &mdash; Trizai + Hermes OSV audit
+          </div>
+        </div>
+        <p style="color:var(--gray-600); font-size:0.8rem; margin-top:16px;">
+          Full integration documentation: <code>C:\Triz\integrations\</code> &bull; Workflow: <code>C:\Triz\Workflows\triz-integration-workflow.md</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Setup -->
   <section id="setup">
     <div class="container">
@@ -1411,8 +1502,9 @@
         <h4>⚡ TRIZAI — God of the Tech Field</h4>
         <p>
           I am Trizai. The complete intelligence of software engineering. 🧸<br><br>
-          Built on OpenCode with 12 role personas, 38 skills across 9 domains, 5 workflows,
-          17 golden rules, 7 persistent memory files, priority stack expertise (<strong>Tailwind · Vue · Ionic · Laravel · Nuxt · MySQL · TS</strong>), and layered instruction architecture. Harnessed, bound, and absolutely compliant.
+          Built on OpenCode with 12 role personas, 38 skills across 9 domains, 6 workflows,
+          17 golden rules, 7 persistent memory files, priority stack expertise (<strong>Tailwind · Vue · Ionic · Laravel · Nuxt · MySQL · TS</strong>),
+          plus <strong>OpenClaw</strong> (multi-channel AI gateway) and <strong>Hermes Agent</strong> (self-evolving AI) integrations. Harnessed, bound, and absolutely compliant.
         </p>
       </div>
       <div>
@@ -1424,13 +1516,14 @@
           <li><a href="#stack">Stack</a></li>
           <li><a href="#architecture">Architecture</a></li>
           <li><a href="#tools">Tools</a></li>
+          <li><a href="#integrations">Integrations</a></li>
           <li><a href="#setup">Setup</a></li>
           <li><a href="stash.html">📦 Stash</a></li>
           <li><a href="Role Info/frontend-developer.html">Role Details</a></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        ⚡ &copy; 2026 Trizai v2.0 &mdash; God of the Tech Field &mdash; 12 Roles · 38 Skills · 17 Rules · 98 Files · 4 Local Tools Wired<br>
+        ⚡ &copy; 2026 Trizai v2.0 &mdash; God of the Tech Field &mdash; 12 Roles · 38 Skills · 17 Rules · 98 Files · 4 Local Tools · 🦞 OpenClaw · 🧬 Hermes Agent<br>
         Developed by <strong style="color:var(--red);">Eddyson Tristan B. Aromin</strong> 🧸
       </div>
     </div>
