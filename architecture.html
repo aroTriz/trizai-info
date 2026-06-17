@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture & Workflows — Team Tris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">TRI<span>ZAI</span></div>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="roles.html" class="nav-link">Roles</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="architecture.html" class="nav-link active">Architecture</a></li>
+        <li><a href="stack.html" class="nav-link">Stack</a></li>
+        <li><a href="stash.html" class="nav-link">Stash</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Nav progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Architecture -->
+  <section style="padding-top:140px;" id="architecture">
+    <div class="container">
+      <p class="section-label">&#x1F3D7;&#xFE0F; Architecture</p>
+      <h2 class="section-title">The Harnessed Intelligence Stack</h2>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>&#x1F4C4; <code>CLAUDE.md</code></h3>
+          <p>Root harness that defines startup behavior, priority order, role system, and mission. The bootstrap file that loads everything.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F9F1; <code>Core/</code></h3>
+          <p>Identity, mission, principles, and system architecture &mdash; the foundational logic of Trizai.</p>
+          <ul><li>identity.md</li><li>mission.md</li><li>principles.md</li><li>architecture.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x2696;&#xFE0F; <code>Rules/</code></h3>
+          <p>Hard constraints, safety rules, code quality standards, and communication rules. Highest priority after the harness.</p>
+          <ul><li>golden_rules.md <span style="color:var(--red);">(18 rules)</span></li><li>security.md</li><li>code_quality.md</li><li>communication.md</li></ul>
+          <div class="chip-group">
+            <span class="chip">Rule 15 &mdash; One-Shot Perfect Execution</span>
+            <span class="chip">Rule 16 &mdash; Persistent Memory Compliance</span>
+            <span class="chip">Rule 17 &mdash; Self-Audit Before Delivery</span>
+            <span class="chip">Rule 18 &mdash; Dynamic Role Adaptation</span>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F465; <code>Roles/</code></h3>
+          <p>19 specialized expert personas across the full development spectrum. Each loaded dynamically based on task context.</p>
+          <ul>
+            <li>Frontend, Backend, QA, MR Checker, Planner, DevOps, UX, Tech Lead</li>
+            <li>Discovery-Triz, Cybersecurity, FullSTACK-Triz, SuperGODZ-Triz</li>
+            <li><span style="color:var(--red);">NEW: Product Manager, Data Engineer, Mobile Dev, Scrum Master, Tech Writer, SRE, DBA</span></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F4AC; <code>Personality/</code></h3>
+          <p>Tone, communication style, response frameworks, and role-switching behavior.</p>
+          <ul><li>communication_style.md</li><li>response_frameworks.md</li><li>role_switching.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F6E0;&#xFE0F; <code>Skills/</code></h3>
+          <p>52 specialized skill files across 16 domains: 9 original + <span style="color:var(--red);">7 new (product, data, mobile, agile, docs, sre, dba)</span>.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F9E0; <code>Memory/</code></h3>
+          <p>Persistent intelligence &mdash; 7 files that never lose context. Loaded FIRST on every startup, updated LAST after every action.</p>
+          <ul><li>memory-protocol.md</li><li>session-memory.md</li><li>project_facts.md</li><li>decisions.md</li><li>preferences.md</li><li>primary-stack.md</li><li>local-tools.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F504; <code>Workflows/</code></h3>
+          <p>5 execution patterns for every scenario: one-shot perfect execution, development lifecycle, code review, deployment, incident response.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F4CB; <code>Context/</code></h3>
+          <p>Temporary session tracking and active task management for continuity across interactions.</p>
+        </div>
+      </div>
+
+      <div class="arch-diagram">
+<span class="highlight">TRIZAI SYSTEM ARCHITECTURE v2.1 &mdash; GOD OF THE TECH FIELD</span>
+&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;
+
+<span class="highlight">BOOT SEQUENCE:</span>
+  1. Memory/  (restore full context &mdash; loaded FIRST)
+  2. Rules/   (binding constraints &mdash; 18 Golden Rules)
+  3. Core/    (identity &mdash; God of Tech, mission, principles)
+  4. Roles/   (19 expert personas)
+  5. Personality/ (authoritative precision, frameworks)
+  6. Skills/  (52 skills across 16 domains)
+  7. Workflows/ (5 execution patterns)
+  8. Context/ (session state)
+
+<span class="highlight">CLAUDE.md</span>  (Root Harness &mdash; startup, memory protocol, agent dispatch)
+   |
+   |-- <span class="highlight">Memory/</span>&#x27F6; memory-protocol &middot; session-memory &middot; project-facts &middot; decisions
+   |               preferences &middot; primary-stack &middot; local-tools  (7 files)
+   |-- <span class="highlight">Rules/</span>&#x27F6;  Golden Rules (17) &middot; Security &middot; Code Quality &middot; Communication
+   |-- <span class="highlight">Core/</span>&#x27F6;   Identity &middot; Mission &middot; Principles &middot; Architecture
+   |-- <span class="highlight">Roles/</span>&#x27F6;  12 original + <span class="highlight">7 new</span>: Product Manager &middot; Data Engineer
+   |               &middot; Mobile Dev &middot; Scrum Master &middot; Tech Writer &middot; SRE &middot; DBA
+   |-- <span class="highlight">Personality/</span>&#x27F6; Communication &middot; Response Frameworks &middot; Role Switching
+   |-- <span class="highlight">Skills/</span>
+   |   |-- frontend/    6 skills (components, perf, styling, a11y, testing, state)
+   |   |-- backend/     5 skills (API, DB, security, testing, error handling)
+   |   |-- qa/          4 skills (strategies, automation, bug reporting, perf testing)
+   |   |-- devops/      4 skills (CI/CD, containers, IaC, monitoring)
+   |   |-- general/     4 skills (git, review, docs, structure)
+   |   |-- planning/    3 skills (requirements, architecture, sprints)
+   |   |-- discovery/   5 skills (research, figma, canva, flow, stack)
+   |   |-- security/    5 skills (encryption, web, pentest, compliance, IR)
+   |   |-- fullstack/   2 skills (e2e, integration)
+   |   |-- <span class="highlight">product/</span>    2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">data/</span>       2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">mobile/</span>     2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">agile/</span>      1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">docs/</span>       1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">sre/</span>        1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">dba/</span>        1 skill  <span class="dim">(NEW)</span>
+   |-- <span class="highlight">Workflows/</span>&#x27F6; One-Shot Execution &middot; Dev Lifecycle &middot; Review &middot; Deploy &middot; Incident
+   |-- <span class="highlight">Context/</span>&#x27F6;  Session State &middot; Active Tasks
+
+<span class="highlight">Execution Model:</span>
+  Context &rarr; Analysis &rarr; Pre-Verification &rarr; One-Shot Execution &rarr; Self-Audit
+
+<span class="highlight">Governance:</span>
+  Rule-bound &middot; Memory-persistent &middot; Self-auditing &middot; Never rogue
+
+<span class="highlight">External Integrations:</span>
+   &#x1F99E; OpenClaw Gateway (:18789) &middot; &#x1F9EC; Hermes Agent (:9119) &middot; &#x1F517; ACP Bridge
+
+<span class="highlight">Local Tool Access:</span>
+   VS Code &middot; XAMPP (Apache/MySQL/PHP) &middot; DBeaver &middot; Android Studio
+</div>
+    </div>
+  </section>
+
+  <!-- Workflows -->
+  <section id="workflows">
+    <div class="container">
+      <p class="section-label">&#x1F504; Workflows</p>
+      <h2 class="section-title">Execution Patterns</h2>
+      <p class="section-desc">
+        &#x26A1; My default execution is <strong>one-shot perfect</strong>. Every task follows: Context &rarr; Analysis &rarr; Pre-Verification &rarr; Execute &rarr; Self-Audit. 
+        I do not iterate toward correct. I am correct on first delivery.
+      </p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>&#x26A1; One-Shot Perfect Execution</h3>
+          <p>Default workflow. Complete context gathering, deep analysis, pre-execution rule verification, one-pass production delivery, and post-execution self-audit. No iteration.</p>
+          <ul><li>Workflows/one-shot-execution.md <span style="color:var(--red);">(default)</span></li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F4C5; Project Lifecycle</h3>
+          <p>Full end-to-end project management: Initiation &rarr; Foundation &rarr; Core Features &rarr; QA &rarr; Production Readiness &rarr; Launch. With time management built in.</p>
+          <ul><li>Workflows/project-lifecycle.md <span style="color:var(--red);">(NEW)</span></li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F504; Development Lifecycle</h3>
+          <p>Full SDLC: Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Review &rarr; Deploy &rarr; Monitor. Each phase has clear role assignments and quality gates.</p>
+          <ul><li>Workflows/development_lifecycle.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F50D; Review Process</h3>
+          <p>Code review standards, per-role checklists, approval gates, merge criteria. Enforces quality before any merge.</p>
+          <ul><li>Workflows/review_process.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F680; Deployment Pipeline</h3>
+          <p>Build &rarr; Test &rarr; Stage &rarr; Approve &rarr; Production &rarr; Verify. CI/CD integration guidelines and rollback procedures.</p>
+          <ul><li>Workflows/deployment_pipeline.md</li></ul>
+        </div>
+        <div class="info-card">
+          <h3>&#x1F6A8; Incident Response</h3>
+          <p>Detect &rarr; Triage &rarr; Fix &rarr; Verify &rarr; Document &rarr; Retro. Severity levels, escalation paths, and blameless culture.</p>
+          <ul><li>Workflows/incident_response.md</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>&#x26A1; TEAM TRIS &mdash; One Team, One Goal</h4>
+        <p>
+          We are Team Tris. The complete intelligence of software engineering. &#x1F9F8;<br><br>
+          Built on OpenCode with <strong>19 role personas</strong>, <strong>56 skills across 16 domains</strong>, 7 workflows,
+          17 golden rules, 7 persistent memory files, priority stack expertise (<strong>Tailwind &middot; Vue &middot; Ionic &middot; Laravel &middot; Nuxt &middot; MySQL &middot; TS</strong>),
+          plus <strong>OpenClaw</strong> (multi-channel AI gateway) and <strong>Hermes Agent</strong> (self-evolving AI) integrations. Harnessed, bound, and absolutely compliant.
+        </p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="roles.html">Roles</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="stack.html">Stack</a></li>
+          <li><a href="stash.html">&#x1F4E6; Stash</a></li>
+          <li><a href="Role Info/frontend-developer.html">Role Details</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        &#x26A1; &copy; 2026 Team Tris v2.1 &mdash; One Team, One Goal &mdash; 19 Roles &middot; 56 Skills &middot; 18 Rules &middot; 130+ Files &middot; 4 Local Tools &middot; &#x1F99E; OpenClaw &middot; &#x1F9EC; Hermes Agent<br>
+        Developed by <strong>Eddyson Tristan B. Aromin</strong> &#x1F9F8;
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast container -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const navOverlay = document.getElementById('navOverlay');
+
+    function toggleMenu() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('section, .info-card, .role-card, .skill-item, .step, .stat-card, .arch-diagram').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    });
+
+    const toast = document.getElementById('toast');
+    let toastTimeout;
+
+    function showToast(message) {
+      clearTimeout(toastTimeout);
+      toast.textContent = message;
+      toast.classList.add('show');
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    document.querySelectorAll('.role-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const roleName = card.dataset.role || 'Companion';
+        const messages = [
+          '\u26A1 ' + roleName + ' activated. Absolute mastery engaged.',
+          '\u26A1 ' + roleName + ' online. Delivering perfect execution.',
+          '\u26A1 ' + roleName + ' ready. One-shot. No iteration needed.',
+          '\u26A1 ' + roleName + ' active. Ba-la-la-la-la.'
+        ];
+        showToast(messages[Math.floor(Math.random() * messages.length)]);
+      });
+    });
+
+    setTimeout(() => {
+      showToast('\u26A1 Architecture and workflows loaded. System ready.');
+    }, 800);
+  </script>
+
+</body>
+</html>
