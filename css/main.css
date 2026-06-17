@@ -44,13 +44,15 @@ nav {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(230,57,70,0.08);
+  height: var(--nav-height);
 }
 
 nav .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--nav-height);
+  height: 100%;
+  padding: 0 24px;
 }
 
 .logo {
@@ -59,16 +61,25 @@ nav .container {
   color: var(--white);
   letter-spacing: -0.5px;
   user-select: none;
+  line-height: 1;
 }
 
 .logo span { color: var(--red); }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .nav-links a {
@@ -78,22 +89,26 @@ nav .container {
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
-  display: block;
-  line-height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  height: 100%;
   padding: 0 6px;
 }
 
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 2px;
+  bottom: 0; left: 6px;
+  right: 6px;
+  height: 2px;
   background: var(--red);
-  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
 .nav-links a:hover { color: var(--red); }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
 
 /* Hamburger Menu */
 .hamburger {
@@ -1586,7 +1601,7 @@ footer .footer-links a:hover { color: var(--red); }
     opacity: 1;
   }
 
-  .nav-links li { width: 100%; }
+  .nav-links li { width: 100%; height: auto; }
 
   .nav-links a {
     display: block;
@@ -1595,6 +1610,7 @@ footer .footer-links a:hover { color: var(--red); }
     font-size: 1rem;
     font-weight: 500;
     line-height: normal;
+    height: auto;
   }
 
   .nav-links a:hover,
