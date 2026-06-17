@@ -8,34 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
   <style>
-    .stash-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:.88rem}
-    .stash-table th{text-align:left;padding:10px 12px;color:var(--red);font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--red)}
-    .stash-table td{padding:10px 12px;border-bottom:1px solid rgba(230,57,70,0.08);color:var(--gray-100);vertical-align:top}
-    .stash-table tr:hover td{background:rgba(230,57,70,0.04)}
-    .stash-table .num{font-family:"JetBrains Mono",monospace;color:var(--gray-600);width:48px}
-    .stash-table .tag{display:inline-block;padding:2px 8px;background:rgba(230,57,70,0.1);color:var(--red);border-radius:100px;font-size:.7rem;font-family:"JetBrains Mono",monospace;white-space:nowrap}
-    .stash-table .status-active{color:#4CAF50;font-family:"JetBrains Mono",monospace;font-size:.7rem}
-    .tag-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-    .tag-filter .tag-btn{padding:6px 14px;background:var(--black);border:1px solid rgba(230,57,70,0.2);border-radius:100px;color:var(--gray-100);font-size:.8rem;font-family:"JetBrains Mono",monospace;cursor:pointer;transition:all .3s ease}
-    .tag-filter .tag-btn:hover{border-color:var(--red);color:var(--red)}
-    .tag-filter .tag-btn.active{background:var(--red);color:var(--white);border-color:var(--red)}
-    .stash-cta{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-    .stash-cta .cta-item{background:var(--black);border:1px solid rgba(230,57,70,0.15);border-radius:12px;padding:20px 24px;transition:all .3s ease}
-    .stash-cta .cta-item:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(230,57,70,0.08)}
-    .stash-cta .cta-item code{font-family:"JetBrains Mono",monospace;color:var(--red);background:rgba(230,57,70,0.08);padding:2px 8px;border-radius:4px;font-size:.85rem}
-    .stash-cta .cta-item h4{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:6px}
-    .stash-cta .cta-item p{font-size:.85rem;color:var(--gray-600)}
-    .empty-state{text-align:center;padding:60px 20px;color:var(--gray-600)}
-    .empty-state .big-icon{font-size:4rem;margin-bottom:16px;display:block}
-    .expertise-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:.88rem}
-    .expertise-table th{text-align:left;padding:10px 12px;color:var(--red);font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--red)}
-    .expertise-table td{padding:10px 12px;border-bottom:1px solid rgba(230,57,70,0.08);color:var(--gray-100)}
-    .expertise-table td:first-child{font-family:"JetBrains Mono",monospace;color:var(--red)}
-    .expertise-table tr:hover td{background:rgba(230,57,70,0.04)}
-    .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
     .code-block{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--gray-100);background:var(--black);border:1px solid rgba(230,57,70,0.12);border-radius:10px;padding:20px;line-height:1.6;overflow-x:auto;white-space:pre}
     .code-block .highlight{color:var(--red);font-weight:600}
-    @media(max-width:767px){.stash-cta{grid-template-columns:1fr}.code-block{font-size:.7rem;padding:14px}}
+    .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    @media(max-width:767px){.code-block{font-size:.7rem;padding:14px}}
   </style>
 </head>
 <body>
@@ -49,7 +25,6 @@
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#architecture" class="nav-link">Architecture</a></li>
         <li><a href="#stack" class="nav-link">Stack</a></li>
-        <li><a href="#stash" class="nav-link">Stash</a></li>
         <li><a href="https://discord.gg/CXe5pDHSG" target="_blank" style="color:var(--red);font-weight:600;"> Discord</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
@@ -416,43 +391,6 @@
     </div>
   </section>
 
-  <!-- Stash -->
-  <section id="stash" style="scroll-margin-top:80px;">
-    <div class="container">
-      <p class="section-label">Saved Items</p>
-      <h2 class="section-title gradient-text">Trizai Stash</h2>
-      <p class="section-desc">Saved items, links, notes, tips, and resources &mdash; all persistent, all organized, all yours. File: <code>Memory/stash.md</code></p>
-
-      <div class="stash-cta">
-        <div class="cta-item"><h4>Save to Stash</h4><p>Say: <code>Stash this: [item] with tag [tag]</code></p></div>
-        <div class="cta-item"><h4>View Stash</h4><p>Say: <code>Show my stash</code> or <code>What is in my stash?</code></p></div>
-        <div class="cta-item"><h4>Filter by Tag</h4><p>Say: <code>Show stash tagged [tag]</code></p></div>
-        <div class="cta-item"><h4>Unstash</h4><p>Say: <code>Archive stash #[number]</code> or <code>Unstash #[number]</code></p></div>
-      </div>
-
-      <div class="tag-filter" id="tagFilter">
-        <button class="tag-btn active" data-tag="all">All</button>
-        <button class="tag-btn" data-tag="system">system</button>
-        <button class="tag-btn" data-tag="trizai">trizai</button>
-        <button class="tag-btn" data-tag="stack">stack</button>
-        <button class="tag-btn" data-tag="tools">tools</button>
-        <button class="tag-btn" data-tag="config">config</button>
-        <button class="tag-btn" data-tag="roles">roles</button>
-        <button class="tag-btn" data-tag="skills">skills</button>
-        <button class="tag-btn" data-tag="html">html</button>
-        <button class="tag-btn" data-tag="tips">tips</button>
-        <button class="tag-btn" data-tag="admonition">admonition</button>
-      </div>
-
-      <table class="stash-table" id="stashTable">
-        <thead><tr><th>#</th><th>Date</th><th>Tag</th><th>Item</th><th>Status</th></tr></thead>
-        <tbody id="stashBody"></tbody>
-      </table>
-
-      <p style="color:var(--gray-600);font-size:0.8rem;margin-top:16px;text-align:center;">Source: <code>Memory/stash.md</code> &mdash; Stash is persistent. Nothing is ever deleted, only archived.</p>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -467,9 +405,7 @@
           <li><a href="#roles">Roles</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#architecture">Architecture</a></li>
-          <li><a href="#design">Design</a></li>
           <li><a href="#stack">Stack</a></li>
-          <li><a href="#stash">Stash</a></li>
           <li><a href="Role Info/frontend-developer.html">Role Details</a></li>
         </ul>
       </div>
@@ -599,50 +535,6 @@
         }
       });
     });
-
-    // Stash data & filter
-    const stashItems = [
-      { num: 1,  date: '2026-06-17', tag: 'system',   item: 'System overhaul - memory persistence, 17 rules, 12 roles, God of Tech identity', status: 'active' },
-      { num: 2,  date: '2026-06-17', tag: 'trizai',   item: 'Nickname can be Tris or Triz', status: 'active' },
-      { num: 3,  date: '2026-06-17', tag: 'trizai',   item: 'Developer: Eddyson Tristan B. Aromin', status: 'active' },
-      { num: 4,  date: '2026-06-17', tag: 'stack',    item: 'Priority stack: Tailwind - Vue - Ionic - Laravel - Nuxt - MySQL - TypeScript', status: 'active' },
-      { num: 5,  date: '2026-06-17', tag: 'tools',    item: 'Local tools: VS Code, XAMPP, DBeaver, Android Studio', status: 'active' },
-      { num: 6,  date: '2026-06-17', tag: 'config',   item: 'Rules 1-14 enhanced with enforcement; Rules 15-17 added (one-shot, memory, self-audit)', status: 'active' },
-      { num: 7,  date: '2026-06-17', tag: 'config',   item: 'One-shot perfect execution workflow added', status: 'active' },
-      { num: 8,  date: '2026-06-17', tag: 'config',   item: 'Personality rewritten from companion to authoritative precision', status: 'active' },
-      { num: 9,  date: '2026-06-17', tag: 'roles',    item: '4 new roles: Discovery-Triz, Cybersecurity, FullSTACK-Triz, SuperGODZ-Triz', status: 'active' },
-      { num: 10, date: '2026-06-17', tag: 'skills',   item: '3 new domains: discovery (5), security (5), fullstack (2) = 12 new skills', status: 'active' },
-      { num: 11, date: '2026-06-17', tag: 'html',     item: '12 role HTML pages created in Info/Role Info/', status: 'active' },
-      { num: 12, date: '2026-06-17', tag: 'html',     item: 'Main HTML updated with God of Tech identity', status: 'active' },
-      { num: 13, date: '2026-06-17', tag: 'tips',     item: 'Ba-la-la-la-la - fist bump celebration for shipping', status: 'active' },
-      { num: 14, date: '2026-06-17', tag: 'admonition', item: 'Config files must be concise - every word earns its place (Rule 14)', status: 'active' },
-      { num: 15, date: '2026-06-17', tag: 'admonition', item: 'Memory is loaded FIRST, updated LAST - never lose context (Rule 16)', status: 'active' }
-    ];
-
-    const tbody = document.getElementById('stashBody');
-
-    function renderStash(tag) {
-      const filtered = tag === 'all'
-        ? stashItems.filter(s => s.status === 'active')
-        : stashItems.filter(s => s.status === 'active' && s.tag === tag);
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><span class="big-icon"></span><p>No active items' + (tag !== 'all' ? ' with tag ' + tag : '') + '.</p></div></td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(s => '<tr><td class="num">#' + String(s.num).padStart(3,'0') + '</td><td style="font-family:JetBrains Mono,monospace;font-size:0.8rem;color:var(--gray-600);">' + s.date + '</td><td><span class="tag">' + s.tag + '</span></td><td>' + s.item + '</td><td><span class="status-active">● active</span></td></tr>').join('');
-    }
-
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderStash(btn.dataset.tag);
-      });
-    });
-
-    renderStash('all');
 
     // Radar chart
     const canvas = document.getElementById('radarChart');
