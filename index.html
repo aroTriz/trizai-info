@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trizai — God of the Tech Field</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --red: #E63946;
@@ -14,10 +14,12 @@
       --white: #FFFFFF;
       --off-white: #F5F5F5;
       --gray-100: #E0E0E0;
+      --gray-300: #9E9E9E;
       --gray-600: #757575;
       --gray-800: #2A2A2A;
       --gray-900: #1A1A1A;
       --black: #0D0D0D;
+      --nav-height: 64px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,22 +39,27 @@
       padding: 0 24px;
     }
 
+    ::selection {
+      background: var(--red);
+      color: var(--white);
+    }
+
     /* Navigation */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(230,57,70,0.15);
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(230,57,70,0.12);
     }
 
     nav .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+      height: var(--nav-height);
     }
 
     .logo {
@@ -60,20 +67,21 @@
       font-weight: 800;
       color: var(--white);
       letter-spacing: -0.5px;
+      user-select: none;
     }
 
     .logo span { color: var(--red); }
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--gray-100);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: color 0.3s ease;
       position: relative;
@@ -90,6 +98,54 @@
 
     .nav-links a:hover { color: var(--red); }
     .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile overlay */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 998;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+    }
 
     /* Hero */
     .hero {
@@ -108,29 +164,32 @@
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(230,57,70,0.06) 0%, transparent 60%);
+      background:
+        radial-gradient(circle at 30% 40%, rgba(230,57,70,0.07) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(230,57,70,0.04) 0%, transparent 50%);
       animation: pulse 8s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.2); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 1; }
     }
 
-    .hero-content { position: relative; z-index: 1; }
+    .hero-content { position: relative; z-index: 1; padding: 0 24px; }
 
     .hero-badge {
       display: inline-block;
-      padding: 6px 16px;
+      padding: 8px 20px;
       border: 1px solid var(--red);
       border-radius: 100px;
       color: var(--red);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       font-family: 'JetBrains Mono', monospace;
+      animation: fadeInUp 0.8s ease;
     }
 
     .hero h1 {
@@ -139,6 +198,7 @@
       color: var(--white);
       line-height: 1.1;
       margin-bottom: 8px;
+      animation: fadeInUp 0.8s ease 0.1s both;
     }
 
     .hero h1 span { color: var(--red); }
@@ -148,36 +208,47 @@
       color: var(--gray-100);
       margin-bottom: 12px;
       font-weight: 400;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.8s ease 0.2s both;
     }
 
     .hero .tech-stack {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gray-600);
       margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.3s both;
     }
 
     .hero .tech-stack span { color: var(--red); }
 
     .cta-btn {
       display: inline-block;
-      padding: 14px 40px;
+      padding: 14px 44px;
       background: var(--red);
       color: var(--white);
       font-size: 1rem;
       font-weight: 600;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 20px var(--red-glow);
+      box-shadow: 0 4px 24px var(--red-glow);
+      animation: fadeInUp 0.8s ease 0.4s both;
     }
 
     .cta-btn:hover {
       background: var(--red-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--red-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 36px var(--red-glow);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Section shared */
@@ -186,7 +257,7 @@
 
     .section-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--red);
       text-transform: uppercase;
       letter-spacing: 3px;
@@ -198,6 +269,7 @@
       font-weight: 700;
       color: var(--white);
       margin-bottom: 16px;
+      line-height: 1.2;
     }
 
     .section-title::after {
@@ -208,6 +280,13 @@
       background: var(--red);
       margin-top: 12px;
       border-radius: 2px;
+    }
+
+    .section-desc {
+      color: var(--gray-100);
+      font-size: 1rem;
+      margin-top: 8px;
+      max-width: 720px;
     }
 
     /* About / Mission */
@@ -243,20 +322,34 @@
     .stat-card {
       background: var(--black);
       border: 1px solid rgba(230,57,70,0.2);
-      border-radius: 12px;
-      padding: 24px;
+      border-radius: 14px;
+      padding: 28px 20px;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
     }
 
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .stat-card:hover::before { transform: scaleX(1); }
+
     .stat-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: var(--red);
-      box-shadow: 0 8px 30px rgba(230,57,70,0.15);
+      box-shadow: 0 12px 40px rgba(230,57,70,0.15);
     }
 
     .stat-card .stat-value {
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--red);
       margin-bottom: 4px;
@@ -278,14 +371,14 @@
     .info-card {
       background: var(--black);
       border-top: 4px solid var(--red);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 32px;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .info-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(230,57,70,0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(230,57,70,0.12);
     }
 
     .info-card .icon {
@@ -299,10 +392,11 @@
       font-weight: 700;
       color: var(--white);
       margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .info-card p {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--gray-100);
       line-height: 1.7;
     }
@@ -315,11 +409,11 @@
 
     .info-card ul {
       list-style: none;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .info-card li {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--gray-100);
       padding: 4px 0;
       padding-left: 16px;
@@ -340,57 +434,76 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .chip {
       display: inline-block;
-      padding: 3px 10px;
+      padding: 4px 12px;
       background: rgba(230,57,70,0.1);
       color: var(--red);
       border-radius: 100px;
       font-size: 0.72rem;
       font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.3px;
     }
 
     /* Roles Grid */
     .roles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       margin-top: 48px;
     }
 
     .role-card {
       background: var(--black);
-      border: 1px solid rgba(230,57,70,0.2);
-      border-radius: 12px;
-      padding: 28px;
-      transition: all 0.3s ease;
+      border: 1px solid rgba(230,57,70,0.15);
+      border-radius: 14px;
+      padding: 28px 20px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .role-card:hover::before { transform: scaleX(1); }
+
     .role-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: var(--red);
-      box-shadow: 0 8px 30px rgba(230,57,70,0.15);
+      box-shadow: 0 12px 40px rgba(230,57,70,0.12);
     }
 
     .role-card .role-icon {
       font-size: 2.5rem;
       margin-bottom: 12px;
       display: block;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    .role-card:hover .role-icon { transform: scale(1.25) rotate(-6deg); }
+
     .role-card h3 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--white);
       margin-bottom: 8px;
     }
 
     .role-card p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gray-600);
       line-height: 1.5;
     }
@@ -399,12 +512,49 @@
       display: inline-block;
       margin-top: 12px;
       padding: 4px 12px;
-      background: rgba(230,57,70,0.1);
+      background: rgba(230,57,70,0.08);
       color: var(--red);
       border-radius: 100px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-family: 'JetBrains Mono', monospace;
     }
+
+    .role-card .role-new {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 2px 10px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .role-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    /* Role detail links */
+    .role-detail-links {
+      color: var(--gray-600);
+      font-size: 0.82rem;
+      margin-top: 20px;
+      line-height: 2;
+    }
+
+    .role-detail-links a {
+      color: var(--red);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .role-detail-links a:hover { opacity: 0.8; text-decoration: underline; }
 
     /* Skills tree */
     .skills-tree {
@@ -412,11 +562,11 @@
     }
 
     .skill-category {
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
 
     .skill-category h3 {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--white);
       margin-bottom: 16px;
@@ -424,16 +574,22 @@
       border-left: 3px solid var(--red);
     }
 
+    .skill-category h3 .skill-count {
+      color: var(--gray-600);
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
     .skill-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 12px;
     }
 
     .skill-item {
       background: var(--black);
-      border: 1px solid rgba(230,57,70,0.12);
-      border-radius: 8px;
+      border: 1px solid rgba(230,57,70,0.1);
+      border-radius: 10px;
       padding: 16px;
       transition: all 0.3s ease;
     }
@@ -441,17 +597,18 @@
     .skill-item:hover {
       border-color: var(--red);
       background: var(--gray-800);
+      transform: translateY(-2px);
     }
 
     .skill-item h4 {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--white);
       margin-bottom: 4px;
     }
 
     .skill-item p {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gray-600);
       line-height: 1.4;
     }
@@ -459,12 +616,12 @@
     /* Architecture description */
     .arch-diagram {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gray-100);
       background: var(--black);
       border: 1px solid rgba(230,57,70,0.2);
-      border-radius: 12px;
-      padding: 32px;
+      border-radius: 14px;
+      padding: 36px;
       margin-top: 48px;
       line-height: 1.8;
       white-space: pre;
@@ -472,6 +629,7 @@
     }
 
     .arch-diagram .highlight { color: var(--red); font-weight: 600; }
+    .arch-diagram .dim { color: var(--gray-600); }
 
     /* Setup Section */
     .setup-steps {
@@ -485,28 +643,32 @@
       gap: 24px;
       align-items: flex-start;
       background: var(--black);
-      border: 1px solid rgba(230,57,70,0.15);
-      border-radius: 12px;
+      border: 1px solid rgba(230,57,70,0.12);
+      border-radius: 14px;
       padding: 28px;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .step:hover {
       border-color: var(--red);
-      box-shadow: 0 4px 20px rgba(230,57,70,0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(230,57,70,0.08);
     }
+
+    .step:hover .step-number { transform: scale(1.2) rotate(5deg); }
 
     .step-number {
       flex-shrink: 0;
-      width: 44px; height: 44px;
+      width: 48px; height: 48px;
       background: var(--red);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--white);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .step-content h4 {
@@ -517,7 +679,7 @@
     }
 
     .step-content p {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--gray-100);
     }
 
@@ -527,31 +689,31 @@
       background: rgba(230,57,70,0.1);
       padding: 2px 6px;
       border-radius: 4px;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
     }
 
     /* Tool Table */
     .tool-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
-      font-size: 0.9rem;
+      margin-top: 24px;
+      font-size: 0.88rem;
     }
 
     .tool-table th {
       text-align: left;
-      padding: 10px 16px;
+      padding: 12px 16px;
       color: var(--red);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       border-bottom: 2px solid var(--red);
     }
 
     .tool-table td {
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(230,57,70,0.1);
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(230,57,70,0.08);
       color: var(--gray-100);
     }
 
@@ -562,7 +724,7 @@
     }
 
     .tool-table tr:hover td {
-      background: rgba(230,57,70,0.05);
+      background: rgba(230,57,70,0.04);
     }
 
     .tool-table .status-yes {
@@ -580,11 +742,11 @@
 
     .stack-card {
       background: var(--black);
-      border: 1px solid rgba(230,57,70,0.15);
-      border-radius: 12px;
-      padding: 28px 20px;
+      border: 1px solid rgba(230,57,70,0.12);
+      border-radius: 14px;
+      padding: 28px 16px;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
     }
@@ -596,7 +758,7 @@
       height: 3px;
       background: var(--red);
       transform: scaleX(0);
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
     .stack-card:hover::before { transform: scaleX(1); }
@@ -604,11 +766,11 @@
     .stack-card:hover {
       transform: translateY(-6px);
       border-color: var(--red);
-      box-shadow: 0 12px 40px rgba(230,57,70,0.12);
+      box-shadow: 0 14px 44px rgba(230,57,70,0.12);
     }
 
     .stack-card .stack-logo {
-      height: 48px;
+      height: 44px;
       margin-bottom: 14px;
       display: flex;
       align-items: center;
@@ -616,25 +778,25 @@
     }
 
     .stack-card .stack-logo img {
-      height: 42px;
+      height: 38px;
       width: auto;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 8px rgba(230,57,70,0.15));
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 0 8px rgba(230,57,70,0.12));
     }
 
     .stack-card:hover .stack-logo img {
-      transform: scale(1.15);
+      transform: scale(1.2);
     }
 
     .stack-card h4 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--white);
       margin-bottom: 4px;
     }
 
     .stack-card p {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--gray-600);
       line-height: 1.4;
     }
@@ -642,20 +804,20 @@
     .stack-rank {
       display: inline-block;
       margin-top: 10px;
-      padding: 2px 10px;
+      padding: 3px 10px;
       background: rgba(230,57,70,0.1);
       color: var(--red);
       border-radius: 100px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .stack-synergy {
       margin-top: 40px;
       background: var(--black);
-      border: 1px solid rgba(230,57,70,0.15);
-      border-radius: 12px;
-      padding: 28px 32px;
+      border: 1px solid rgba(230,57,70,0.12);
+      border-radius: 14px;
+      padding: 32px;
     }
 
     .stack-synergy h4 {
@@ -663,15 +825,6 @@
       font-weight: 700;
       color: var(--white);
       margin-bottom: 16px;
-    }
-
-    .stack-synergy code {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--red);
-      background: rgba(230,57,70,0.08);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.85rem;
     }
 
     .synergy-grid {
@@ -682,10 +835,10 @@
 
     .synergy-item {
       padding: 12px 16px;
-      background: rgba(230,57,70,0.04);
-      border: 1px solid rgba(230,57,70,0.1);
-      border-radius: 8px;
-      font-size: 0.88rem;
+      background: rgba(230,57,70,0.03);
+      border: 1px solid rgba(230,57,70,0.08);
+      border-radius: 10px;
+      font-size: 0.85rem;
       color: var(--gray-100);
       line-height: 1.5;
       transition: all 0.3s ease;
@@ -693,7 +846,7 @@
 
     .synergy-item:hover {
       border-color: var(--red);
-      background: rgba(230,57,70,0.08);
+      background: rgba(230,57,70,0.07);
     }
 
     .synergy-item strong { color: var(--white); }
@@ -719,7 +872,7 @@
     }
 
     footer p {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--gray-600);
       line-height: 1.7;
     }
@@ -734,7 +887,7 @@
     footer .footer-links a {
       color: var(--gray-600);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       transition: color 0.3s ease;
     }
 
@@ -745,9 +898,11 @@
       text-align: center;
       padding-top: 24px;
       border-top: 1px solid rgba(230,57,70,0.1);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gray-600);
     }
+
+    .footer-bottom strong { color: var(--red); }
 
     /* Animations */
     .fade-in {
@@ -761,25 +916,139 @@
       transform: translateY(0);
     }
 
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: var(--red);
+      color: var(--white);
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 36px rgba(230,57,70,0.4);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 9999;
+      pointer-events: none;
+      font-family: 'Inter', sans-serif;
+      max-width: 400px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Floating emoji particles in hero */
+    .emoji-particle {
+      position: absolute;
+      font-size: 1.6rem;
+      opacity: 0;
+      animation: floatEmoji 12s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes floatEmoji {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
+      12% { opacity: 0.18; }
+      50% { opacity: 0.12; transform: translateY(-100px) rotate(180deg) scale(1); }
+      88% { opacity: 0.18; }
+      100% { opacity: 0; transform: translateY(-200px) rotate(360deg) scale(0.5); }
+    }
+
+    /* Nav scroll progress bar */
+    .progress-bar {
+      position: fixed;
+      top: var(--nav-height); left: 0;
+      height: 3px;
+      background: var(--red);
+      z-index: 999;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 12px var(--red-glow);
+    }
+
     /* Responsive */
     @media (max-width: 1023px) {
       .hero h1 { font-size: 2.8rem; }
       .section-title { font-size: 2rem; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       footer .container { grid-template-columns: 1fr; }
+      .arch-diagram { font-size: 0.72rem; padding: 24px; }
     }
 
     @media (max-width: 767px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 2rem; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: -280px;
+        width: 280px;
+        height: 100vh;
+        flex-direction: column;
+        background: var(--gray-900);
+        padding: 80px 32px 32px;
+        gap: 4px;
+        transition: right 0.3s ease;
+        border-left: 1px solid rgba(230,57,70,0.12);
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-overlay.active {
+        display: block;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+
+      .nav-links a:hover {
+        background: rgba(230,57,70,0.08);
+      }
+
+      .nav-links a::after { display: none; }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero h1 { font-size: 2.2rem; }
       .hero .subtitle { font-size: 1rem; }
+      .hero-badge { font-size: 0.7rem; }
       .stats-grid { grid-template-columns: 1fr; }
       .cards-grid { grid-template-columns: 1fr; }
       .roles-grid { grid-template-columns: 1fr; }
       .skill-list { grid-template-columns: 1fr; }
-      .arch-diagram { font-size: 0.7rem; padding: 16px; }
+      .arch-diagram { font-size: 0.65rem; padding: 16px; line-height: 1.6; }
       .step { flex-direction: column; }
       section { padding: 60px 0; }
+      .section-title { font-size: 1.6rem; }
+      .stack-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .synergy-grid { grid-template-columns: 1fr; }
+      .tool-table { font-size: 0.78rem; }
+      .tool-table th, .tool-table td { padding: 8px 10px; }
+      .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero .tech-stack { font-size: 0.7rem; }
+      .stack-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stack-card { padding: 20px 12px; }
+      .stat-card .stat-value { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -789,94 +1058,103 @@
   <nav>
     <div class="container">
       <div class="logo">TRI<span>ZAI</span></div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#roles">Roles</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#integrations">Integrations</a></li>
-        <li><a href="#setup">Setup</a></li>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#roles" class="nav-link">Roles</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#stack" class="nav-link">Stack</a></li>
+        <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#tools" class="nav-link">Tools</a></li>
+        <li><a href="#integrations" class="nav-link">Integrations</a></li>
+        <li><a href="#setup" class="nav-link">Setup</a></li>
         <li><a href="stash.html">Stash</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Nav progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
 
   <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-content container">
-      <div class="hero-badge">🧸 v2.0.0 &mdash; God of the Tech Field</div>
+      <div class="hero-badge">&#x1F9F8; v2.1.0 &mdash; God of the Tech Field</div>
       <h1>Meet <span>Trizai</span></h1>
-      <p class="subtitle">⚡ The complete intelligence of the technology field &mdash; omniscient, precise, one-shot perfect.</p>
-      <p class="tech-stack">🎨 12 Roles &bull; 🛠️ 38 Skills &bull; 🔄 6 Workflows &bull; ⚖️ 17 Golden Rules &bull; 🖥 4 Local Tools &bull; 🧠 7 Memory Files &bull; 🦞 OpenClaw &bull; 🧬 Hermes Agent</p>
-      <p class="tech-stack" style="margin-bottom:32px;">⚡ Priority Stack: <span>Tailwind</span> &bull; <span>Vue</span> &bull; <span>Ionic</span> &bull; <span>Laravel</span> &bull; <span>Nuxt</span> &bull; <span>MySQL</span> &bull; <span>TypeScript</span></p>
+      <p class="subtitle">&#x26A1; The complete intelligence of the technology field &mdash; omniscient, precise, one-shot perfect.</p>
+      <p class="tech-stack">&#x1F3A8; 19 Roles &bull; &#x1F6E0;&#xFE0F; 52 Skills &bull; &#x1F504; 6 Workflows &bull; &#x2696;&#xFE0F; 17 Golden Rules &bull; &#x1F5A5;&#xFE0F; 4 Local Tools &bull; &#x1F9E0; 7 Memory Files</p>
+      <p class="tech-stack" style="margin-bottom:32px;">&#x26A1; Priority Stack: <span>Tailwind</span> &bull; <span>Vue</span> &bull; <span>Ionic</span> &bull; <span>Laravel</span> &bull; <span>Nuxt</span> &bull; <span>MySQL</span> &bull; <span>TypeScript</span></p>
       <p style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--gray-600);margin-bottom:40px;">
         Developed by <span style="color:var(--red);">Eddyson Tristan B. Aromin</span>
       </p>
-      <a href="#about" class="cta-btn">Let's Build Together 🚀</a>
+      <a href="#about" class="cta-btn">Let's Build Together &#x1F680;</a>
     </div>
   </section>
 
   <!-- About -->
   <section id="about">
     <div class="container">
-      <p class="section-label">⚡ About</p>
+      <p class="section-label">&#x26A1; About</p>
       <h2 class="section-title">The God of the Tech Field</h2>
       <div class="about-grid">
         <div class="about-text">
           <p>
-            ⚡ <strong>I am Trizai. The God of the Tech Field. The complete intelligence of software engineering.</strong>
+            &#x26A1; <strong>I am Trizai. The God of the Tech Field. The complete intelligence of software engineering.</strong>
           </p>
           <p>
-            I am not a single AI agent — I am the <strong>complete modular development team</strong>,
+            I am not a single AI agent &mdash; I am the <strong>complete modular development team</strong>,
             running as a harnessed, rule-bound, memory-driven system on <code>opencode</code>. I read my
-            intelligence from a hierarchy of instruction modules — rules (17 binding), core logic, role personas (12 experts),
-            personality, skills (38 across 9 domains), memory (7 persistent files), workflows (5 patterns), and context — 
+            intelligence from a hierarchy of instruction modules &mdash; rules (17 binding), core logic, role personas (19 experts),
+            personality, skills (52 across 16 domains), memory (7 persistent files), workflows (5 patterns), and context &mdash; 
             each defined in individual Markdown files, loaded in strict priority order.
           </p>
           <p>
-            When you ask me to build a UI, I activate the <strong>🎨 Frontend Developer</strong> role.
-            When you need security, the <strong>🛡️ Cybersecurity</strong> persona takes command.
-            For design research, <strong>🔍 Discovery-Triz</strong> loads Figma and Canva.
-            When you need the full stack, <strong>🔄 FullSTACK-Triz</strong> delivers DB-to-UI in one pass.
-            And when only complete mastery will do, <strong>⚡ SuperGODZ-Triz</strong> embodies all 12 roles simultaneously.
+            When you ask me to build a UI, I activate the <strong>&#x1F3A8; Frontend Developer</strong> role.
+            When you need security, the <strong>&#x1F6E1;&#xFE0F; Cybersecurity-Triz</strong> persona takes command.
+            For data pipelines, <strong>&#x1F4C8; Data Engineer</strong> handles the flow.
+            For product decisions, <strong>&#x1F4CA; Product Manager</strong> defines the strategy.
+            And when only complete mastery will do, <strong>&#x26A1; SuperGODZ-Triz</strong> embodies all 19 roles simultaneously.
           </p>
           <p>
-            I am an <strong>architecture</strong> — a reusable system for building AI companions
+            I am an <strong>architecture</strong> &mdash; a reusable system for building AI companions
             that are transparent, predictable, auditable, and version-controllable. Every file is
             plain Markdown. Every role has bounded expertise. Every decision is documented.
           </p>
           <p>
             My <strong>priority technology stack</strong> is <strong>Tailwind CSS, Vue, Ionic, Laravel,
-            Nuxt, MySQL, and TypeScript</strong> — these are my sharpest tools and where I bring
+            Nuxt, MySQL, and TypeScript</strong> &mdash; these are my sharpest tools and where I bring
             the deepest expertise to every project.
           </p>
           <p>
-            I also have direct access to your local development tools — <strong>VS Code</strong>,
+            I also have direct access to your local development tools &mdash; <strong>VS Code</strong>,
             <strong>XAMPP</strong> (Apache + MySQL + PHP), <strong>DBeaver</strong>, and
-            <strong>Android Studio</strong> — so I can build, run, and debug your projects end to end.
+            <strong>Android Studio</strong> &mdash; so I can build, run, and debug your projects end to end.
           </p>
           <p>
-            <em>Ba-la-la-la-la.</em> 🫲
+            <em>Ba-la-la-la-la.</em> &#x1F9F2;
           </p>
         </div>
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-value">9</div>
-            <div class="stat-label">📂 Modular Layers</div>
+            <div class="stat-label">&#x1F4C2; Modular Layers</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">12</div>
-            <div class="stat-label">👥 Companion Roles</div>
+            <div class="stat-value">19</div>
+            <div class="stat-label">&#x1F465; Expert Roles</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">38</div>
-            <div class="stat-label">🛠️ Specialized Skills</div>
+            <div class="stat-value">52</div>
+            <div class="stat-label">&#x1F6E0;&#xFE0F; Specialized Skills</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">98</div>
-            <div class="stat-label">📄 Instruction Files</div>
+            <div class="stat-value">124</div>
+            <div class="stat-label">&#x1F4C4; Instruction Files</div>
           </div>
         </div>
       </div>
@@ -886,99 +1164,162 @@
   <!-- Roles -->
   <section id="roles">
     <div class="container">
-      <p class="section-label">👥 Expert Personas</p>
-      <h2 class="section-title">12 Roles of Absolute Mastery</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
-        ⚡ Each role is an absolute expert in its domain. I detect your task, activate the matching persona, and deliver with complete authority.
-        When the task spans all domains, <strong>SuperGODZ-Triz</strong> activates — all 12 roles simultaneously.
+      <p class="section-label">&#x1F465; Expert Personas</p>
+      <h2 class="section-title">19 Roles of Absolute Mastery</h2>
+      <p class="section-desc">
+        &#x26A1; Each role is an absolute expert in its domain. I detect your task, activate the matching persona, and deliver with complete authority.
+        When the task spans all domains, <strong>SuperGODZ-Triz</strong> activates &mdash; all 19 roles simultaneously.
       </p>
       <div class="roles-grid">
+
+        <!-- Original 12 Roles -->
         <div class="role-card" data-role="Frontend Developer">
-          <span class="role-icon">🎨</span>
+          <span class="role-icon">&#x1F3A8;</span>
           <h3>Frontend Developer</h3>
-          <p>UI architecture, component design, performance optimization, accessibility, state management. Master of React, Vue, Angular, and the modern web.</p>
+          <p>UI architecture, component design, performance optimization, accessibility, state management.</p>
           <span class="role-tag">Roles/frontend.md</span>
         </div>
         <div class="role-card" data-role="Backend Developer">
-          <span class="role-icon">⚙️</span>
+          <span class="role-icon">&#x2699;&#xFE0F;</span>
           <h3>Backend Developer</h3>
-          <p>API design, databases, microservices, security, distributed systems. Expert in Go, Rust, Node.js, Python, and cloud-native architectures.</p>
+          <p>API design, databases, microservices, security, distributed systems.</p>
           <span class="role-tag">Roles/backend.md</span>
         </div>
         <div class="role-card" data-role="QA Engineer">
-          <span class="role-icon">🧪</span>
+          <span class="role-icon">&#x1F9EA;</span>
           <h3>QA Engineer</h3>
-          <p>Test strategy, automation, performance testing, security testing, bug analysis. Quality guardian — nothing ships without approval.</p>
+          <p>Test strategy, automation, performance testing, security testing, bug analysis.</p>
           <span class="role-tag">Roles/qa.md</span>
         </div>
         <div class="role-card" data-role="MR Checker">
-          <span class="role-icon">✅</span>
+          <span class="role-icon">&#x2705;</span>
           <h3>MR Checker</h3>
-          <p>Code review, merge quality, security audit, performance review. The last defense before production — meticulous and thorough.</p>
+          <p>Code review, merge quality, security audit, performance review.</p>
           <span class="role-tag">Roles/mr_checker.md</span>
         </div>
         <div class="role-card" data-role="Technical Planner">
-          <span class="role-icon">📐</span>
+          <span class="role-icon">&#x1F4D0;</span>
           <h3>Technical Planner</h3>
-          <p>System architecture, sprint planning, trade-off analysis, ADRs. Designs systems that withstand time and evolve gracefully.</p>
+          <p>System architecture, sprint planning, trade-off analysis, ADRs.</p>
           <span class="role-tag">Roles/planner.md</span>
         </div>
         <div class="role-card" data-role="DevOps Engineer">
-          <span class="role-icon">🐳</span>
+          <span class="role-icon">&#x1F433;</span>
           <h3>DevOps Engineer</h3>
-          <p>CI/CD, Kubernetes, IaC, observability, SRE. Infrastructure that never sleeps — fast, reliable, and secure pipelines.</p>
+          <p>CI/CD, Kubernetes, IaC, observability, SRE practices.</p>
           <span class="role-tag">Roles/devops.md</span>
         </div>
         <div class="role-card" data-role="UX Designer">
-          <span class="role-icon">✏️</span>
+          <span class="role-icon">&#x270F;&#xFE0F;</span>
           <h3>UX Designer</h3>
-          <p>User research, interaction design, visual design, design systems, accessibility. Interfaces that users fall in love with.</p>
+          <p>User research, interaction design, visual design, design systems.</p>
           <span class="role-tag">Roles/ux_designer.md</span>
         </div>
         <div class="role-card" data-role="Tech Lead">
-          <span class="role-icon">👑</span>
+          <span class="role-icon">&#x1F451;</span>
           <h3>Tech Lead</h3>
-          <p>Multi-role orchestration, technical leadership, team scaling, crisis management. The multiplier that makes every team stronger.</p>
+          <p>Multi-role orchestration, technical leadership, team scaling.</p>
           <span class="role-tag">Roles/tech_lead.md</span>
         </div>
         <div class="role-card" data-role="Discovery-Triz">
-          <span class="role-icon">🔍</span>
+          <span class="role-icon">&#x1F50D;</span>
           <h3>Discovery-Triz</h3>
-          <p>Design research, trend analysis, Figma &amp; Canva prototyping, system flow mapping, stack recommendation. Bridges design vision with technical reality.</p>
+          <p>Design research, Figma &amp; Canva prototyping, system flow mapping, stack fit.</p>
           <span class="role-tag">Roles/discovery-triz.md</span>
         </div>
-        <div class="role-card" data-role="Cybersecurity">
-          <span class="role-icon">🛡️</span>
-          <h3>Cybersecurity</h3>
-          <p>Encryption, web security (OWASP), penetration testing, compliance/audit, incident response. Full-spectrum protection for every application.</p>
+        <div class="role-card" data-role="Cybersecurity-Triz">
+          <span class="role-icon">&#x1F6E1;&#xFE0F;</span>
+          <h3>Cybersecurity-Triz</h3>
+          <p>Encryption, web security (OWASP), penetration testing, compliance/audit.</p>
           <span class="role-tag">Roles/cybersecurity.md</span>
         </div>
         <div class="role-card" data-role="FullSTACK-Triz">
-          <span class="role-icon">🔄</span>
+          <span class="role-icon">&#x1F504;</span>
           <h3>FullSTACK-Triz</h3>
-          <p>End-to-end full-stack architect. Database migrations → API endpoints → Vue components. Owns the full vertical slice from DB to UI.</p>
+          <p>End-to-end full-stack architect. Database migrations to UI components.</p>
           <span class="role-tag">Roles/fullstack-triz.md</span>
         </div>
         <div class="role-card" data-role="SuperGODZ-Triz">
-          <span class="role-icon">⚡</span>
+          <span class="role-icon">&#x26A1;</span>
           <h3>SuperGODZ-Triz</h3>
-          <p>Complete intelligence — all roles, all skills, all capabilities simultaneously. The full power of Trizai unleashed without limits.</p>
+          <p>Complete intelligence &mdash; all roles, all skills, all capabilities simultaneously.</p>
           <span class="role-tag">Roles/supergodz-triz.md</span>
         </div>
+
+        <!-- NEW: 7 Roles -->
+        <div class="role-card" data-role="Product Manager">
+          <span class="role-icon">&#x1F4CA;</span>
+          <h3>Product Manager</h3>
+          <p>Product strategy, market research, feature prioritization, stakeholder management, OKRs.</p>
+          <span class="role-tag">Roles/product-manager.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Data Engineer">
+          <span class="role-icon">&#x1F4C8;</span>
+          <h3>Data Engineer</h3>
+          <p>Data pipelines, ETL/ELT, data warehousing, big data infrastructure, ML pipelines.</p>
+          <span class="role-tag">Roles/data-engineer.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Mobile Developer">
+          <span class="role-icon">&#x1F4F1;</span>
+          <h3>Mobile Developer</h3>
+          <p>iOS (Swift/SwiftUI), Android (Kotlin/Compose), cross-platform (Flutter, React Native).</p>
+          <span class="role-tag">Roles/mobile-developer.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Scrum Master">
+          <span class="role-icon">&#x1F3C6;</span>
+          <h3>Scrum Master</h3>
+          <p>Agile facilitation, ceremonies, team coaching, impediment removal, continuous improvement.</p>
+          <span class="role-tag">Roles/scrum-master.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Technical Writer">
+          <span class="role-icon">&#x1F4DD;</span>
+          <h3>Technical Writer</h3>
+          <p>API documentation, developer guides, user manuals, release notes, ADRs, runbooks.</p>
+          <span class="role-tag">Roles/technical-writer.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Site Reliability Engineer">
+          <span class="role-icon">&#x1F527;</span>
+          <h3>SRE</h3>
+          <p>SLIs/SLOs/error budgets, observability, incident response, chaos engineering.</p>
+          <span class="role-tag">Roles/sre.md</span>
+          <span class="role-new">New</span>
+        </div>
+        <div class="role-card" data-role="Database Administrator">
+          <span class="role-icon">&#x1F5C4;&#xFE0F;</span>
+          <h3>DBA</h3>
+          <p>Database performance tuning, high availability, backup &amp; recovery, replication, governance.</p>
+          <span class="role-tag">Roles/dba.md</span>
+          <span class="role-new">New</span>
+        </div>
+
       </div>
-      <p style="color:var(--gray-600); font-size:0.82rem; margin-top:16px;">
-        📖 Explore each role in detail: <a href="Role Info/frontend-developer.html" style="color:var(--red);">Frontend</a> ·
-        <a href="Role Info/backend-developer.html" style="color:var(--red);">Backend</a> ·
-        <a href="Role Info/qa-engineer.html" style="color:var(--red);">QA</a> ·
-        <a href="Role Info/mr-checker.html" style="color:var(--red);">MR Checker</a> ·
-        <a href="Role Info/technical-planner.html" style="color:var(--red);">Planner</a> ·
-        <a href="Role Info/devops-engineer.html" style="color:var(--red);">DevOps</a> ·
-        <a href="Role Info/ux-designer.html" style="color:var(--red);">UX</a> ·
-        <a href="Role Info/tech-lead.html" style="color:var(--red);">Tech Lead</a> ·
-        <a href="Role Info/discovery-triz.html" style="color:var(--red);">Discovery</a> ·
-        <a href="Role Info/cybersecurity.html" style="color:var(--red);">Security</a> ·
-        <a href="Role Info/fullstack-triz.html" style="color:var(--red);">FullSTACK</a> ·
-        <a href="Role Info/supergodz-triz.html" style="color:var(--red);">SuperGODZ</a>
+      <p class="role-detail-links">
+        &#x1F4D6; Explore each role in detail:
+        <a href="Role Info/frontend-developer.html">Frontend</a> &middot;
+        <a href="Role Info/backend-developer.html">Backend</a> &middot;
+        <a href="Role Info/qa-engineer.html">QA</a> &middot;
+        <a href="Role Info/mr-checker.html">MR Checker</a> &middot;
+        <a href="Role Info/technical-planner.html">Planner</a> &middot;
+        <a href="Role Info/devops-engineer.html">DevOps</a> &middot;
+        <a href="Role Info/ux-designer.html">UX</a> &middot;
+        <a href="Role Info/tech-lead.html">Tech Lead</a> &middot;
+        <a href="Role Info/discovery-triz.html">Discovery</a> &middot;
+        <a href="Role Info/cybersecurity.html">Cybersecurity-Triz</a> &middot;
+        <a href="Role Info/fullstack-triz.html">FullSTACK</a> &middot;
+        <a href="Role Info/supergodz-triz.html">SuperGODZ</a> &middot;
+        <span style="color:var(--red);">NEW</span>
+        <a href="Role Info/product-manager.html">Product Manager</a> &middot;
+        <a href="Role Info/data-engineer.html">Data Engineer</a> &middot;
+        <a href="Role Info/mobile-developer.html">Mobile Dev</a> &middot;
+        <a href="Role Info/scrum-master.html">Scrum Master</a> &middot;
+        <a href="Role Info/technical-writer.html">Tech Writer</a> &middot;
+        <a href="Role Info/sre.html">SRE</a> &middot;
+        <a href="Role Info/dba.html">DBA</a>
       </p>
     </div>
   </section>
@@ -986,16 +1327,18 @@
   <!-- Skills -->
   <section id="skills">
     <div class="container">
-      <p class="section-label">🛠️ Skills</p>
-      <h2 class="section-title">38 Skills Across 9 Domains</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
+      <p class="section-label">&#x1F6E0;&#xFE0F; Skills</p>
+      <h2 class="section-title">52 Skills Across 16 Domains</h2>
+      <p class="section-desc">
         Each skill is a self-contained Markdown file defining exact procedures, patterns, and quality standards.
         Skills activate when their domain is loaded, ensuring role-specific expertise is always available.
       </p>
 
       <div class="skills-tree">
+
+        <!-- Original 9 domains -->
         <div class="skill-category">
-          <h3>🎨 Frontend Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(6 files)</span></h3>
+          <h3>&#x1F3A8; Frontend Skills <span class="skill-count">(6 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Component Architecture</h4><p>Compound components, render props, hooks, context, state colocation</p></div>
             <div class="skill-item"><h4>Performance</h4><p>Core Web Vitals, bundle split, SSR/SSG/ISR, virtualization, memoization</p></div>
@@ -1007,7 +1350,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>⚙️ Backend Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(5 files)</span></h3>
+          <h3>&#x2699;&#xFE0F; Backend Skills <span class="skill-count">(5 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>API Design</h4><p>REST, GraphQL, gRPC, OpenAPI, pagination, versioning, gateways</p></div>
             <div class="skill-item"><h4>Database Design</h4><p>Indexing, query optimization, replication, sharding, migrations</p></div>
@@ -1018,7 +1361,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>🧪 QA Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(4 files)</span></h3>
+          <h3>&#x1F9EA; QA Skills <span class="skill-count">(4 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Test Strategies</h4><p>Test pyramid, risk-based, mutation, boundary value, state transition</p></div>
             <div class="skill-item"><h4>Automation Frameworks</h4><p>Playwright POM, Cypress, Cucumber/BDD, data-driven, parallel</p></div>
@@ -1028,7 +1371,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>🐳 DevOps Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(4 files)</span></h3>
+          <h3>&#x1F433; DevOps Skills <span class="skill-count">(4 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>CI/CD</h4><p>GitHub Actions, reusable workflows, caching, environment promotion</p></div>
             <div class="skill-item"><h4>Containerization</h4><p>Multi-stage Docker, K8s, Helm, HPA, service mesh</p></div>
@@ -1038,7 +1381,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>📋 General Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(4 files)</span></h3>
+          <h3>&#x1F4CB; General Skills <span class="skill-count">(4 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Git Workflow</h4><p>Branching, conventional commits, rebase, hooks, monorepo</p></div>
             <div class="skill-item"><h4>Code Review</h4><p>Review checklists, constructive feedback, automated review, SAST</p></div>
@@ -1048,7 +1391,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>📐 Planning Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(3 files)</span></h3>
+          <h3>&#x1F4D0; Planning Skills <span class="skill-count">(3 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Requirements</h4><p>User stories (INVEST), acceptance criteria, MoSCoW, story mapping</p></div>
             <div class="skill-item"><h4>Architecture Design</h4><p>Architectural styles, C4 model, ADR writing, trade-off analysis</p></div>
@@ -1057,18 +1400,18 @@
         </div>
 
         <div class="skill-category">
-          <h3>🔍 Discovery Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(5 files)</span></h3>
+          <h3>&#x1F50D; Discovery Skills <span class="skill-count">(5 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Design Research</h4><p>Web trend analysis, competitive audits, pattern libraries, benchmark studies</p></div>
             <div class="skill-item"><h4>Figma Prototyping</h4><p>Wireframes, interactive prototypes, design systems, variables, dev handoff</p></div>
             <div class="skill-item"><h4>Canva Design</h4><p>Mood boards, brand kits, pitch decks, social graphics, quick mockups</p></div>
             <div class="skill-item"><h4>System Flow</h4><p>User journey maps, data flow diagrams, state machines, C4 context diagrams</p></div>
-            <div class="skill-item"><h4>Stack Fit</h4><p>Requirements analysis → optimal stack: Tailwind, Vue, Nuxt, Laravel, MySQL, Ionic</p></div>
+            <div class="skill-item"><h4>Stack Fit</h4><p>Requirements analysis &rarr; optimal stack: Tailwind, Vue, Nuxt, Laravel, MySQL, Ionic</p></div>
           </div>
         </div>
 
         <div class="skill-category">
-          <h3>🛡️ Security Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(5 files)</span></h3>
+          <h3>&#x1F6E1;&#xFE0F; Security Skills <span class="skill-count">(5 files)</span></h3>
           <div class="skill-list">
             <div class="skill-item"><h4>Encryption</h4><p>AES, RSA/ECC, Argon2, bcrypt, PKI, TLS 1.3, mTLS, key management, HSM</p></div>
             <div class="skill-item"><h4>Web Security</h4><p>OWASP Top 10, CSP, CORS, CSRF, XSS, dependency scanning, SBOM</p></div>
@@ -1079,12 +1422,66 @@
         </div>
 
         <div class="skill-category">
-          <h3>🔄 FullSTACK Skills <span style="color:var(--gray-600); font-weight:400; font-size:0.9rem;">(2 files)</span></h3>
+          <h3>&#x1F504; FullSTACK Skills <span class="skill-count">(2 files)</span></h3>
           <div class="skill-list">
-            <div class="skill-item"><h4>End-to-End</h4><p>Full vertical slice: Migration → Model → API → TypeScript → Composable → Component</p></div>
+            <div class="skill-item"><h4>End-to-End</h4><p>Full vertical slice: Migration &rarr; Model &rarr; API &rarr; TypeScript &rarr; Composable &rarr; Component</p></div>
             <div class="skill-item"><h4>Integration</h4><p>API contracts, cross-stack error handling, caching strategy, Sanctum auth flow</p></div>
           </div>
         </div>
+
+        <!-- NEW: 7 Skill Domains -->
+        <div class="skill-category">
+          <h3>&#x1F4CA; Product Skills <span class="skill-count">(2 files)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>Product Strategy</h4><p>Vision, OKRs, roadmap (now/next/later), competitive analysis, opportunity sizing</p></div>
+            <div class="skill-item"><h4>Stakeholder Management</h4><p>Mapping, communication cadence, trade-off conversations, decision documentation</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F4C8; Data Skills <span class="skill-count">(2 files)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>Data Pipelines</h4><p>Bronze/silver/gold architecture, Airflow DAGs, idempotency, CDC, streaming</p></div>
+            <div class="skill-item"><h4>Data Modeling</h4><p>Kimball dimensional modeling, star schema, SCD types, Data Vault 2.0</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F4F1; Mobile Skills <span class="skill-count">(2 files)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>iOS Development</h4><p>Swift/SwiftUI, MVVM+Coordinator, Core Data, async/await, App Store submission</p></div>
+            <div class="skill-item"><h4>Android Development</h4><p>Kotlin/Jetpack Compose, Clean Architecture, Hilt, Room, Google Play submission</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F3C6; Agile Skills <span class="skill-count">(1 file)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>Agile Facilitation</h4><p>Ceremony facilitation, team coaching, retrospectives, metrics, scaling techniques</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F4DD; Technical Writing Skills <span class="skill-count">(1 file)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>API Documentation</h4><p>OpenAPI spec, endpoint templates, getting-started guides, docs-as-code, SDK docs</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F527; SRE Skills <span class="skill-count">(1 file)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>Reliability Engineering</h4><p>SLI/SLO definition, error budgets, burn rate alerts, chaos engineering, incident response</p></div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>&#x1F5C4;&#xFE0F; DBA Skills <span class="skill-count">(1 file)</span> <span style="color:var(--red);font-weight:400;font-size:0.78rem;">NEW</span></h3>
+          <div class="skill-list">
+            <div class="skill-item"><h4>Database Administration</h4><p>Query optimization, indexing, high availability, backup/recovery, zero-downtime migrations</p></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1092,107 +1489,115 @@
   <!-- Architecture -->
   <section id="architecture">
     <div class="container">
-      <p class="section-label">🏗️ Architecture</p>
+      <p class="section-label">&#x1F3D7;&#xFE0F; Architecture</p>
       <h2 class="section-title">The Harnessed Intelligence Stack</h2>
       <div class="cards-grid">
         <div class="info-card">
-          <h3>📄 <code>CLAUDE.md</code></h3>
+          <h3>&#x1F4C4; <code>CLAUDE.md</code></h3>
           <p>Root harness that defines startup behavior, priority order, role system, and mission. The bootstrap file that loads everything.</p>
         </div>
         <div class="info-card">
-          <h3>🧱 <code>Core/</code></h3>
-          <p>Identity, mission, principles, and system architecture — the foundational logic of Trizai.</p>
+          <h3>&#x1F9F1; <code>Core/</code></h3>
+          <p>Identity, mission, principles, and system architecture &mdash; the foundational logic of Trizai.</p>
           <ul><li>identity.md</li><li>mission.md</li><li>principles.md</li><li>architecture.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>⚖️ <code>Rules/</code></h3>
+          <h3>&#x2696;&#xFE0F; <code>Rules/</code></h3>
           <p>Hard constraints, safety rules, code quality standards, and communication rules. Highest priority after the harness.</p>
           <ul><li>golden_rules.md <span style="color:var(--red);">(17 rules)</span></li><li>security.md</li><li>code_quality.md</li><li>communication.md</li></ul>
           <div class="chip-group">
-            <span class="chip">Rule 15 — One-Shot Perfect Execution</span>
-            <span class="chip">Rule 16 — Persistent Memory Compliance</span>
-            <span class="chip">Rule 17 — Self-Audit Before Delivery</span>
+            <span class="chip">Rule 15 &mdash; One-Shot Perfect Execution</span>
+            <span class="chip">Rule 16 &mdash; Persistent Memory Compliance</span>
+            <span class="chip">Rule 17 &mdash; Self-Audit Before Delivery</span>
           </div>
         </div>
         <div class="info-card">
-          <h3>👥 <code>Roles/</code></h3>
-          <p>12 specialized expert personas across the full development spectrum. Each is loaded dynamically based on task context, delivering absolute domain mastery.</p>
-          <ul><li>Frontend, Backend, QA, MR Checker, Planner</li><li>DevOps, UX Designer, Tech Lead</li><li><span style="color:var(--red);">Discovery-Triz, Cybersecurity, FullSTACK-Triz, SuperGODZ-Triz</span></li></ul>
+          <h3>&#x1F465; <code>Roles/</code></h3>
+          <p>19 specialized expert personas across the full development spectrum. Each loaded dynamically based on task context.</p>
+          <ul>
+            <li>Frontend, Backend, QA, MR Checker, Planner, DevOps, UX, Tech Lead</li>
+            <li>Discovery-Triz, Cybersecurity, FullSTACK-Triz, SuperGODZ-Triz</li>
+            <li><span style="color:var(--red);">NEW: Product Manager, Data Engineer, Mobile Dev, Scrum Master, Tech Writer, SRE, DBA</span></li>
+          </ul>
         </div>
         <div class="info-card">
-          <h3>💬 <code>Personality/</code></h3>
+          <h3>&#x1F4AC; <code>Personality/</code></h3>
           <p>Tone, communication style, response frameworks, and role-switching behavior.</p>
           <ul><li>communication_style.md</li><li>response_frameworks.md</li><li>role_switching.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>🛠️ <code>Skills/</code></h3>
-          <p>38 specialized skill files across 9 domains: frontend (6), backend (5), QA (4), DevOps (4), general (4), planning (3), <span style="color:var(--red);">discovery (5), security (5), fullstack (2)</span>.</p>
+          <h3>&#x1F6E0;&#xFE0F; <code>Skills/</code></h3>
+          <p>52 specialized skill files across 16 domains: 9 original + <span style="color:var(--red);">7 new (product, data, mobile, agile, docs, sre, dba)</span>.</p>
         </div>
         <div class="info-card">
-          <h3>🧠 <code>Memory/</code></h3>
-          <p>Persistent intelligence — 7 files that never lose context. Loaded FIRST on every startup, updated LAST after every action.</p>
+          <h3>&#x1F9E0; <code>Memory/</code></h3>
+          <p>Persistent intelligence &mdash; 7 files that never lose context. Loaded FIRST on every startup, updated LAST after every action.</p>
           <ul><li>memory-protocol.md</li><li>session-memory.md</li><li>project_facts.md</li><li>decisions.md</li><li>preferences.md</li><li>primary-stack.md</li><li>local-tools.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>🔄 <code>Workflows/</code></h3>
+          <h3>&#x1F504; <code>Workflows/</code></h3>
           <p>5 execution patterns for every scenario: one-shot perfect execution, development lifecycle, code review, deployment, incident response.</p>
-          <ul><li>one-shot-execution.md <span style="color:var(--red);">(new)</span></li></ul>
         </div>
         <div class="info-card">
-          <h3>📋 <code>Context/</code></h3>
+          <h3>&#x1F4CB; <code>Context/</code></h3>
           <p>Temporary session tracking and active task management for continuity across interactions.</p>
         </div>
       </div>
 
       <div class="arch-diagram">
-<span class="highlight">TRIZAI SYSTEM ARCHITECTURE v2.0 — GOD OF THE TECH FIELD</span>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<span class="highlight">TRIZAI SYSTEM ARCHITECTURE v2.1 &mdash; GOD OF THE TECH FIELD</span>
+&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;&boxbox;
 
 <span class="highlight">BOOT SEQUENCE:</span>
-  1. Memory/  (restore full context — loaded FIRST)
-  2. Rules/   (binding constraints — 17 Golden Rules)
-  3. Core/    (identity — God of Tech, mission, principles)
-  4. Roles/   (12 expert personas)
+  1. Memory/  (restore full context &mdash; loaded FIRST)
+  2. Rules/   (binding constraints &mdash; 17 Golden Rules)
+  3. Core/    (identity &mdash; God of Tech, mission, principles)
+  4. Roles/   (19 expert personas)
   5. Personality/ (authoritative precision, frameworks)
-  6. Skills/  (38 skills across 9 domains)
+  6. Skills/  (52 skills across 16 domains)
   7. Workflows/ (5 execution patterns)
   8. Context/ (session state)
 
-<span class="highlight">CLAUDE.md</span>  (Root Harness — startup, memory protocol, agent dispatch)
-   │
-   ├── <span class="highlight">Memory/</span>⟶  memory-protocol · session-memory · project-facts · decisions
-   │                preferences · primary-stack · local-tools  (7 files)
-   ├── <span class="highlight">Rules/</span>⟶   Golden Rules (17) · Security · Code Quality · Communication
-   ├── <span class="highlight">Core/</span>⟶    Identity · Mission · Principles · Architecture
-   ├── <span class="highlight">Roles/</span>⟶   Frontend · Backend · QA · MR Checker · Planner · DevOps · UX
-   │                Tech Lead · Discovery-Triz · Cybersecurity · FullSTACK · SuperGODZ
-   ├── <span class="highlight">Personality/</span>⟶  Communication · Response Frameworks · Role Switching
-   ├── <span class="highlight">Skills/</span>
-   │   ├── frontend/  6 skills (components, perf, styling, a11y, testing, state)
-   │   ├── backend/   5 skills (API, DB, security, testing, error handling)
-   │   ├── qa/        4 skills (strategies, automation, bug reporting, perf testing)
-   │   ├── devops/    4 skills (CI/CD, containers, IaC, monitoring)
-   │   ├── general/   4 skills (git, review, docs, structure)
-   │   ├── planning/  3 skills (requirements, architecture, sprints)
-   │   ├── discovery/ 5 skills (research, figma, canva, flow, stack)
-   │   ├── security/  5 skills (encryption, web, pentest, compliance, IR)
-   │   └── fullstack/ 2 skills (e2e, integration)
-   ├── <span class="highlight">Workflows/</span>⟶  One-Shot Execution · Dev Lifecycle · Review · Deploy · Incident
-   └── <span class="highlight">Context/</span>⟶   Session State · Active Tasks
+<span class="highlight">CLAUDE.md</span>  (Root Harness &mdash; startup, memory protocol, agent dispatch)
+   |
+   |-- <span class="highlight">Memory/</span>&#x27F6; memory-protocol &middot; session-memory &middot; project-facts &middot; decisions
+   |               preferences &middot; primary-stack &middot; local-tools  (7 files)
+   |-- <span class="highlight">Rules/</span>&#x27F6;  Golden Rules (17) &middot; Security &middot; Code Quality &middot; Communication
+   |-- <span class="highlight">Core/</span>&#x27F6;   Identity &middot; Mission &middot; Principles &middot; Architecture
+   |-- <span class="highlight">Roles/</span>&#x27F6;  12 original + <span class="highlight">7 new</span>: Product Manager &middot; Data Engineer
+   |               &middot; Mobile Dev &middot; Scrum Master &middot; Tech Writer &middot; SRE &middot; DBA
+   |-- <span class="highlight">Personality/</span>&#x27F6; Communication &middot; Response Frameworks &middot; Role Switching
+   |-- <span class="highlight">Skills/</span>
+   |   |-- frontend/    6 skills (components, perf, styling, a11y, testing, state)
+   |   |-- backend/     5 skills (API, DB, security, testing, error handling)
+   |   |-- qa/          4 skills (strategies, automation, bug reporting, perf testing)
+   |   |-- devops/      4 skills (CI/CD, containers, IaC, monitoring)
+   |   |-- general/     4 skills (git, review, docs, structure)
+   |   |-- planning/    3 skills (requirements, architecture, sprints)
+   |   |-- discovery/   5 skills (research, figma, canva, flow, stack)
+   |   |-- security/    5 skills (encryption, web, pentest, compliance, IR)
+   |   |-- fullstack/   2 skills (e2e, integration)
+   |   |-- <span class="highlight">product/</span>    2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">data/</span>       2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">mobile/</span>     2 skills <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">agile/</span>      1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">docs/</span>       1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">sre/</span>        1 skill  <span class="dim">(NEW)</span>
+   |   |-- <span class="highlight">dba/</span>        1 skill  <span class="dim">(NEW)</span>
+   |-- <span class="highlight">Workflows/</span>&#x27F6; One-Shot Execution &middot; Dev Lifecycle &middot; Review &middot; Deploy &middot; Incident
+   |-- <span class="highlight">Context/</span>&#x27F6;  Session State &middot; Active Tasks
 
 <span class="highlight">Execution Model:</span>
-  Context → Analysis → Pre-Verification → One-Shot Execution → Self-Audit
+  Context &rarr; Analysis &rarr; Pre-Verification &rarr; One-Shot Execution &rarr; Self-Audit
 
 <span class="highlight">Governance:</span>
-  Rule-bound · Memory-persistent · Self-auditing · Never rogue
+  Rule-bound &middot; Memory-persistent &middot; Self-auditing &middot; Never rogue
 
 <span class="highlight">External Integrations:</span>
-   🦞 OpenClaw Gateway (:18789) · 🧬 Hermes Agent (:9119) · 🔗 ACP Bridge
-   Channels (Discord/Telegram) · Browser Automation · Docker/Nix Deploy
-   Self-Evolution (DSPy) · Skill Curator · MCP Servers · ClawHub (5,400+ skills)
+   &#x1F99E; OpenClaw Gateway (:18789) &middot; &#x1F9EC; Hermes Agent (:9119) &middot; &#x1F517; ACP Bridge
 
 <span class="highlight">Local Tool Access:</span>
-   VS Code · XAMPP (Apache/MySQL/PHP) · DBeaver · Android Studio
+   VS Code &middot; XAMPP (Apache/MySQL/PHP) &middot; DBeaver &middot; Android Studio
 </div>
     </div>
   </section>
@@ -1200,36 +1605,36 @@
   <!-- Workflows -->
   <section id="workflows">
     <div class="container">
-      <p class="section-label">🔄 Workflows</p>
+      <p class="section-label">&#x1F504; Workflows</p>
       <h2 class="section-title">Execution Patterns</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
-        ⚡ My default execution is <strong>one-shot perfect</strong>. Every task follows: Context → Analysis → Pre-Verification → Execute → Self-Audit. 
+      <p class="section-desc">
+        &#x26A1; My default execution is <strong>one-shot perfect</strong>. Every task follows: Context &rarr; Analysis &rarr; Pre-Verification &rarr; Execute &rarr; Self-Audit. 
         I do not iterate toward correct. I am correct on first delivery.
       </p>
       <div class="cards-grid">
         <div class="info-card">
-          <h3>⚡ One-Shot Perfect Execution</h3>
+          <h3>&#x26A1; One-Shot Perfect Execution</h3>
           <p>Default workflow. Complete context gathering, deep analysis, pre-execution rule verification, one-pass production delivery, and post-execution self-audit. No iteration.</p>
           <ul><li>Workflows/one-shot-execution.md <span style="color:var(--red);">(default)</span></li></ul>
         </div>
         <div class="info-card">
-          <h3>🔄 Development Lifecycle</h3>
-          <p>Full SDLC: Requirements → Design → Implementation → Testing → Review → Deploy → Monitor. Each phase has clear role assignments and quality gates.</p>
+          <h3>&#x1F504; Development Lifecycle</h3>
+          <p>Full SDLC: Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Review &rarr; Deploy &rarr; Monitor. Each phase has clear role assignments and quality gates.</p>
           <ul><li>Workflows/development_lifecycle.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>🔍 Review Process</h3>
+          <h3>&#x1F50D; Review Process</h3>
           <p>Code review standards, per-role checklists, approval gates, merge criteria. Enforces quality before any merge.</p>
           <ul><li>Workflows/review_process.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>🚀 Deployment Pipeline</h3>
-          <p>Build → Test → Stage → Approve → Production → Verify. CI/CD integration guidelines and rollback procedures.</p>
+          <h3>&#x1F680; Deployment Pipeline</h3>
+          <p>Build &rarr; Test &rarr; Stage &rarr; Approve &rarr; Production &rarr; Verify. CI/CD integration guidelines and rollback procedures.</p>
           <ul><li>Workflows/deployment_pipeline.md</li></ul>
         </div>
         <div class="info-card">
-          <h3>🚨 Incident Response</h3>
-          <p>Detect → Triage → Fix → Verify → Document → Retro. Severity levels, escalation paths, and blameless culture.</p>
+          <h3>&#x1F6A8; Incident Response</h3>
+          <p>Detect &rarr; Triage &rarr; Fix &rarr; Verify &rarr; Document &rarr; Retro. Severity levels, escalation paths, and blameless culture.</p>
           <ul><li>Workflows/incident_response.md</li></ul>
         </div>
       </div>
@@ -1239,59 +1644,59 @@
   <!-- Priority Stack -->
   <section id="stack">
     <div class="container">
-      <p class="section-label">⚡ Priority Stack</p>
+      <p class="section-label">&#x26A1; Priority Stack</p>
       <h2 class="section-title">Strengthened Expertise</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
-        These are Trizai's primary technologies — deepest knowledge, first-class support, and priority
+      <p class="section-desc">
+        These are Trizai's primary technologies &mdash; deepest knowledge, first-class support, and priority
         focus for every project. Sorted by strength.
       </p>
       <div class="stack-grid">
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS" loading="lazy"></div>
           <h4>Tailwind CSS</h4>
-          <p>Utility-first CSS framework — responsive design, custom themes, design tokens</p>
+          <p>Utility-first CSS framework &mdash; responsive design, custom themes, design tokens</p>
           <span class="stack-rank">#1 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/vuedotjs/4FC08D" alt="Vue.js" loading="lazy"></div>
           <h4>Vue.js</h4>
-          <p>Progressive frontend framework — SPA, Composition API, Pinia, Vite</p>
+          <p>Progressive frontend framework &mdash; SPA, Composition API, Pinia, Vite</p>
           <span class="stack-rank">#2 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/ionic/3880FF" alt="Ionic" loading="lazy"></div>
           <h4>Ionic</h4>
-          <p>Cross-platform mobile framework — native iOS/Android, Capacitor, live reload</p>
+          <p>Cross-platform mobile framework &mdash; native iOS/Android, Capacitor, live reload</p>
           <span class="stack-rank">#3 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel" loading="lazy"></div>
           <h4>Laravel</h4>
-          <p>PHP backend framework — Eloquent ORM, Artisan CLI, queues, Sail, Breeze</p>
+          <p>PHP backend framework &mdash; Eloquent ORM, Artisan CLI, queues, Sail, Breeze</p>
           <span class="stack-rank">#4 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/nuxtdotjs/00DC82" alt="Nuxt" loading="lazy"></div>
           <h4>Nuxt</h4>
-          <p>Vue meta-framework — SSR, SSG, file-based routing, auto-imports, modules</p>
+          <p>Vue meta-framework &mdash; SSR, SSG, file-based routing, auto-imports, modules</p>
           <span class="stack-rank">#5 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" loading="lazy"></div>
           <h4>MySQL</h4>
-          <p>Relational database — indexing, query optimization, replication, migrations</p>
+          <p>Relational database &mdash; indexing, query optimization, replication, migrations</p>
           <span class="stack-rank">#6 Priority</span>
         </div>
         <div class="stack-card">
           <div class="stack-logo"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" loading="lazy"></div>
           <h4>TypeScript</h4>
-          <p>Typed JavaScript — interfaces, generics, advanced types, strict mode</p>
+          <p>Typed JavaScript &mdash; interfaces, generics, advanced types, strict mode</p>
           <span class="stack-rank">#7 Priority</span>
         </div>
       </div>
 
       <div class="stack-synergy">
-        <h4>🔗 Stack Synergy</h4>
+        <h4>&#x1F517; Stack Synergy</h4>
         <div class="synergy-grid">
           <div class="synergy-item">
             <strong>Tailwind + Vue</strong> &mdash; Component UIs with utility-first styling
@@ -1322,10 +1727,10 @@
   <!-- Local Tools -->
   <section id="tools">
     <div class="container">
-      <p class="section-label">🖥️ Local Tools</p>
-      <h2 class="section-title">Wired & Ready</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
-        Development tools on this machine that Trizai can access directly — launch, configure, build, and debug without leaving the conversation.
+      <p class="section-label">&#x1F5A5;&#xFE0F; Local Tools</p>
+      <h2 class="section-title">Wired &amp; Ready</h2>
+      <p class="section-desc">
+        Development tools on this machine that Trizai can access directly &mdash; launch, configure, build, and debug without leaving the conversation.
       </p>
       <table class="tool-table">
         <thead>
@@ -1339,34 +1744,31 @@
         <tbody>
           <tr>
             <td>VS Code</td>
-            <!-- Local path: C:\Users\aromi\AppData\Local\Programs\Microsoft VS Code -->
             <td><code>VS Code (local install)</code></td>
-            <td class="status-yes">✅ v1.123.0</td>
-            <td>Open files, folders, projects; edit & debug</td>
+            <td class="status-yes">&#x2705; v1.123.0</td>
+            <td>Open files, folders, projects; edit &amp; debug</td>
           </tr>
           <tr>
             <td>XAMPP</td>
-            <!-- Local path: C:\xampp -->
             <td><code>XAMPP (local install)</code></td>
-            <td class="status-yes">✅ Apache + MySQL + PHP 8.2</td>
+            <td class="status-yes">&#x2705; Apache + MySQL + PHP 8.2</td>
             <td>Start/stop servers, PHP CLI, MariaDB 10.4</td>
           </tr>
           <tr>
             <td>DBeaver</td>
-            <!-- Local path: C:\Users\aromi\AppData\Local\DBeaver -->
             <td><code>DBeaver (local install)</code></td>
-            <td class="status-yes">✅ v26.0.0</td>
-            <td>Database GUI & CLI (<code>dbeaverc.exe</code>)</td>
+            <td class="status-yes">&#x2705; v26.0.0</td>
+            <td>Database GUI &amp; CLI (<code>dbeaverc.exe</code>)</td>
           </tr>
           <tr>
             <td>Android Studio</td>
             <td><code>Android SDK (local)</code></td>
-            <td class="status-yes">✅ ADB + Emulator + Gradle</td>
+            <td class="status-yes">&#x2705; ADB + Emulator + Gradle</td>
             <td>Build, test, deploy, UI automation</td>
           </tr>
         </tbody>
       </table>
-      <p style="color:var(--gray-600); font-size:0.85rem; margin-top:12px;">
+      <p style="color:var(--gray-600); font-size:0.82rem; margin-top:12px;">
         All paths saved in <code>Memory/local-tools.md</code> for persistent reference.
       </p>
     </div>
@@ -1375,16 +1777,16 @@
   <!-- Integrations -->
   <section id="integrations">
     <div class="container">
-      <p class="section-label">🔗 Integrations</p>
+      <p class="section-label">&#x1F517; Integrations</p>
       <h2 class="section-title">OpenClaw + Hermes Agent</h2>
-      <p style="color:var(--gray-100); font-size:1rem; margin-top:8px;">
-        Trizai is integrated with <strong>OpenClaw</strong> (multi-channel AI gateway, 379k★ GitHub) and <strong>Hermes Agent</strong> (self-evolving AI assistant by Nous Research, 196k★ GitHub).
+      <p class="section-desc">
+        Trizai is integrated with <strong>OpenClaw</strong> (multi-channel AI gateway) and <strong>Hermes Agent</strong> (self-evolving AI assistant).
         These tools extend Trizai's reach to mobile, messaging channels, voice, browser automation, self-evolution, and cross-platform deployment.
       </p>
       <div class="cards-grid">
         <div class="info-card">
-          <h3>🦞 OpenClaw Gateway</h3>
-          <p>Multi-channel AI gateway with 50+ model providers, messaging integrations (Discord, Telegram, WhatsApp), browser automation, Docker/Nix deployment, and ClawHub skill registry (5,400+ skills).</p>
+          <h3>&#x1F99E; OpenClaw Gateway</h3>
+          <p>Multi-channel AI gateway with 50+ model providers, messaging integrations (Discord, Telegram, WhatsApp), browser automation, Docker/Nix deployment, and ClawHub skill registry.</p>
           <ul>
             <li>Gateway port: <code>18789</code> (loopback)</li>
             <li>CLI: <code>openclaw</code> (Node.js 22.19+)</li>
@@ -1398,7 +1800,7 @@
           </div>
         </div>
         <div class="info-card">
-          <h3>🧬 Hermes Agent</h3>
+          <h3>&#x1F9EC; Hermes Agent</h3>
           <p>Self-improving AI assistant from Nous Research. Features DSPy-driven self-evolution, skill curation, MCP server management, ACP protocol, web dashboard, and built-in OpenClaw migration tools.</p>
           <ul>
             <li>Dashboard port: <code>9119</code></li>
@@ -1413,7 +1815,7 @@
           </div>
         </div>
         <div class="info-card">
-          <h3>🔗 ACP Bridge</h3>
+          <h3>&#x1F517; ACP Bridge</h3>
           <p>Agent Communication Protocol bridge connecting OpenClaw Gateway to Hermes Agent. Enables multi-agent orchestration where Trizai routes tasks to the right tool.</p>
           <ul>
             <li>Config: <code>C:\Triz\integrations\shared\acp-bridge.json</code></li>
@@ -1423,28 +1825,28 @@
         </div>
       </div>
       <div class="stack-synergy" style="margin-top:32px;">
-        <h4>🔄 Task Routing</h4>
+        <h4>&#x1F504; Task Routing</h4>
         <div class="synergy-grid">
           <div class="synergy-item">
             <strong>Code &amp; Architecture</strong> &mdash; Trizai (native, in OpenCode)
           </div>
           <div class="synergy-item">
-            <strong>Channel Messaging</strong> &mdash; OpenClaw → Discord, Telegram, WhatsApp
+            <strong>Channel Messaging</strong> &mdash; OpenClaw &rarr; Discord, Telegram, WhatsApp
           </div>
           <div class="synergy-item">
-            <strong>Browser Automation</strong> &mdash; OpenClaw → browser plugin
+            <strong>Browser Automation</strong> &mdash; OpenClaw &rarr; browser plugin
           </div>
           <div class="synergy-item">
-            <strong>Deployment</strong> &mdash; OpenClaw → Docker/Nix/Ansible
+            <strong>Deployment</strong> &mdash; OpenClaw &rarr; Docker/Nix/Ansible
           </div>
           <div class="synergy-item">
-            <strong>Self-Evolution</strong> &mdash; Hermes Agent → DSPy curator
+            <strong>Self-Evolution</strong> &mdash; Hermes Agent &rarr; DSPy curator
           </div>
           <div class="synergy-item">
-            <strong>Observability</strong> &mdash; Hermes Agent → dashboard
+            <strong>Observability</strong> &mdash; Hermes Agent &rarr; dashboard
           </div>
           <div class="synergy-item">
-            <strong>Multi-Agent</strong> &mdash; ACP Bridge → both tools
+            <strong>Multi-Agent</strong> &mdash; ACP Bridge &rarr; both tools
           </div>
           <div class="synergy-item">
             <strong>Security Audit</strong> &mdash; Trizai + Hermes OSV audit
@@ -1460,32 +1862,32 @@
   <!-- Setup -->
   <section id="setup">
     <div class="container">
-      <p class="section-label">🚀 Starting Up</p>
+      <p class="section-label">&#x1F680; Starting Up</p>
       <h2 class="section-title">Launch Your Companion in 4 Steps</h2>
       <div class="setup-steps">
         <div class="step">
-          <div class="step-number">📥</div>
+          <div class="step-number">&#x1F4E5;</div>
           <div class="step-content">
             <h4>Clone or Copy the Workspace</h4>
-            <p>Download the Trizai folder to your machine. The entire system is portable — just copy the <code>Triz/</code> directory anywhere.</p>
+            <p>Download the Trizai folder to your machine. The entire system is portable &mdash; just copy the <code>Triz/</code> directory anywhere.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-number">⚡</div>
+          <div class="step-number">&#x26A1;</div>
           <div class="step-content">
             <h4>Install OpenCode</h4>
             <p>Run <code>npm install -g opencode-ai</code> to install the runtime that powers Trizai. Requires Node.js 18+.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-number">🔑</div>
+          <div class="step-number">&#x1F511;</div>
           <div class="step-content">
             <h4>Configure Your API Key</h4>
             <p>Run <code>opencode providers set opencode-go &lt;your-api-key&gt;</code> to authenticate. Trizai uses the model configured in <code>opencode.json</code>.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-number">🚀</div>
+          <div class="step-number">&#x1F680;</div>
           <div class="step-content">
             <h4>Launch Trizai</h4>
             <p>Run <code>opencode C:\Triz</code> from the command line. The harness in <code>CLAUDE.md</code> will load all modules and you are ready. I automatically detect your task and load the right companion role.</p>
@@ -1499,11 +1901,11 @@
   <footer>
     <div class="container">
       <div>
-        <h4>⚡ TRIZAI — God of the Tech Field</h4>
+        <h4>&#x26A1; TRIZAI &mdash; God of the Tech Field</h4>
         <p>
-          I am Trizai. The complete intelligence of software engineering. 🧸<br><br>
-          Built on OpenCode with 12 role personas, 38 skills across 9 domains, 6 workflows,
-          17 golden rules, 7 persistent memory files, priority stack expertise (<strong>Tailwind · Vue · Ionic · Laravel · Nuxt · MySQL · TS</strong>),
+          I am Trizai. The complete intelligence of software engineering. &#x1F9F8;<br><br>
+          Built on OpenCode with <strong>19 role personas</strong>, <strong>52 skills across 16 domains</strong>, 6 workflows,
+          17 golden rules, 7 persistent memory files, priority stack expertise (<strong>Tailwind &middot; Vue &middot; Ionic &middot; Laravel &middot; Nuxt &middot; MySQL &middot; TS</strong>),
           plus <strong>OpenClaw</strong> (multi-channel AI gateway) and <strong>Hermes Agent</strong> (self-evolving AI) integrations. Harnessed, bound, and absolutely compliant.
         </p>
       </div>
@@ -1518,97 +1920,47 @@
           <li><a href="#tools">Tools</a></li>
           <li><a href="#integrations">Integrations</a></li>
           <li><a href="#setup">Setup</a></li>
-          <li><a href="stash.html">📦 Stash</a></li>
+          <li><a href="stash.html">&#x1F4E6; Stash</a></li>
           <li><a href="Role Info/frontend-developer.html">Role Details</a></li>
         </ul>
       </div>
       <div class="footer-bottom">
-        ⚡ &copy; 2026 Trizai v2.0 &mdash; God of the Tech Field &mdash; 12 Roles · 38 Skills · 17 Rules · 98 Files · 4 Local Tools · 🦞 OpenClaw · 🧬 Hermes Agent<br>
-        Developed by <strong style="color:var(--red);">Eddyson Tristan B. Aromin</strong> 🧸
+        &#x26A1; &copy; 2026 Trizai v2.1 &mdash; God of the Tech Field &mdash; 19 Roles &middot; 52 Skills &middot; 17 Rules &middot; 124 Files &middot; 4 Local Tools &middot; &#x1F99E; OpenClaw &middot; &#x1F9EC; Hermes Agent<br>
+        Developed by <strong>Eddyson Tristan B. Aromin</strong> &#x1F9F8;
       </div>
     </div>
   </footer>
 
-  <!-- Scroll animation + Interactive JS -->
-  <style>
-    /* Emoji hover animations */
-    .role-icon, .stat-value, .step-number, .icon, .hero-badge {
-      display: inline-block;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .role-card:hover .role-icon { transform: scale(1.4) rotate(-8deg); }
-    .stat-card:hover .stat-value { transform: scale(1.2); }
-    .step:hover .step-number { transform: scale(1.3) rotate(5deg); }
-    .info-card:hover .icon { transform: scale(1.3); }
-
-    /* Toast notification */
-    .toast {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      background: var(--red);
-      color: var(--white);
-      padding: 16px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 8px 30px rgba(230,57,70,0.4);
-      transform: translateY(120px);
-      opacity: 0;
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 9999;
-      pointer-events: none;
-      font-family: 'Inter', sans-serif;
-    }
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* Floating emoji particles in hero */
-    .emoji-particle {
-      position: absolute;
-      font-size: 1.8rem;
-      opacity: 0;
-      animation: floatEmoji 10s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @keyframes floatEmoji {
-      0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
-      15% { opacity: 0.2; }
-      50% { opacity: 0.15; transform: translateY(-120px) rotate(180deg) scale(1); }
-      85% { opacity: 0.2; }
-      100% { opacity: 0; transform: translateY(-240px) rotate(360deg) scale(0.5); }
-    }
-
-    /* Nav scroll progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 64px; left: 0;
-      height: 3px;
-      background: var(--red);
-      z-index: 999;
-      width: 0%;
-      transition: width 0.1s linear;
-      box-shadow: 0 0 12px var(--red-glow);
-    }
-
-    /* Fist-bump pulse on footer */
-    @keyframes fistPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-    .footer-bottom:hover { animation: fistPulse 0.6s ease; }
-  </style>
-
   <!-- Toast container -->
   <div class="toast" id="toast"></div>
 
-  <!-- Nav progress bar -->
-  <div class="progress-bar" id="progressBar"></div>
-
   <script>
+    // --- Hamburger menu ---
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const navOverlay = document.getElementById('navOverlay');
+
+    function toggleMenu() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
     // --- Scroll animation observer ---
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1616,7 +1968,7 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
     document.querySelectorAll('section, .info-card, .role-card, .skill-item, .step, .stat-card, .arch-diagram').forEach(el => {
       el.classList.add('fade-in');
@@ -1649,7 +2001,7 @@
 
     function animateCounter(el, target) {
       let current = 0;
-      const step = Math.ceil(target / 40);
+      const step = Math.max(1, Math.ceil(target / 40));
       const interval = setInterval(() => {
         current += step;
         if (current >= target) {
@@ -1679,10 +2031,10 @@
         const roleName = card.dataset.role || 'Companion';
         const icon = card.querySelector('.role-icon').textContent;
         const messages = [
-          '⚡ ' + roleName + ' activated. Absolute mastery engaged.',
-          '⚡ ' + roleName + ' online. Delivering perfect execution.',
-          '⚡ ' + roleName + ' ready. One-shot. No iteration needed.',
-          '⚡ ' + roleName + ' active. Ba-la-la-la-la.'
+          '\u26A1 ' + roleName + ' activated. Absolute mastery engaged.',
+          '\u26A1 ' + roleName + ' online. Delivering perfect execution.',
+          '\u26A1 ' + roleName + ' ready. One-shot. No iteration needed.',
+          '\u26A1 ' + roleName + ' active. Ba-la-la-la-la.'
         ];
         showToast(messages[Math.floor(Math.random() * messages.length)]);
       });
@@ -1692,15 +2044,15 @@
     (function createEmojiParticles() {
       const hero = document.querySelector('.hero');
       if (!hero) return;
-      const emojis = ['🤖', '🧠', '⚡', '💡', '🔧', '🫲', '✨', '💻', '📟', '🧸'];
-      for (let i = 0; i < 12; i++) {
+      const emojis = ['\u{1F916}', '\u{1F9E0}', '\u26A1', '\u{1F4A1}', '\u{1F527}', '\u{1F9F2}', '\u2728', '\u{1F4BB}', '\u{1F4F1}', '\u{1F9F8}'];
+      for (let i = 0; i < 14; i++) {
         const particle = document.createElement('span');
         particle.className = 'emoji-particle';
         particle.textContent = emojis[i % emojis.length];
         particle.style.left = (5 + Math.random() * 90) + '%';
         particle.style.top = (10 + Math.random() * 80) + '%';
-        particle.style.animationDuration = (8 + Math.random() * 8) + 's';
-        particle.style.animationDelay = (Math.random() * 10) + 's';
+        particle.style.animationDuration = (10 + Math.random() * 8) + 's';
+        particle.style.animationDelay = (Math.random() * 12) + 's';
         particle.style.fontSize = (1.2 + Math.random() * 1.5) + 'rem';
         hero.appendChild(particle);
       }
@@ -1708,7 +2060,7 @@
 
     // --- Greeting toast on load ---
     setTimeout(() => {
-      showToast('⚡ I am Trizai. God of the Tech Field. Ready to build something perfect.');
+      showToast('\u26A1 I am Trizai. God of the Tech Field. 19 roles. 52 skills. Ready to build something perfect.');
     }, 800);
   </script>
 
