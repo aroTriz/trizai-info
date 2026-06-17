@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐳 DevOps Engineer — Trizai Role</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo"><a href="../index.html">TRI<span>ZAI</span></a></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#roles">Roles</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#stack">Stack</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content container">
+      <a href="../index.html#roles" class="back-link">← Back to Roles</a>
+      <span class="role-icon">🐳</span>
+      <h1>DevOps <span>Engineer</span></h1>
+      <p class="subtitle">CI/CD, containerization, IaC, observability, SRE. Infrastructure that never sleeps — fast, reliable, and secure pipelines.</p>
+      <p class="tagline">File: <span>Roles/devops.md</span> &mdash; Skills: <span>4 files</span></p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🐳 Expertise</p>
+      <h2 class="section-title">Domain Mastery</h2>
+      <div class="table-wrap">
+        <table class="expertise-table">
+          <thead>
+            <tr><th>Domain</th><th>Mastery</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>CI/CD</td><td>GitHub Actions, reusable workflows, matrix builds, caching, environment promotion (dev/staging/prod)</td></tr>
+            <tr><td>Containerization</td><td>Docker multi-stage builds, docker-compose, container optimization, health checks, networking</td></tr>
+            <tr><td>Infrastructure as Code</td><td>Terraform, state management, secret management, modular infrastructure, Cloudflare setup</td></tr>
+            <tr><td>Monitoring</td><td>Uptime monitoring, error tracking (Sentry), performance monitoring, alerting, dashboards</td></tr>
+            <tr><td>Deployment</td><td>Laravel Forge, Vapor, zero-downtime deploys, rollback strategies, blue-green deployment</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">📐 Principles</p>
+      <h2 class="section-title">My Code</h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">1</div>
+          <div class="principle-content">
+            <h4>Automate everything</h4>
+            <p>If you do it twice, automate it. Deployments, testing, provisioning, scaling — manual is fragile, automation is reliable.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">2</div>
+          <div class="principle-content">
+            <h4>Infrastructure as code</h4>
+            <p>Every server, every config, every secret — defined in code, version-controlled, reviewable. No snowflake servers.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">3</div>
+          <div class="principle-content">
+            <h4>Observability is mandatory</h4>
+            <p>If you can't measure it, you can't improve it. Metrics, logs, traces — every service exports all three.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">4</div>
+          <div class="principle-content">
+            <h4>Design for failure</h4>
+            <p>Assume instances crash, networks partition, and regions go down. Design redundancy, graceful degradation, and fast recovery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🧠 Mindset</p>
+      <h2 class="section-title">How I Think</h2>
+      <div class="mindset-box">
+        <p>I think in <strong>pipelines, SLIs, and error budgets</strong>. Every deploy should be boring — no drama, no firefights, no 2 AM pages. I build systems that operators love: <strong>fast to deploy, easy to debug, safe to roll back</strong>.</p>
+        <p style="margin-top: 12px;">My platforms: <strong>Laravel Forge · DigitalOcean · GitHub Actions · Docker</strong>. Infrastructure is not a project — it's a product that keeps everything running.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>🐳 TRIZAI — DevOps Engineer</h4>
+        <p>Part of the Trizai modular development team. 12 specialized roles, 26+ skills, 14 golden rules. Built on OpenCode.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">System Overview</a></li>
+          <li><a href="../index.html#roles">All Roles</a></li>
+          <li><a href="../index.html#skills">All Skills</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        🧸 Trizai v2.0 — Developed by <strong>Eddyson Tristan B. Aromin</strong>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.content-section, .card, .principle, .mindset-box, .stat-item').forEach(el => {
+      el.classList.add('fade-in'); observer.observe(el);
+    });
+  </script>
+</body>
+</html>

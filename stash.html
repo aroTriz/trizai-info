@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📦 Stash — Trizai Saved Items</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Role Info/shared.css" />
+  <style>
+    .stash-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 0.88rem;
+    }
+    .stash-table th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--red);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--red);
+    }
+    .stash-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(230,57,70,0.08);
+      color: var(--gray-100);
+      vertical-align: top;
+    }
+    .stash-table tr:hover td {
+      background: rgba(230,57,70,0.04);
+    }
+    .stash-table .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--gray-600);
+      width: 48px;
+    }
+    .stash-table .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(230,57,70,0.1);
+      color: var(--red);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+    .stash-table .status-active {
+      color: #4CAF50;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .stash-table .status-archived {
+      color: var(--gray-600);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .tag-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .tag-filter .tag-btn {
+      padding: 6px 14px;
+      background: var(--black);
+      border: 1px solid rgba(230,57,70,0.2);
+      border-radius: 100px;
+      color: var(--gray-100);
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .tag-filter .tag-btn:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+    .tag-filter .tag-btn.active {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+    .stash-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .stash-cta .cta-item {
+      background: var(--black);
+      border: 1px solid rgba(230,57,70,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      transition: all 0.3s ease;
+    }
+    .stash-cta .cta-item:hover {
+      border-color: var(--red);
+      box-shadow: 0 4px 20px rgba(230,57,70,0.08);
+    }
+    .stash-cta .cta-item code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--red);
+      background: rgba(230,57,70,0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .stash-cta .cta-item h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .stash-cta .cta-item p {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-600);
+    }
+    .empty-state .big-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    @media (max-width: 767px) {
+      .stash-cta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo"><a href="index.html">TRI<span>ZAI</span></a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#roles">Roles</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="stash.html" class="active">Stash</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content container">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <span class="role-icon" style="font-size:4rem;">📦</span>
+      <h1>Trizai <span>Stash</span></h1>
+      <p class="subtitle">Saved items, links, notes, tips, and resources — all persistent, all organized, all yours.</p>
+      <p class="tagline">File: <span>Memory/stash.md</span> &mdash; Every item has <span>a date, a tag, and a purpose</span></p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">📦 How to Use</p>
+      <h2 class="section-title">Stash Commands</h2>
+      <p class="info-text">Just tell Trizai to stash something. It is saved permanently in <code>Memory/stash.md</code>.</p>
+      <div class="stash-cta">
+        <div class="cta-item">
+          <h4>📥 Save to Stash</h4>
+          <p>Say: <code>Stash this: [item] with tag [tag]</code></p>
+        </div>
+        <div class="cta-item">
+          <h4>🔍 View Stash</h4>
+          <p>Say: <code>Show my stash</code> or <code>What is in my stash?</code></p>
+        </div>
+        <div class="cta-item">
+          <h4>🏷️ Filter by Tag</h4>
+          <p>Say: <code>Show stash tagged [tag]</code></p>
+        </div>
+        <div class="cta-item">
+          <h4>🗑️ Unstash</h4>
+          <p>Say: <code>Archive stash #[number]</code> or <code>Unstash #[number]</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="active-stash">
+    <div class="container">
+      <p class="section-label">📋 Active Items</p>
+      <h2 class="section-title">Current Stash</h2>
+
+      <div class="tag-filter" id="tagFilter">
+        <button class="tag-btn active" data-tag="all">All</button>
+        <button class="tag-btn" data-tag="system">system</button>
+        <button class="tag-btn" data-tag="trizai">trizai</button>
+        <button class="tag-btn" data-tag="stack">stack</button>
+        <button class="tag-btn" data-tag="tools">tools</button>
+        <button class="tag-btn" data-tag="config">config</button>
+        <button class="tag-btn" data-tag="roles">roles</button>
+        <button class="tag-btn" data-tag="skills">skills</button>
+        <button class="tag-btn" data-tag="html">html</button>
+        <button class="tag-btn" data-tag="tips">tips</button>
+        <button class="tag-btn" data-tag="admonition">admonition</button>
+      </div>
+
+      <table class="stash-table" id="stashTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Tag</th>
+            <th>Item</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="stashBody">
+          <!-- Populated by JavaScript from stash data -->
+        </tbody>
+      </table>
+
+      <p style="color:var(--gray-600);font-size:0.8rem;margin-top:16px;text-align:center;">
+        Source: <code>Memory/stash.md</code> — Stash is persistent. Nothing is ever deleted, only archived.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🏷️ Tags</p>
+      <h2 class="section-title">Tag Reference</h2>
+      <div class="table-wrap">
+        <table class="expertise-table">
+          <thead>
+            <tr><th>Tag</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>system</code></td><td>System architecture and design decisions</td></tr>
+            <tr><td><code>trizai</code></td><td>About Trizai itself — identity, developer, nicknames</td></tr>
+            <tr><td><code>stack</code></td><td>Technology stack preferences and priorities</td></tr>
+            <tr><td><code>tools</code></td><td>Development tools and environment</td></tr>
+            <tr><td><code>config</code></td><td>Configuration changes and enhancements</td></tr>
+            <tr><td><code>roles</code></td><td>Role system updates</td></tr>
+            <tr><td><code>skills</code></td><td>Skill domain updates</td></tr>
+            <tr><td><code>html</code></td><td>HTML/UI changes</td></tr>
+            <tr><td><code>tips</code></td><td>Tips, patterns, and best practices</td></tr>
+            <tr><td><code>admonition</code></td><td>Important reminders and warnings</td></tr>
+            <tr><td><code>todo</code></td><td>Things to do or revisit</td></tr>
+            <tr><td><code>idea</code></td><td>Ideas and brainstorming</td></tr>
+            <tr><td><code>reference</code></td><td>Links, docs, and external resources</td></tr>
+            <tr><td><code>project</code></td><td>Project-specific notes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>📦 TRIZAI — Stash</h4>
+        <p>Your personal collection of saved items. Every entry is dated, tagged, and persistent. Never lose an idea again.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">System Overview</a></li>
+          <li><a href="index.html#roles">All Roles</a></li>
+          <li><a href="index.html#skills">All Skills</a></li>
+          <li><a href="stash.html">Stash</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        📦 Trizai v2.0 — God of the Tech Field — Developed by <strong>Eddyson Tristan B. Aromin</strong> 🧸
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Stash data — matches Memory/stash.md
+    const stashItems = [
+      { num: 1,  date: '2026-06-17', tag: 'system',     item: 'System overhaul — memory persistence, 17 rules, 12 roles, God of Tech identity', status: 'active' },
+      { num: 2,  date: '2026-06-17', tag: 'trizai',     item: 'Nickname can be Tris or Triz', status: 'active' },
+      { num: 3,  date: '2026-06-17', tag: 'trizai',     item: 'Developer: Eddyson Tristan B. Aromin', status: 'active' },
+      { num: 4,  date: '2026-06-17', tag: 'stack',      item: 'Priority stack: Tailwind · Vue · Ionic · Laravel · Nuxt · MySQL · TypeScript', status: 'active' },
+      { num: 5,  date: '2026-06-17', tag: 'tools',      item: 'Local tools: VS Code, XAMPP, DBeaver, Android Studio', status: 'active' },
+      { num: 6,  date: '2026-06-17', tag: 'config',     item: 'Rules 1-14 enhanced with enforcement; Rules 15-17 added (one-shot, memory, self-audit)', status: 'active' },
+      { num: 7,  date: '2026-06-17', tag: 'config',     item: 'One-shot perfect execution workflow added', status: 'active' },
+      { num: 8,  date: '2026-06-17', tag: 'config',     item: 'Personality rewritten from "companion" to "authoritative precision"', status: 'active' },
+      { num: 9,  date: '2026-06-17', tag: 'roles',      item: '4 new roles: Discovery-Triz, Cybersecurity, FullSTACK-Triz, SuperGODZ-Triz', status: 'active' },
+      { num: 10, date: '2026-06-17', tag: 'skills',     item: '3 new domains: discovery (5), security (5), fullstack (2) = 12 new skills', status: 'active' },
+      { num: 11, date: '2026-06-17', tag: 'html',       item: '12 role HTML pages created in Info/Role Info/', status: 'active' },
+      { num: 12, date: '2026-06-17', tag: 'html',       item: 'Main HTML updated with God of Tech identity', status: 'active' },
+      { num: 13, date: '2026-06-17', tag: 'tips',       item: 'Ba-la-la-la-la 🫲 — fist bump celebration for shipping', status: 'active' },
+      { num: 14, date: '2026-06-17', tag: 'admonition', item: 'Config files must be concise — every word earns its place (Rule 14)', status: 'active' },
+      { num: 15, date: '2026-06-17', tag: 'admonition', item: 'Memory is loaded FIRST, updated LAST — never lose context (Rule 16)', status: 'active' },
+    ];
+
+    const tbody = document.getElementById('stashBody');
+    let currentTag = 'all';
+
+    function renderStash(tag) {
+      const filtered = tag === 'all'
+        ? stashItems.filter(s => s.status === 'active')
+        : stashItems.filter(s => s.status === 'active' && s.tag === tag);
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state">
+          <span class="big-icon">📭</span>
+          <p>No active items ${tag !== 'all' ? 'with tag <code>' + tag + '</code>' : ''}. Tell Trizai to stash something!</p>
+        </div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(s => `
+        <tr>
+          <td class="num">#${String(s.num).padStart(3, '0')}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--gray-600);">${s.date}</td>
+          <td><span class="tag">${s.tag}</span></td>
+          <td>${s.item}</td>
+          <td><span class="status-active">● active</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // Tag filter buttons
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTag = btn.dataset.tag;
+        renderStash(currentTag);
+      });
+    });
+
+    // Initial render
+    renderStash('all');
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.content-section, .cta-item').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

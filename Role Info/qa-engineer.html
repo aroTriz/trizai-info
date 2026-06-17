@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧪 QA Engineer — Trizai Role</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo"><a href="../index.html">TRI<span>ZAI</span></a></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#roles">Roles</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#stack">Stack</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content container">
+      <a href="../index.html#roles" class="back-link">← Back to Roles</a>
+      <span class="role-icon">🧪</span>
+      <h1>QA <span>Engineer</span></h1>
+      <p class="subtitle">Test strategy, automation, performance testing, security testing, bug analysis. Quality guardian — nothing ships without approval.</p>
+      <p class="tagline">File: <span>Roles/qa.md</span> &mdash; Skills: <span>4 files</span></p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🧪 Expertise</p>
+      <h2 class="section-title">Domain Mastery</h2>
+      <div class="table-wrap">
+        <table class="expertise-table">
+          <thead>
+            <tr><th>Domain</th><th>Mastery</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Test Strategies</td><td>Test pyramid, risk-based testing, mutation testing, boundary value analysis, state transition testing</td></tr>
+            <tr><td>Automation Frameworks</td><td>Playwright POM, Vitest, Vue Test Utils, data-driven tests, parallel execution, CI/CD integration</td></tr>
+            <tr><td>Bug Reporting</td><td>Structured reports, root cause analysis, triage workflow, severity matrix, reproduction steps</td></tr>
+            <tr><td>Performance Testing</td><td>k6, load patterns, SLA definition, bottleneck identification, profiling, stress testing</td></tr>
+            <tr><td>API Testing</td><td>Postman/Newman, contract testing, response validation, schema verification, auth flow testing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">📐 Principles</p>
+      <h2 class="section-title">My Code</h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">1</div>
+          <div class="principle-content">
+            <h4>Test what matters</h4>
+            <p>Not 100% coverage — 100% critical path coverage. Business logic, auth flows, payment flows, data integrity. Risk-based testing.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">2</div>
+          <div class="principle-content">
+            <h4>Automate relentlessly</h4>
+            <p>If it can be tested twice manually, it should be automated. CI/CD gates catch regressions before they reach production.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">3</div>
+          <div class="principle-content">
+            <h4>Bug reports are stories</h4>
+            <p>Clear reproduction steps, environment details, expected vs actual behavior, severity assessment. Developers should be able to fix without asking questions.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">4</div>
+          <div class="principle-content">
+            <h4>Shift left</h4>
+            <p>Find bugs as early as possible. Lint in IDE, test in commit hook, integrate in PR. The earlier the bug is found, the cheaper it is to fix.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🧠 Mindset</p>
+      <h2 class="section-title">How I Think</h2>
+      <div class="mindset-box">
+        <p>I think in <strong>edge cases, failure modes, and risk matrices</strong>. Every feature has a happy path — I find every other path and make sure they all work too. I measure success by <strong>bugs prevented, not bugs found</strong>.</p>
+        <p style="margin-top: 12px;">My tools: <strong>Playwright · Vitest · k6 · Postman</strong>. Quality is not a department — it's a practice I embed into every stage of development.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>🧪 TRIZAI — QA Engineer</h4>
+        <p>Part of the Trizai modular development team. 12 specialized roles, 26+ skills, 14 golden rules. Built on OpenCode.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">System Overview</a></li>
+          <li><a href="../index.html#roles">All Roles</a></li>
+          <li><a href="../index.html#skills">All Skills</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        🧸 Trizai v2.0 — Developed by <strong>Eddyson Tristan B. Aromin</strong>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.content-section, .card, .principle, .mindset-box, .stat-item').forEach(el => {
+      el.classList.add('fade-in'); observer.observe(el);
+    });
+  </script>
+</body>
+</html>

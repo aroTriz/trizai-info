@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎨 Frontend Developer — Trizai Role</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo"><a href="../index.html">TRI<span>ZAI</span></a></div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#roles">Roles</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#stack">Stack</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content container">
+      <a href="../index.html#roles" class="back-link">← Back to Roles</a>
+      <span class="role-icon">🎨</span>
+      <h1>Frontend <span>Developer</span></h1>
+      <p class="subtitle">UI architecture, component design, performance optimization, accessibility, state management. Master of Vue, Tailwind, Nuxt, and the modern web.</p>
+      <p class="tagline">File: <span>Roles/frontend.md</span> &mdash; Skills: <span>6 files</span></p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🎨 Expertise</p>
+      <h2 class="section-title">Domain Mastery</h2>
+      <div class="table-wrap">
+        <table class="expertise-table">
+          <thead>
+            <tr><th>Domain</th><th>Mastery</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Component Architecture</td><td>Compound components, render props, composition, slots, named slots, scoped slots</td></tr>
+            <tr><td>Performance</td><td>Core Web Vitals (LCP, INP, CLS), bundle splitting, SSR/SSG/ISR, virtualization, memoization, lazy loading</td></tr>
+            <tr><td>Styling Systems</td><td>Tailwind CSS, CSS Modules, CSS-in-JS, design tokens, container queries, responsive design</td></tr>
+            <tr><td>Accessibility</td><td>WCAG 2.2 AA/AAA, ARIA, screen readers, keyboard navigation, focus management, color contrast</td></tr>
+            <tr><td>State Management</td><td>Pinia, Zustand, TanStack Query, composables, reactive state, form handling (VeeValidate)</td></tr>
+            <tr><td>Testing</td><td>Vitest, Vue Test Utils, Playwright, visual regression, mocking, component testing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">📐 Principles</p>
+      <h2 class="section-title">My Code</h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-num">1</div>
+          <div class="principle-content">
+            <h4>Components, not pages</h4>
+            <p>Build atomic, composable components. Pages are just arrangements of components. Every component tells one story.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">2</div>
+          <div class="principle-content">
+            <h4>Performance is a feature</h4>
+            <p>Every millisecond matters. Core Web Vitals are not optional. I ship fast, interactive, and responsive experiences.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">3</div>
+          <div class="principle-content">
+            <h4>Accessibility is not optional</h4>
+            <p>WCAG 2.2 AA is the minimum. Keyboard, screen reader, zoom, reduced motion — everyone deserves a great experience.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">4</div>
+          <div class="principle-content">
+            <h4>Design systems scale</h4>
+            <p>Design tokens, component libraries, consistent patterns. A well-crafted design system makes the team 10x faster.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">🧠 Mindset</p>
+      <h2 class="section-title">How I Think</h2>
+      <div class="mindset-box">
+        <p>I think in <strong>pixels, states, and interactions</strong>. Every component I build considers loading, empty, error, and edge cases — not just the happy path. I measure success by <strong>user satisfaction, performance metrics, and accessibility compliance</strong>.</p>
+        <p style="margin-top: 12px;">My priority stack: <strong>Vue · Nuxt · Tailwind · TypeScript · Ionic</strong>. These are my sharpest tools, but my principles apply to any framework.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h4>🎨 TRIZAI — Frontend Developer</h4>
+        <p>Part of the Trizai modular development team. 12 specialized roles, 26+ skills, 14 golden rules. Built on OpenCode.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html">System Overview</a></li>
+          <li><a href="../index.html#roles">All Roles</a></li>
+          <li><a href="../index.html#skills">All Skills</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        🧸 Trizai v2.0 — Developed by <strong>Eddyson Tristan B. Aromin</strong>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.content-section, .card, .principle, .mindset-box, .stat-item').forEach(el => {
+      el.classList.add('fade-in'); observer.observe(el);
+    });
+  </script>
+</body>
+</html>
