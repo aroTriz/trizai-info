@@ -20,6 +20,7 @@
         <li><a href="roles.html" class="nav-link active">Roles</a></li>
         <li><a href="skills.html" class="nav-link">Skills</a></li>
         <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="design.html" class="nav-link">Design</a></li>
         <li><a href="stack.html" class="nav-link">Stack</a></li>
         <li><a href="stash.html" class="nav-link">Stash</a></li>
         <li><a href="https://discord.gg/CXe5pDHSG" target="_blank" style="color:var(--red);font-weight:600;">&#x1F991; Discord</a></li>
@@ -310,16 +311,38 @@
       }, 2500);
     }
 
+    // Role card slug mapping
+    const roleSlugs = {
+      'Frontend Developer': 'frontend-developer',
+      'Backend Developer': 'backend-developer',
+      'QA Engineer': 'qa-engineer',
+      'MR Checker': 'mr-checker',
+      'Technical Planner': 'technical-planner',
+      'DevOps Engineer': 'devops-engineer',
+      'UX Designer': 'ux-designer',
+      'Tech Lead': 'tech-lead',
+      'Discovery-Triz': 'discovery-triz',
+      'Cybersecurity-Triz': 'cybersecurity',
+      'FullSTACK-Triz': 'fullstack-triz',
+      'SuperGODZ-Triz': 'supergodz-triz',
+      'Product Manager': 'product-manager',
+      'Data Engineer': 'data-engineer',
+      'Mobile Developer': 'mobile-developer',
+      'Scrum Master': 'scrum-master',
+      'Technical Writer': 'technical-writer',
+      'Site Reliability Engineer': 'sre',
+      'Database Administrator': 'dba'
+    };
+
     document.querySelectorAll('.role-card').forEach(card => {
       card.addEventListener('click', () => {
-        const roleName = card.dataset.role || 'Companion';
-        const messages = [
-          '\u26A1 ' + roleName + ' activated. Absolute mastery engaged.',
-          '\u26A1 ' + roleName + ' online. Delivering perfect execution.',
-          '\u26A1 ' + roleName + ' ready. One-shot. No iteration needed.',
-          '\u26A1 ' + roleName + ' active. Ba-la-la-la-la.'
-        ];
-        showToast(messages[Math.floor(Math.random() * messages.length)]);
+        const roleName = card.dataset.role || '';
+        const slug = roleSlugs[roleName];
+        if (slug) {
+          window.location.href = 'Role Info/' + slug + '.html';
+        } else {
+          showToast('\u26A1 ' + roleName + ' activated. Absolute mastery engaged.');
+        }
       });
     });
 
