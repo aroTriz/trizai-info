@@ -35,10 +35,10 @@
   <!-- Hero -->
   <section class="hero hero-3d mesh-bg starfield" id="home">
     <div class="hero-content container">
-      <div class="hero-badge float-3d">v2.1.0 &mdash; TRIZAI</div>
+      <div class="hero-badge float-3d">v2.2.0 &mdash; TRIZAI</div>
       <h1>TRI<span class="neon-glow">ZAI</span></h1>
       <p class="subtitle">God of the Tech Field, One-Man Army &mdash; all 19 roles, one unified mission, perfect execution.</p>
-      <p class="tech-stack">19 Roles &bull; 56 Skills &bull; 7 Workflows &bull; 18 Golden Rules &bull; 4 Local Tools &bull; 7 Memory Files</p>
+      <p class="tech-stack">19 Roles &bull; 56 Skills &bull; 7 Workflows &bull; 18 Golden Rules &bull; 4 Local Tools &bull; 7 Memory Files &bull; CodeGraph Index</p>
       <p class="tech-stack" style="margin-bottom:32px;">Priority Stack: <span>Tailwind</span> &bull; <span>Vue</span> &bull; <span>Ionic</span> &bull; <span>Laravel</span> &bull; <span>Nuxt</span> &bull; <span>MySQL</span> &bull; <span>TypeScript</span></p>
       <p style="font-family:JetBrains Mono,monospace;font-size:0.75rem;color:var(--gray-600);margin-bottom:40px;">Developed by <span style="color:var(--red);">Eddyson Tristan B. Aromin</span></p>
       <a href="mailto:aromineddyson.triz@gmail.com" class="cta-btn" target="_blank">Let's Build Together</a>
@@ -59,13 +59,14 @@
           <p>I am an <strong>architecture</strong> &mdash; a reusable system for building AI companions that are transparent, predictable, auditable, and version-controllable. Every file is plain Markdown. Every role has bounded expertise. Every decision is documented.</p>
           <p>My <strong>priority technology stack</strong> is <strong>Tailwind CSS, Vue, Ionic, Laravel, Nuxt, MySQL, and TypeScript</strong> &mdash; these are my sharpest tools and where I bring the deepest expertise to every project.</p>
           <p>I also have direct access to your local development tools &mdash; <strong>VS Code</strong>, <strong>XAMPP</strong> (Apache + MySQL + PHP), <strong>DBeaver</strong>, and <strong>Android Studio</strong> &mdash; so I can build, run, and debug your projects end to end.</p>
-          <p>I am integrated with <strong>OpenClaw</strong> (multi-channel AI gateway with 50+ model providers, Discord/Telegram/WhatsApp messaging, browser automation, Docker/Nix deployment, ClawHub with 5,400+ skills) and <strong>Hermes Agent</strong> (self-evolving AI with DSPy-driven skill curation, MCP server management, ACP protocol, web dashboard). Together we form a <strong>complete AI ecosystem</strong>.</p>
+          <p>I am integrated with <strong>OpenClaw</strong> (multi-channel AI gateway), <strong>Hermes Agent</strong> (self-evolving AI), and <strong>CodeGraph</strong> (semantic code intelligence). Together we form a <strong>complete AI ecosystem</strong> with code indexing, multi-channel messaging, browser automation, self-evolution, and cross-platform deployment.</p>
         </div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-value">9</div><div class="stat-label">Modular Layers</div></div>
           <div class="stat-card"><div class="stat-value">19</div><div class="stat-label">TRIZAI Roles</div></div>
           <div class="stat-card"><div class="stat-value">56</div><div class="stat-label">Specialized Skills</div></div>
           <div class="stat-card"><div class="stat-value">130+</div><div class="stat-label">Instruction Files</div></div>
+          <div class="stat-card"><div class="stat-value">8.4K</div><div class="stat-label">CodeGraph Nodes</div></div>
         </div>
       </div>
     </div>
@@ -279,7 +280,7 @@
   Context, Analysis, Pre-Verification, One-Shot Execution, Self-Audit
 
 <span class="highlight">External Integrations:</span>
-  OpenClaw Gateway (:18789) . Hermes Agent (:9119) . ACP Bridge
+  OpenClaw Gateway (:18789) . Hermes Agent (:9119) . ACP Bridge . CodeGraph MCP
 </div>
     </div>
   </section>
@@ -354,17 +355,18 @@
   <section id="integrations" class="mesh-bg" style="scroll-margin-top:80px;">
     <div class="container">
       <p class="section-label"> Integrations</p>
-      <h2 class="section-title gradient-text">OpenClaw + Hermes Agent</h2>
-      <p class="section-desc">Trizai is integrated with <strong>OpenClaw</strong> (multi-channel AI gateway) and <strong>Hermes Agent</strong> (self-evolving AI assistant). These tools extend Trizai's reach to mobile, messaging channels, voice, browser automation, self-evolution, and cross-platform deployment.</p>
+      <h2 class="section-title gradient-text">OpenClaw + Hermes + CodeGraph</h2>
+      <p class="section-desc">Trizai is integrated with <strong>OpenClaw</strong> (multi-channel AI gateway), <strong>Hermes Agent</strong> (self-evolving AI), and <strong>CodeGraph</strong> (semantic code intelligence). These tools extend Trizai's reach to mobile, messaging, voice, browser automation, self-evolution, code indexing, and cross-platform deployment.</p>
       <div class="cards-grid">
         <div class="info-card tilt-card glass-card"><h3>OpenClaw Gateway</h3><p>Multi-channel AI gateway with 50+ model providers, messaging integrations (Discord, Telegram, WhatsApp), browser automation, Docker/Nix deployment, and ClawHub skill registry.</p><ul><li>Gateway port: <code>18789</code> (loopback)</li><li>CLI: <code>openclaw</code> (Node.js 22.19+)</li></ul><div class="chip-group"><span class="chip">Channel Messaging</span><span class="chip">Browser Automation</span><span class="chip">Docker/Nix Deploy</span><span class="chip">ClawHub Skills</span></div></div>
         <div class="info-card tilt-card glass-card"><h3>Hermes Agent</h3><p>Self-improving AI assistant from Nous Research. Features DSPy-driven self-evolution, skill curation, MCP server management, ACP protocol, and web dashboard.</p><ul><li>Dashboard port: <code>9119</code></li><li>CLI: <code>hermes</code> (Python venv)</li></ul><div class="chip-group"><span class="chip">Self-Evolution</span><span class="chip">Skill Curator</span><span class="chip">MCP Server</span><span class="chip">ACP Protocol</span></div></div>
         <div class="info-card tilt-card glass-card"><h3>ACP Bridge</h3><p>Agent Communication Protocol bridge connecting OpenClaw Gateway to Hermes Agent. Enables multi-agent orchestration where Trizai routes tasks to the right tool.</p><ul><li>Config: <code>C:\Triz\integrations\shared\acp-bridge.json</code></li><li>Shared workspace: <code>C:\Triz\integrations\shared\workspace</code></li></ul></div>
+        <div class="info-card tilt-card glass-card"><h3>CodeGraph</h3><p>Local-first semantic code intelligence with tree-sitter parsing, SQLite knowledge graph, and MCP server integration. Indexes the workspace and OpenHarness codebase for instant symbol search, call chain tracing, and impact analysis.</p><ul><li>CLI: <code>codegraph</code> (npm global)</li><li>Workspace: <code>8.4K nodes, 26K edges</code></li></ul><div class="chip-group"><span class="chip">Symbol Search</span><span class="chip">Call Tracing</span><span class="chip">Impact Analysis</span><span class="chip">MCP Server</span><span class="chip">Auto-Sync</span></div></div>
       </div>
       <div class="stack-synergy" style="margin-top:32px;">
         <h4>Task Routing</h4>
         <div class="synergy-grid">
-          <div class="synergy-item tilt-card"><strong>Code &amp; Architecture</strong> &mdash; Trizai (native, in OpenCode)</div>
+          <div class="synergy-item tilt-card"><strong>Code &amp; Architecture</strong> &mdash; Trizai + CodeGraph (indexed, searchable)</div>
           <div class="synergy-item tilt-card"><strong>Channel Messaging</strong> &mdash; OpenClaw to Discord, Telegram, WhatsApp</div>
           <div class="synergy-item tilt-card"><strong>Browser Automation</strong> &mdash; OpenClaw to browser plugin</div>
           <div class="synergy-item tilt-card"><strong>Deployment</strong> &mdash; OpenClaw to Docker/Nix/Ansible</div>
@@ -372,6 +374,7 @@
           <div class="synergy-item tilt-card"><strong>Observability</strong> &mdash; Hermes Agent dashboard</div>
           <div class="synergy-item tilt-card"><strong>Multi-Agent</strong> &mdash; ACP Bridge to both tools</div>
           <div class="synergy-item tilt-card"><strong>Security Audit</strong> &mdash; Trizai + Hermes OSV audit</div>
+          <div class="synergy-item tilt-card"><strong>Code Intelligence</strong> &mdash; CodeGraph to tree-sitter graph</div>
         </div>
       </div>
     </div>
@@ -410,7 +413,7 @@
         </ul>
       </div>
       <div class="footer-bottom">
-        &copy; 2026 TRIZAI v2.1 &mdash; God of the Tech Field &mdash; 19 Roles &middot; 56 Skills &middot; 18 Rules &middot; 130+ Files &middot; 4 Local Tools &middot; OpenClaw &middot; Hermes Agent<br>
+        &copy; 2026 TRIZAI v2.2 &mdash; God of the Tech Field &mdash; 19 Roles &middot; 56 Skills &middot; 18 Rules &middot; 130+ Files &middot; 4 Local Tools &middot; OpenClaw &middot; Hermes Agent &middot; CodeGraph<br>
         Developed by <strong>Eddyson Tristan B. Aromin</strong>
       </div>
     </div>
