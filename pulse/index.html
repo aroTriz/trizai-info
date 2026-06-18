@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — What's happening</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Login -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-container">
+      <div class="login-big-icon">🐦</div>
+      <h1 class="login-h1">What's happening</h1>
+      <h2 class="login-h2">Join Pulse today.</h2>
+      <button class="login-btn" onclick="handleLogin()">Create account</button>
+      <p class="login-terms">By signing up, you agree to our Terms and Privacy Policy.</p>
+      <div class="login-have-account">Already have an account? <a href="#" onclick="handleLogin()">Sign in</a></div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="mainApp" class="main-app" style="display:none;">
+    <div class="app-layout">
+      <!-- Left Sidebar -->
+      <aside class="left-nav">
+        <div class="nav-logo">🐦</div>
+        <div class="nav-items">
+          <div class="nav-item active" onclick="switchPage('feed')">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+          </div>
+          <div class="nav-item" onclick="switchPage('explore')">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <span>Explore</span>
+          </div>
+          <div class="nav-item" onclick="switchPage('notifs')">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+            <span>Notifications</span>
+          </div>
+          <div class="nav-item" onclick="switchPage('messages')">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M19.25 3.018H4.75C3.233 3.018 2 4.252 2 5.77v12.495c0 1.518 1.233 2.753 2.75 2.753h14.5c1.517 0 2.75-1.235 2.75-2.753V5.77c0-1.518-1.233-2.752-2.75-2.752zm-14.5 1.5h14.5c.69 0 1.25.56 1.25 1.25v.714l-8.05 5.367c-.273.18-.626.182-.9-.002L3.5 6.482v-.714c0-.69.56-1.25 1.25-1.25zm14.5 14.998H4.75c-.69 0-1.25-.56-1.25-1.25V8.24l7.24 4.83c.383.256.822.384 1.26.384.44 0 .877-.128 1.26-.383l7.24-4.83v10.022c0 .69-.56 1.25-1.25 1.25z"/></svg>
+            <span>Messages</span>
+          </div>
+          <div class="nav-item" onclick="switchPage('profile')">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Profile</span>
+          </div>
+        </div>
+        <button class="tweet-btn" onclick="handleTweet()">Post</button>
+        <div class="nav-user" onclick="handleLogout()">
+          <div class="nav-user-avatar">T</div>
+          <div class="nav-user-info">
+            <strong id="navUserName">Triz</strong>
+            <span id="navUserHandle">@triz</span>
+          </div>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#71767b"><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+        </div>
+      </aside>
+
+      <!-- Main Feed -->
+      <main class="main-feed">
+        <div class="feed-header">
+          <h2>Home</h2>
+          <div class="feed-header-tabs">
+            <span class="tab-active">For you</span>
+            <span>Following</span>
+          </div>
+        </div>
+
+        <!-- Tweet Composer -->
+        <div class="tweet-composer">
+          <div class="composer-top">
+            <div class="composer-avatar">T</div>
+            <div class="composer-input-wrap">
+              <div contenteditable="true" class="composer-input" id="tweetInput" data-placeholder="What's happening?!" role="textbox"></div>
+            </div>
+          </div>
+          <div class="composer-bottom">
+            <div class="composer-icons">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1d9bf0"><path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1d9bf0"><path d="M3 5.5C3 4.119 4.12 3 5.5 3h13C19.88 3 21 4.119 21 5.5v13c0 1.381-1.12 2.5-2.5 2.5h-13C4.12 21 3 19.881 3 18.5v-13zM5.5 5c-.28 0-.5.22-.5.5v13c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-13c0-.28-.22-.5-.5-.5h-13zM18 10.71V7.75C18 6.784 17.216 6 16.25 6h-2.96l.71.71-5.29 5.29L7.46 10.5 5 12.96l2 2 2 2 2-2 2-2 2 2 2-2 1 1V10.71z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1d9bf0"><path d="M6 5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2H6zm0 2h12v2H6V7zm0 4h12v2H6v-2zm0 4h8v2H6v-2z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1d9bf0"><path d="M6 3V2h2v1h8V2h2v1c1.66 0 3 1.34 3 3v13c0 1.66-1.34 3-3 3H6c-1.66 0-3-1.34-3-3V6c0-1.66 1.34-3 3-3zm0 2c-.55 0-1 .45-1 1v1h14V6c0-.55-.45-1-1-1H6zm-1 4v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V9H5z"/></svg>
+            </div>
+            <div class="composer-right">
+              <span class="char-count" id="charCount">280</span>
+              <button class="tweet-submit" onclick="handleTweet()">Post</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feed Tweets -->
+        <div id="tweetFeed"></div>
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="right-bar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#71767b"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" placeholder="Search Pulse">
+        </div>
+        <div class="trends-card">
+          <h3>Trends for you</h3>
+          <div class="trend-item"><small>Trending in Philippines</small><strong>#CodePH</strong><small>5,247 posts</small></div>
+          <div class="trend-item"><small>Technology</small><strong>TypeScript</strong><small>124K posts</small></div>
+          <div class="trend-item"><small>Trending</small><strong>Open Source</strong><small>89.5K posts</small></div>
+          <div class="trend-item"><small>Gaming</small><strong>Valorant</strong><small>2M posts</small></div>
+          <div class="trend-item"><small>Trending in Philippines</small><strong>AI</strong><small>340K posts</small></div>
+        </div>
+        <div class="follow-card">
+          <h3>Who to follow</h3>
+          <div class="follow-item">
+            <div class="follow-avatar" style="background:#e63946;">C</div>
+            <div class="follow-info"><strong>CodeHub</strong><span>@codehub_io</span></div>
+            <button class="follow-btn">Follow</button>
+          </div>
+          <div class="follow-item">
+            <div class="follow-avatar" style="background:#42b72a;">D</div>
+            <div class="follow-info"><strong>DevDaily</strong><span>@devdaily</span></div>
+            <button class="follow-btn">Follow</button>
+          </div>
+          <div class="follow-item">
+            <div class="follow-avatar" style="background:#764ba2;">T</div>
+            <div class="follow-info"><strong>TechTriz</strong><span>@techtriz</span></div>
+            <button class="follow-btn">Follow</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

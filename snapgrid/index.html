@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SnapGrid — Capture & Share</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Login -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">📸</div>
+      <h1 class="login-brand">SnapGrid</h1>
+      <p class="login-sub">Sign in to see photos from your friends.</p>
+      <input type="text" id="loginUser" class="login-input" placeholder="Phone number, username or email" value="triz">
+      <input type="password" id="loginPass" class="login-input" placeholder="Password" value="snap123">
+      <button class="login-btn" onclick="handleLogin()">Log In</button>
+      <div class="login-or"><span>OR</span></div>
+      <button class="login-fb" onclick="handleLogin()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="#1877f2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Log in with Facebook
+      </button>
+      <a href="#" class="login-forgot">Forgot password?</a>
+    </div>
+    <div class="signup-box">
+      Don't have an account? <a href="#" onclick="handleSignup()">Sign up</a>
+    </div>
+    <div class="login-apps">
+      <p>Get the app.</p>
+      <div class="store-badges">
+        <div class="store-badge">Google Play</div>
+        <div class="store-badge">App Store</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="mainApp" class="main-app" style="display:none;">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="top-camera">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#262626"><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+      </div>
+      <div class="top-logo">SnapGrid</div>
+      <div class="top-dm" onclick="alert('Direct Messages')">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#262626"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+      </div>
+    </header>
+
+    <!-- Stories -->
+    <div class="stories-container">
+      <div class="story-item">
+        <div class="story-ring story-add"><span class="story-add-icon">+</span></div>
+        <span class="story-name">Your Story</span>
+      </div>
+      <div class="story-item">
+        <div class="story-ring" style="border-color:#e1306c;"><div class="story-avatar" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">A</div></div>
+        <span class="story-name">alex_designs</span>
+      </div>
+      <div class="story-item">
+        <div class="story-ring" style="border-color:#e1306c;"><div class="story-avatar" style="background:#42b72a;">S</div></div>
+        <span class="story-name">sofia_dev</span>
+      </div>
+      <div class="story-item">
+        <div class="story-ring" style="border-color:#e1306c;"><div class="story-avatar" style="background:#e63946;">M</div></div>
+        <span class="story-name">marcus.codes</span>
+      </div>
+      <div class="story-item">
+        <div class="story-ring" style="border-color:#e1306c;"><div class="story-avatar" style="background:#764ba2;">J</div></div>
+        <span class="story-name">jpark_art</span>
+      </div>
+      <div class="story-item">
+        <div class="story-ring" style="border-color:#e1306c;"><div class="story-avatar" style="background:#1877f2;">L</div></div>
+        <span class="story-name">lisa_creates</span>
+      </div>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed" id="feedContainer"></div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </div>
+      <div class="nav-item" onclick="switchFeedTab('search')">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </div>
+      <div class="nav-item" onclick="handleCreatePost()">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+      </div>
+      <div class="nav-item" onclick="switchFeedTab('reels')">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+      </div>
+      <div class="nav-item" onclick="alert('Your Profile 👤')">
+        <div class="nav-avatar">T</div>
+      </div>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
