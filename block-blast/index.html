@@ -22,7 +22,6 @@ html,body{
   box-shadow:0 20px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04);
   display:flex;flex-direction:column;overflow:hidden;
 }
-/* HEADER */
 header{display:flex;justify-content:space-between;align-items:center;padding:0 2px 6px;flex-shrink:0}
 .logo{
   font-family:'Fredoka One',cursive;
@@ -35,12 +34,9 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
 .score-wrap>div{background:rgba(255,255,255,.05);padding:3px 10px;border-radius:10px;text-align:center;line-height:1.2}
 .score-wrap span{font-weight:800;font-size:1.25em;color:#ffd93d;display:block;margin-top:1px}
 .high-score span{color:#6bcb77!important}
-
-/* GRID WRAP */
 #grid-wrap{
   position:relative;flex:1;min-height:0;
-  background:rgba(0,0,0,.4);
-  border-radius:12px;
+  background:rgba(0,0,0,.4);border-radius:12px;
 }
 #grid{
   position:absolute;top:5px;left:5px;right:5px;bottom:5px;
@@ -73,8 +69,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
   100%{transform:scale(1) translateY(0);opacity:1}
 }
 .cell.just-placed{animation:popIn .2s ease forwards}
-
-/* GHOST (same coords as grid) */
 #ghost{
   position:absolute;top:5px;left:5px;right:5px;bottom:5px;
   pointer-events:none;z-index:5;display:none;
@@ -83,17 +77,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
 .ghost-cell{
   position:absolute;border-radius:4px;
   border:2px solid rgba(255,255,255,.3);
-  transition:none;
 }
 .ghost-cell.invalid{border-color:rgba(255,0,0,.4);opacity:.3!important}
-
-/* FLOATING DRAG PIECE */
 #drag-float{
   position:fixed;pointer-events:none;z-index:50;display:none;
 }
 #drag-float.show{display:block}
-
-/* TRAY */
 #tray{
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
   flex-shrink:0;padding:8px 0 4px;min-height:66px;
@@ -103,10 +92,9 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
   border:2px solid rgba(255,255,255,.06);
   border-radius:12px;display:flex;justify-content:center;align-items:center;
   cursor:grab;padding:5px;min-height:60px;
-  transition:background .15s,border-color .15s,transform .15s,box-shadow .2s,opacity .2s;
+  transition:opacity .2s,border-color .2s;
 }
-.slot:active{cursor:grabbing}
-.slot.drag-source{opacity:.15;border-color:rgba(255,255,255,.02);transform:scale(.95)}
+.slot.drag-source{opacity:.12;border-color:transparent;transform:scale(.92);transition:opacity .15s,border-color .15s,transform .15s}
 .slot.no-room{opacity:.25;border-color:rgba(255,0,0,.08)}
 .mini-grid{display:grid;gap:1px;pointer-events:none}
 .mini-cell{aspect-ratio:1;border-radius:3px;width:clamp(13px,3.8vw,22px)}
@@ -114,8 +102,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
   box-shadow:inset 0 1px 2px rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.2);
   border-radius:3px;border:1px solid rgba(255,255,255,.12);
 }
-
-/* BUTTONS */
 .btn-row{display:flex;gap:8px;flex-shrink:0;padding:2px 0}
 .btn{
   flex:1;padding:10px;border:none;border-radius:12px;
@@ -127,8 +113,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
 .btn-new{background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;box-shadow:0 4px 15px rgba(255,107,107,.25);font-weight:800}
 .btn-undo{background:rgba(255,255,255,.07);color:#888}
 .btn-undo:disabled{opacity:.2;cursor:not-allowed}
-
-/* OVERLAY */
 #overlay{
   display:none;position:absolute;inset:0;
   background:rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -147,7 +131,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
   box-shadow:0 4px 20px rgba(107,203,119,.3);transition:transform .1s;
 }
 .overlay-btn:active{transform:scale(.94)}
-
 .flyup{
   position:fixed;pointer-events:none;z-index:60;
   font-weight:900;font-size:clamp(1.2rem,4.5vw,1.6rem);
@@ -160,7 +143,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
   100%{opacity:0;transform:translateY(-60px) scale(1)}
 }
 #hint{text-align:center;font-size:clamp(.45rem,1.4vw,.6rem);color:rgba(255,255,255,.1);padding:1px 0;flex-shrink:0}
-
 @media(max-width:480px){
   #app{border-radius:0;width:100%;padding:8px 6px 6px}
   #overlay{border-radius:0}
@@ -183,28 +165,21 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
       <div class="high-score">Best<span id="high">0</span></div>
     </div>
   </header>
-
   <div id="grid-wrap">
     <div id="grid"></div>
     <div id="ghost"></div>
   </div>
-
-  <!-- floating drag piece follows cursor -->
   <div id="drag-float"></div>
-
   <div id="tray">
     <div class="slot" data-i="0"></div>
     <div class="slot" data-i="1"></div>
     <div class="slot" data-i="2"></div>
   </div>
-
   <div class="btn-row">
     <button class="btn btn-undo" id="btnUndo" disabled>↩ Undo</button>
     <button class="btn btn-new" id="btnNew">✦ New</button>
   </div>
-
   <div id="hint">Drag a piece onto the grid</div>
-
   <div id="overlay">
     <div class="overlay-title">💥 Game Over</div>
     <div class="overlay-score" id="finalScore">0</div>
@@ -215,7 +190,8 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
 
 <script>
 // ══════════════════════════════════════════════════
-// BLOCK BLAST — drag & drop, snap ghost, no empty slots
+// BLOCK BLAST — drag & drop, mobile-friendly
+// ── NEVER re-render tray during drag ──
 // ══════════════════════════════════════════════════
 
 const C=10,R=10;
@@ -237,404 +213,260 @@ const SHAPES = [
   [[1,1],[1,0],[1,1]],[[1,1],[0,1],[1,1]],
 ];
 
-// ── STATE ──
-let g = [];                     // grid[R][C]
-let pieces = [{s:null,c:0},{s:null,c:0},{s:null,c:0}];
-let score = 0, high = 0;
-let dead = false, busy = false;
-let undoSave = null;
+let g=[]; let pieces=[null,null,null];
+let score=0,high=0,dead=false,busy=false,undoSave=null;
 
-// Drag state
-let drag = {
-  slot: -1,           // which slot being dragged
-  active: false,
-  startX: 0, startY: 0,
-  ghostRow: -1, ghostCol: -1,
-  piece: null         // {s, c} copy
-};
+let drag={slot:-1,active:false,piece:null};
 
-// DOM
-const gridEl = document.getElementById('grid');
-const ghostEl = document.getElementById('ghost');
-const dragFloat = document.getElementById('drag-float');
-const slots = document.querySelectorAll('.slot');
-const scoreEl = document.getElementById('score');
-const highEl = document.getElementById('high');
-const overlay = document.getElementById('overlay');
-const finalScore = document.getElementById('finalScore');
-const finalMsg = document.getElementById('finalMsg');
-const btnUndo = document.getElementById('btnUndo');
-const btnNew = document.getElementById('btnNew');
-const btnRetry = document.getElementById('btnRetry');
-const gridWrap = document.getElementById('grid-wrap');
+const gridEl=document.getElementById('grid');
+const ghostEl=document.getElementById('ghost');
+const dragFloat=document.getElementById('drag-float');
+const slots=document.querySelectorAll('.slot');
+const scoreEl=document.getElementById('score');
+const highEl=document.getElementById('high');
+const overlay=document.getElementById('overlay');
+const finalScore=document.getElementById('finalScore');
+const finalMsg=document.getElementById('finalMsg');
+const btnUndo=document.getElementById('btnUndo');
+const btnNew=document.getElementById('btnNew');
+const btnRetry=document.getElementById('btnRetry');
 
-// ── UTILITIES ──
-let _cidx = 0;
-function hue(i){ return HUES[(i-1)%HUES.length] }
-function nextC(){ return 1+(_cidx++%(HUES.length-1)) }
-function rnd(n){ return Math.floor(Math.random()*n) }
-function pickShape(){
-  const s = SHAPES[rnd(SHAPES.length)];
-  return {s:s.map(r=>[...r]), c:nextC()};
-}
+let _cidx=0;
+function hue(i){return HUES[(i-1)%HUES.length]}
+function nextC(){return 1+(_cidx++%(HUES.length-1))}
+function rnd(n){return Math.floor(Math.random()*n)}
+function pickShape(){return {s:SHAPES[rnd(SHAPES.length)].map(r=>[...r]),c:nextC()}}
 
-// ── GRID ──
 function buildGrid(){
-  gridEl.innerHTML = '';
-  for(let i=0;i<R*C;i++){
-    const d=document.createElement('div'); d.className='cell'; gridEl.appendChild(d);
-  }
+  gridEl.innerHTML='';
+  for(let i=0;i<R*C;i++){const d=document.createElement('div');d.className='cell';gridEl.appendChild(d)}
 }
-function cellAt(r,c){ return gridEl.children[r*C+c] }
-function cellGrad(idx){
-  const h=hue(idx);
-  return `linear-gradient(135deg, hsl(${h},72%,70%) 0%, hsl(${h},72%,58%) 45%, hsl(${h},72%,42%) 100%)`;
-}
+function cellAt(r,c){return gridEl.children[r*C+c]}
+function cellGrad(idx){const h=hue(idx);return `linear-gradient(135deg,hsl(${h},72%,70%) 0%,hsl(${h},72%,58%) 45%,hsl(${h},72%,42%) 100%)`}
 function paint(r,c,v){
-  const el=cellAt(r,c); if(!el) return;
-  if(v){ el.style.background=cellGrad(v); el.classList.add('filled'); }
-  else{ el.style.background='rgba(255,255,255,.03)'; el.classList.remove('filled','just-placed'); }
+  const el=cellAt(r,c);if(!el)return;
+  if(v){el.style.background=cellGrad(v);el.classList.add('filled')}
+  else{el.style.background='rgba(255,255,255,.03)';el.classList.remove('filled','just-placed')}
 }
-function repaint(){ for(let r=0;r<R;r++) for(let c=0;c<C;c++) paint(r,c,g[r][c]); }
+function repaint(){for(let r=0;r<R;r++)for(let c=0;c<C;c++)paint(r,c,g[r][c])}
 
-// ── TRAY ──
-function ensurePieces(){
-  for(let i=0;i<3;i++) if(!pieces[i]||!pieces[i].s) pieces[i]=pickShape();
-}
-function fillTray(){ ensurePieces(); }
-
+// ── TRAY (only called when NOT dragging) ──
+function ensurePieces(){for(let i=0;i<3;i++)if(!pieces[i])pieces[i]=pickShape()}
 function renderTray(){
   ensurePieces();
   slots.forEach((sl,i)=>{
     sl.innerHTML='';
-    const p=pieces[i]; if(!p) return;
-    const rows=p.s.length, cols=p.s[0].length;
-    const mg=document.createElement('div'); mg.className='mini-grid';
+    const p=pieces[i];if(!p)return;
+    const rows=p.s.length,cols=p.s[0].length;
+    const mg=document.createElement('div');mg.className='mini-grid';
     mg.style.gridTemplateColumns=`repeat(${cols},1fr)`;
-    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
       const mc=document.createElement('div');
       mc.className='mini-cell'+(p.s[r][c]?' fill':'');
-      if(p.s[r][c]) mc.style.background=cellGrad(p.c);
+      if(p.s[r][c])mc.style.background=cellGrad(p.c);
       mg.appendChild(mc);
     }
     sl.appendChild(mg);
-    sl.classList.toggle('drag-source', drag.active && drag.slot===i);
-    const room=validSpots(p.s).length>0;
-    sl.classList.toggle('no-room', !drag.active && !room);
+    sl.classList.remove('drag-source','no-room');
+    if(validSpots(p.s).length===0)sl.classList.add('no-room');
   });
 }
 
-// ── SCORE ──
 function updScore(){
   scoreEl.textContent=score;
-  if(score>high){ high=score; localStorage.setItem('bbHigh',high); }
+  if(score>high){high=score;localStorage.setItem('bbHigh',high)}
   highEl.textContent=high;
 }
 function flyUp(pts){
-  const f=document.createElement('div'); f.className='flyup'; f.textContent='+'+pts;
+  const f=document.createElement('div');f.className='flyup';f.textContent='+'+pts;
   const r=scoreEl.getBoundingClientRect();
-  f.style.left=(r.left+r.width/2-30)+'px'; f.style.top=(r.top-30)+'px';
-  document.body.appendChild(f); setTimeout(()=>f.remove(),900);
+  f.style.left=(r.left+r.width/2-30)+'px';f.style.top=(r.top-30)+'px';
+  document.body.appendChild(f);setTimeout(()=>f.remove(),900);
 }
 
-// ── PLACEMENT ──
 function canPlace(sh,r0,c0){
-  for(let r=0;r<sh.length;r++) for(let c=0;c<sh[r].length;c++){
-    if(!sh[r][c]) continue;
+  for(let r=0;r<sh.length;r++)for(let c=0;c<sh[r].length;c++){
+    if(!sh[r][c])continue;
     const gr=r0+r,gc=c0+c;
-    if(gr<0||gr>=R||gc<0||gc>=C||g[gr][gc]) return false;
+    if(gr<0||gr>=R||gc<0||gc>=C||g[gr][gc])return false;
   }
   return true;
 }
-function validSpots(sh){
-  const a=[];
-  for(let r=0;r<R;r++) for(let c=0;c<C;c++) if(canPlace(sh,r,c)) a.push({r,c});
-  return a;
-}
-function doPlace(sh,cidx,row,col){
-  for(let r=0;r<sh.length;r++) for(let c=0;c<sh[r].length;c++)
-    if(sh[r][c]) g[row+r][col+c]=cidx;
-}
+function validSpots(sh){const a=[];for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(canPlace(sh,r,c))a.push({r,c});return a}
+function doPlace(sh,cidx,row,col){for(let r=0;r<sh.length;r++)for(let c=0;c<sh[r].length;c++)if(sh[r][c])g[row+r][col+c]=cidx}
+function findFull(){const rr=[],cc=[];for(let r=0;r<R;r++)if(g[r].every(v=>v))rr.push(r);for(let c=0;c<C;c++)if(g.every(v=>v[c]))cc.push(c);return{rr,cc}}
+function eraseLines(rr,cc){for(const r of rr)for(let c=0;c<C;c++)g[r][c]=0;for(const c of cc)for(let r=0;r<R;r++)g[r][c]=0}
+function isDead(){for(let i=0;i<3;i++)if(pieces[i]&&validSpots(pieces[i].s).length>0)return false;return true}
 
-// ── LINE CLEARS ──
-function findFull(){
-  const rr=[],cc=[];
-  for(let r=0;r<R;r++) if(g[r].every(v=>v)) rr.push(r);
-  for(let c=0;c<C;c++) if(g.every(v=>v[c])) cc.push(c);
-  return {rr,cc};
-}
-function eraseLines(rr,cc){
-  for(const r of rr) for(let c=0;c<C;c++) g[r][c]=0;
-  for(const c of cc) for(let r=0;r<R;r++) g[r][c]=0;
-}
-function isDead(){
-  for(let i=0;i<3;i++) if(pieces[i]&&pieces[i].s&&validSpots(pieces[i].s).length>0) return false;
-  return true;
-}
-
-// ── PLACE FLOW (returns promise for async clears) ──
-function placeFlow(slotI,row,col,cb){
-  if(dead||busy) {if(cb)cb(false); return false}
-  const p = pieces[slotI];
-  if(!p||!p.s||!canPlace(p.s,row,col)){if(cb)cb(false);return false}
-
-  // Save undo
-  undoSave = {g:g.map(r=>[...r]), sc:score, ps:pieces.map(x=>({s:x.s.map(r=>[...r]),c:x.c}))};
+function placeFlow(slotI,row,col){
+  if(dead||busy)return false;
+  const p=pieces[slotI];if(!p||!canPlace(p.s,row,col))return false;
+  undoSave={g:g.map(r=>[...r]),sc:score,ps:pieces.map(x=>({s:x.s.map(r=>[...r]),c:x.c}))};
   btnUndo.disabled=false;
-
-  const cidx=p.c;
-  let blocks=0;
-  for(const r of p.s) for(const v of r) if(v) blocks++;
-
-  doPlace(p.s,cidx,row,col);
-  repaint();
-
-  // Tray: mark slot as pending (piece already copied)
-  // Replace piece only after clears resolve
+  const cidx=p.c;let blocks=0;for(const r of p.s)for(const v of r)if(v)blocks++;
+  doPlace(p.s,cidx,row,col);repaint();
   let clearPts=0,chain=0;
-
-  const resolve = ()=>{
-    const {rr,cc}=findFull();
+  const resolve=()=>{
+    const{rr,cc}=findFull();
     if(!rr.length&&!cc.length){
-      score += blocks*10+clearPts;
-      updScore();
-      if(clearPts>0) flyUp(clearPts);
-      // Fill the used slot
-      pieces[slotI] = pickShape();
-      ensurePieces();
-      renderTray();
-      busy=false;
-      if(isDead()) endGame();
-      if(cb)cb(true);
+      score+=blocks*10+clearPts;updScore();
+      if(clearPts>0)flyUp(clearPts);
+      pieces[slotI]=pickShape();ensurePieces();renderTray();busy=false;
+      if(isDead())endGame();
       return;
     }
-    chain+=rr.length+cc.length;
-    const pts=(rr.length+cc.length)*50*chain;
-    clearPts+=pts;
-    animClear(rr,cc,()=>{
-      eraseLines(rr,cc);
-      repaint();
-      resolve();
-    });
+    chain+=rr.length+cc.length;clearPts+=(rr.length+cc.length)*50*chain;
+    animClear(rr,cc,()=>{eraseLines(rr,cc);repaint();resolve()});
   };
-
-  busy=true;
-  resolve();
-  return true;
+  busy=true;resolve();return true;
 }
-
 function animClear(rr,cc,cb){
-  let total=rr.length*C+cc.length*R;
-  if(!total){cb();return}
-  for(const r of rr) for(let c=0;c<C;c++){const el=cellAt(r,c);if(el)el.classList.add('flash')}
-  for(const c of cc) for(let r=0;r<R;r++) if(!rr.includes(r)){const el=cellAt(r,c);if(el)el.classList.add('flash')}
+  let total=rr.length*C+cc.length*R;if(!total){cb();return}
+  for(const r of rr)for(let c=0;c<C;c++){const el=cellAt(r,c);if(el)el.classList.add('flash')}
+  for(const c of cc)for(let r=0;r<R;r++)if(!rr.includes(r)){const el=cellAt(r,c);if(el)el.classList.add('flash')}
   setTimeout(cb,370);
 }
+function endGame(){dead=true;finalScore.textContent=score;const b=parseInt(localStorage.getItem('bbHigh')||'0');finalMsg.textContent=score>=b&&score>0?'🏆 NEW HIGH SCORE!':score>0?'Nice try!':'Better luck!';overlay.classList.add('show')}
 
-function endGame(){
-  dead=true;
-  finalScore.textContent=score;
-  const b=parseInt(localStorage.getItem('bbHigh')||'0');
-  finalMsg.textContent=score>=b&&score>0?'🏆 NEW HIGH SCORE!':score>0?'Nice try!':'Better luck!';
-  overlay.classList.add('show');
-}
-
-// ── COORDINATE HELPERS ──
-// ghost & grid share same element dimensions (both position:absolute, same inset)
+// ── COORDINATES ──
 function gridSnapPos(cx,cy){
   const gr=ghostEl.getBoundingClientRect();
-  const x=cx-gr.left, y=cy-gr.top;
-  if(x<0||y<0||x>=gr.width||y>=gr.height) return null;
-  return {r:Math.floor(y/(gr.height/R)), c:Math.floor(x/(gr.width/C))};
+  const x=cx-gr.left,y=cy-gr.top;
+  if(x<0||y<0||x>=gr.width||y>=gr.height)return null;
+  return{r:Math.floor(y/(gr.height/R)),c:Math.floor(x/(gr.width/C))};
 }
 
-// ── GHOST ──
 function showGhostAt(sh,cidx,row,col){
   ghostEl.innerHTML='';
-  const cw=ghostEl.clientWidth/C, ch=ghostEl.clientHeight/R;
+  const cw=ghostEl.clientWidth/C,ch=ghostEl.clientHeight/R;
   const ok=canPlace(sh,row,col);
-  for(let r=0;r<sh.length;r++) for(let c=0;c<sh[r].length;c++){
-    if(!sh[r][c]) continue;
-    const d=document.createElement('div'); d.className='ghost-cell'+(ok?'':' invalid');
-    d.style.left=(col+c)*cw+'px'; d.style.top=(row+r)*ch+'px';
-    d.style.width=cw+'px'; d.style.height=ch+'px';
-    d.style.background=cellGrad(cidx);
-    d.style.opacity=ok?'.6':'.2';
+  for(let r=0;r<sh.length;r++)for(let c=0;c<sh[r].length;c++){
+    if(!sh[r][c])continue;
+    const d=document.createElement('div');d.className='ghost-cell'+(ok?'':' invalid');
+    d.style.left=(col+c)*cw+'px';d.style.top=(row+r)*ch+'px';
+    d.style.width=cw+'px';d.style.height=ch+'px';
+    d.style.background=cellGrad(cidx);d.style.opacity=ok?'.6':'.2';
     ghostEl.appendChild(d);
   }
   ghostEl.classList.add('show');
-  drag.ghostRow=row; drag.ghostCol=col;
 }
-function hideGhost(){ghostEl.classList.remove('show');ghostEl.innerHTML=''; drag.ghostRow=-1;drag.ghostCol=-1}
+function hideGhost(){ghostEl.classList.remove('show');ghostEl.innerHTML=''}
 
-// ── DRAG FLOATING PIECE ──
 function showFloat(sh,cidx,cx,cy){
-  const cw=36, ch=36; // fixed pixel size for floating piece
-  dragFloat.innerHTML='';
-  dragFloat.style.left=(cx-20)+'px';
-  dragFloat.style.top=(cy-20)+'px';
-  const rows=sh.length, cols=sh[0].length;
-  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
-    if(!sh[r][c]) continue;
+  const cs=38;dragFloat.innerHTML='';
+  const rows=sh.length,cols=sh[0].length;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    if(!sh[r][c])continue;
     const d=document.createElement('div');
-    d.style.cssText=`position:absolute;left:${c*cw}px;top:${r*ch}px;width:${cw}px;height:${ch}px;border-radius:6px;background:${cellGrad(cidx)};box-shadow:inset 0 1px 3px rgba(255,255,255,.3),inset 0 -3px 4px rgba(0,0,0,.25);`;
+    d.style.cssText=`position:absolute;left:${c*cs}px;top:${r*cs}px;width:${cs}px;height:${cs}px;border-radius:6px;background:${cellGrad(cidx)};box-shadow:inset 0 2px 4px rgba(255,255,255,.3),inset 0 -3px 5px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.4)`;
     dragFloat.appendChild(d);
   }
-  dragFloat.style.width=(cols*cw)+'px';
-  dragFloat.style.height=(rows*ch)+'px';
+  dragFloat.style.width=(cols*cs)+'px';dragFloat.style.height=(rows*cs)+'px';
+  dragFloat.style.left=(cx-cols*cs/2)+'px';dragFloat.style.top=(cy-rows*cs/2)+'px';
   dragFloat.classList.add('show');
 }
 function hideFloat(){dragFloat.classList.remove('show');dragFloat.innerHTML=''}
 
-// ── DRAG CORE ──
-function getSlotAt(cx,cy){
-  for(let i=0;i<slots.length;i++){
-    const r=slots[i].getBoundingClientRect();
-    if(cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom) return i;
-  }
-  return -1;
-}
+// ── DRAG HANDLING ──
+// IMPORTANT: NEVER call renderTray() during drag (avoids DOM mutation that breaks touch)
 
-// Touch: combine into one handler using touch events
-// Mouse: mousedown/mousemove/mouseup
-
-let _touchId=null;
-
-function dragStart(slotI, cx, cy){
-  if(dead||busy) return;
-  const p=pieces[slotI];
-  if(!p||!p.s||validSpots(p.s).length===0) return;
-  drag.slot=slotI;
-  drag.active=true;
-  drag.piece={s:p.s.map(r=>[...r]),c:p.c};
-  drag.startX=cx; drag.startY=cy;
-  drag.ghostRow=-1; drag.ghostCol=-1;
+function startDrag(slotI,cx,cy){
+  if(dead||busy)return;
+  const p=pieces[slotI];if(!p||!validSpots(p.s).length)return;
+  drag={slot:slotI,active:true,piece:{s:p.s.map(r=>[...r]),c:p.c}};
   showFloat(drag.piece.s,drag.piece.c,cx,cy);
-  renderTray();
+  // Dim the source slot WITHOUT re-rendering
+  slots[slotI].classList.add('drag-source');
+  // Save current hint
+  document.getElementById('hint').textContent='Drop on the grid';
 }
-
-function dragMove(cx,cy){
-  if(!drag.active||!drag.piece) return;
-  showFloat(drag.piece.s,drag.piece.c,cx,cy);
+function moveDrag(cx,cy){
+  if(!drag.active||!drag.piece)return;
+  const cols=drag.piece.s[0].length,rows=drag.piece.s.length;
+  dragFloat.style.left=(cx-cols*19)+'px';dragFloat.style.top=(cy-rows*19)+'px';
   const pos=gridSnapPos(cx,cy);
-  if(pos){
-    const same=(pos.r===drag.ghostRow&&pos.c===drag.ghostCol);
-    if(!same) showGhostAt(drag.piece.s,drag.piece.c,pos.r,pos.c);
-  } else {
-    hideGhost();
+  if(pos)showGhostAt(drag.piece.s,drag.piece.c,pos.r,pos.c);
+  else hideGhost();
+}
+function endDrag(cx,cy){
+  const wasDrag=drag.active;
+  const slotI=drag.slot;
+  const pieceCopy=drag.piece;
+  // Clean up drag visuals IMMEDIATELY without renderTray
+  if(drag.slot>=0)slots[drag.slot].classList.remove('drag-source');
+  hideFloat();hideGhost();
+  drag={slot:-1,active:false,piece:null};
+  document.getElementById('hint').textContent='Drag a piece onto the grid';
+
+  if(!wasDrag||!pieceCopy)return;
+  const pos=gridSnapPos(cx,cy);
+  if(pos&&canPlace(pieceCopy.s,pos.r,pos.c)){
+    placeFlow(slotI,pos.r,pos.c);
   }
 }
 
-function dragEnd(cx,cy){
-  if(!drag.active){ cleanup(); return }
-  const pos=gridSnapPos(cx,cy);
-  if(pos && drag.piece && canPlace(drag.piece.s,pos.r,pos.c)){
-    const slotI=drag.slot;
-    // Need a copy because placeFlow replaces the piece
-    const sh=drag.piece.s, ci=drag.piece.c;
-    cleanup();
-    placeFlow(slotI,pos.r,pos.c,()=>{});
-  } else {
-    cleanup();
-  }
-}
-
-function cleanup(){
-  drag.active=false;
-  drag.slot=-1;
-  drag.piece=null;
-  hideFloat();
-  hideGhost();
-  renderTray();
-}
-
-// ── MOUSE EVENTS ──
+// ── MOUSE ──
 slots.forEach((sl,i)=>{
-  sl.addEventListener('mousedown', e=>{
-    if(dead||busy) return;
-    e.preventDefault();
-    dragStart(i,e.clientX,e.clientY);
-  });
+  sl.addEventListener('mousedown',e=>{e.preventDefault();startDrag(i,e.clientX,e.clientY)});
 });
+document.addEventListener('mousemove',e=>{if(drag.active){e.preventDefault();moveDrag(e.clientX,e.clientY)}});
+document.addEventListener('mouseup',e=>{if(drag.active){e.preventDefault();endDrag(e.clientX,e.clientY)}});
 
-document.addEventListener('mousemove', e=>{
-  if(!drag.active) return;
-  e.preventDefault();
-  dragMove(e.clientX,e.clientY);
-});
-
-document.addEventListener('mouseup', e=>{
-  if(!drag.active) return;
-  e.preventDefault();
-  dragEnd(e.clientX,e.clientY);
-});
-
-// ── TOUCH EVENTS ──
+// ── TOUCH (simple: always use first touch, no _touchId tracking needed for single-finger) ──
 slots.forEach((sl,i)=>{
-  sl.addEventListener('touchstart', e=>{
-    if(dead||busy) return;
+  sl.addEventListener('touchstart',e=>{
+    if(dead||busy)return;
     const t=e.changedTouches[0];
-    _touchId=t.identifier;
-    dragStart(i,t.clientX,t.clientY);
+    startDrag(i,t.clientX,t.clientY);
   },{passive:true});
 });
 
-document.addEventListener('touchmove', e=>{
-  if(!drag.active) return;
-  let t=null;
-  for(let i=0;i<e.changedTouches.length;i++){
-    if(e.changedTouches[i].identifier===_touchId) t=e.changedTouches[i];
-  }
-  if(!t) return;
+document.addEventListener('touchmove',e=>{
+  if(!drag.active)return;
+  const t=e.changedTouches[0];
+  if(!t)return;
   e.preventDefault();
-  dragMove(t.clientX,t.clientY);
+  moveDrag(t.clientX,t.clientY);
 },{passive:false});
 
-document.addEventListener('touchend', e=>{
-  if(!drag.active) return;
-  let t=null;
-  for(let i=0;i<e.changedTouches.length;i++){
-    if(e.changedTouches[i].identifier===_touchId) t=e.changedTouches[i];
-  }
-  if(!t) return;
-  dragEnd(t.clientX,t.clientY);
-  _touchId=null;
+document.addEventListener('touchend',e=>{
+  if(!drag.active)return;
+  const t=e.changedTouches[0];
+  if(!t)return;
+  endDrag(t.clientX,t.clientY);
 });
 
-// Also cancel drag on touchcancel
-document.addEventListener('touchcancel',()=>{if(drag.active)cleanup()});
+document.addEventListener('touchcancel',()=>{
+  if(!drag.active)return;
+  if(drag.slot>=0)slots[drag.slot].classList.remove('drag-source');
+  hideFloat();hideGhost();
+  drag={slot:-1,active:false,piece:null};
+  document.getElementById('hint').textContent='Drag a piece onto the grid';
+});
 
 // ── BUTTONS ──
 btnUndo.addEventListener('click',()=>{
-  if(!undoSave||dead||busy||drag.active) return;
-  g=undoSave.g.map(r=>[...r]);
-  score=undoSave.sc;
+  if(!undoSave||dead||busy)return;
+  g=undoSave.g.map(r=>[...r]);score=undoSave.sc;
   pieces=undoSave.ps.map(x=>({s:x.s.map(r=>[...r]),c:x.c}));
   undoSave=null;btnUndo.disabled=true;
   repaint();renderTray();updScore();
 });
-
 function resetGame(){
-  g=Array.from({length:R},()=>Array(C).fill(0));
-  score=0;dead=false;busy=false;undoSave=null;
-  drag.slot=-1;drag.active=false;drag.piece=null;
+  g=Array.from({length:R},()=>Array(C).fill(0));score=0;dead=false;busy=false;undoSave=null;
+  drag={slot:-1,active:false,piece:null};
   hideFloat();hideGhost();
   pieces=[pickShape(),pickShape(),pickShape()];
-  repaint();renderTray();updScore();
-  overlay.classList.remove('show');
-  btnUndo.disabled=true;
+  repaint();renderTray();updScore();overlay.classList.remove('show');btnUndo.disabled=true;
+  document.getElementById('hint').textContent='Drag a piece onto the grid';
 }
-
 btnNew.addEventListener('click',resetGame);
 btnRetry.addEventListener('click',resetGame);
 
 // ── BOOT ──
-high=parseInt(localStorage.getItem('bbHigh')||'0');
-highEl.textContent=high;
-
-function boot(){ buildGrid(); resetGame(); }
-if(document.readyState==='complete') boot();
-else window.addEventListener('load',boot);
+high=parseInt(localStorage.getItem('bbHigh')||'0');highEl.textContent=high;
+function boot(){buildGrid();resetGame()}
+if(document.readyState==='complete')boot();else window.addEventListener('load',boot);
 </script>
 </body>
 </html>
