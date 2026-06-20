@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Poké-Pixel — Battle Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ========== TITLE SCREEN ========== -->
+  <div id="titleScreen" class="screen">
+    <div class="title-pokeball">🔴⚪</div>
+    <h1 class="title-main">Poké-Pixel</h1>
+    <p class="title-sub">A Wild Battle Awaits!</p>
+    <div class="title-pixel-art" id="titleArt"></div>
+    <button class="pixel-btn title-btn" id="titleBtn">▶ PRESS START</button>
+    <p class="title-credit">Press ENTER or click</p>
+  </div>
+
+  <!-- ========== STARTER SELECT ========== -->
+  <div id="starterScreen" class="screen" style="display:none">
+    <h2 class="starter-title">Choose Your Starter!</h2>
+    <p class="starter-sub">Which Pokémon will you begin your journey with?</p>
+    <div class="starters-container" id="startersContainer"></div>
+  </div>
+
+  <!-- ========== BATTLE SCREEN ========== -->
+  <div id="battleScreen" class="screen" style="display:none">
+    <div class="battle-scene">
+      <!-- Wild Pokémon -->
+      <div class="battle-top">
+        <div class="pk-card wild-card" id="wildCard">
+          <div class="pk-sprite-container" id="wildSpriteContainer">
+            <img id="wildSprite" alt="Wild Pokémon" />
+          </div>
+          <div class="pk-info">
+            <div class="pk-name-row">
+              <span class="pk-name" id="wildName">???</span>
+              <span class="pk-level" id="wildLevel">Lv.5</span>
+            </div>
+            <div class="pk-hp-section">
+              <span class="pk-hp-label">HP</span>
+              <div class="pk-hp-bar-outer">
+                <div class="pk-hp-bar-inner" id="wildHpBar"></div>
+              </div>
+              <span class="pk-hp-text" id="wildHpText">12/12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VS flash -->
+      <div class="vs-badge" id="vsBadge">⚡ VS ⚡</div>
+
+      <!-- Player Pokémon -->
+      <div class="battle-bottom">
+        <div class="pk-card player-card" id="playerCard">
+          <div class="pk-sprite-container" id="playerSpriteContainer">
+            <img id="playerSprite" alt="Your Pokémon" />
+          </div>
+          <div class="pk-info">
+            <div class="pk-name-row">
+              <span class="pk-name" id="playerName">???</span>
+              <span class="pk-level" id="playerLevel">Lv.5</span>
+            </div>
+            <div class="pk-hp-section">
+              <span class="pk-hp-label">HP</span>
+              <div class="pk-hp-bar-outer">
+                <div class="pk-hp-bar-inner" id="playerHpBar"></div>
+              </div>
+              <span class="pk-hp-text" id="playerHpText">25/25</span>
+            </div>
+            <div class="pk-xp-section">
+              <span class="pk-xp-label">EXP</span>
+              <div class="pk-xp-bar-outer">
+                <div class="pk-xp-bar-inner" id="playerXpBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Battle Log -->
+      <div class="battle-log-container">
+        <div class="battle-log" id="battleLog">A wild Pokémon appeared!</div>
+        <div class="battle-log-sub" id="battleLogSub">What will you do?</div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-bar" id="actionBar">
+        <button class="action-btn" data-action="fight">⚔️ FIGHT</button>
+        <button class="action-btn" data-action="items">🎒 ITEMS</button>
+        <button class="action-btn" data-action="run">🏃 RUN</button>
+      </div>
+
+      <!-- Move Buttons -->
+      <div class="move-bar" id="moveBar" style="display:none">
+        <button class="move-btn" data-move="0">Tackle</button>
+        <button class="move-btn" data-move="1">Ember</button>
+        <button class="move-btn" data-move="2">Heal</button>
+        <button class="move-btn" data-move="3">Catch</button>
+      </div>
+
+      <!-- Score / Stats -->
+      <div class="score-bar">
+        <span>🏆 Caught: <span id="caughtCount">0</span></span>
+        <span>🔥 Streak: <span id="streakCount">0</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== GAME OVER SCREEN ========== -->
+  <div id="gameOverScreen" class="screen" style="display:none">
+    <div class="over-content">
+      <h2 class="over-title">💀 Fainted 💀</h2>
+      <p class="over-sub">Your Pokémon is unable to battle!</p>
+      <div class="over-stats">
+        <p>Pokémon Caught: <span id="overCaught">0</span></p>
+        <p>Longest Streak: <span id="overStreak">0</span></p>
+      </div>
+      <button class="pixel-btn" onclick="resetGame()">🔄 New Journey</button>
+    </div>
+  </div>
+
+  <!-- ========== CATCH SUCCESS MODAL ========== -->
+  <div id="catchModal" class="modal-overlay" style="display:none">
+    <div class="modal-content">
+      <div class="modal-shake">🔴⚪🔴⚪</div>
+      <h2 class="modal-title-catch">🎉 Gotcha!</h2>
+      <p id="catchText">You caught a Pokémon!</p>
+      <button class="pixel-btn" onclick="closeCatchModal()">Continue ▶</button>
+    </div>
+  </div>
+
+  <!-- Attack effect overlay -->
+  <div id="attackEffect" class="attack-effect" style="display:none"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
