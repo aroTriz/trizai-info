@@ -24,139 +24,61 @@ html,body{
 }
 header{display:flex;justify-content:space-between;align-items:center;padding:0 2px 6px;flex-shrink:0}
 .logo{
-  font-family:'Fredoka One',cursive;
-  font-size:clamp(1rem,3.8vw,1.5rem);
+  font-family:'Fredoka One',cursive;font-size:clamp(1rem,3.8vw,1.5rem);
   background:linear-gradient(135deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;
 }
 .score-wrap{display:flex;gap:8px;font-size:clamp(.5rem,1.8vw,.7rem)}
 .score-wrap>div{background:rgba(255,255,255,.05);padding:3px 10px;border-radius:10px;text-align:center;line-height:1.2}
 .score-wrap span{font-weight:800;font-size:1.25em;color:#ffd93d;display:block;margin-top:1px}
 .high-score span{color:#6bcb77!important}
-#grid-wrap{
-  position:relative;flex:1;min-height:0;
-  background:rgba(0,0,0,.4);border-radius:12px;
-}
-#grid{
-  position:absolute;top:5px;left:5px;right:5px;bottom:5px;
-  display:grid;grid-template-columns:repeat(10,1fr);
-}
-.cell{
-  background:rgba(255,255,255,.03);
-  border-right:1px solid rgba(255,255,255,.025);
-  border-bottom:1px solid rgba(255,255,255,.025);
-}
-.cell.filled{
-  border-radius:3px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -2px 3px rgba(0,0,0,.25),inset 2px 2px 3px rgba(255,255,255,.08);
-  border:none;
-}
-.cell.filled::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.05) 40%,transparent 55%,rgba(0,0,0,.15) 100%);
-  z-index:2;pointer-events:none;border-radius:3px;
-}
+#grid-wrap{position:relative;flex:1;min-height:0;background:rgba(0,0,0,.4);border-radius:12px}
+#grid{position:absolute;top:5px;left:5px;right:5px;bottom:5px;display:grid;grid-template-columns:repeat(10,1fr)}
+.cell{background:rgba(255,255,255,.03);border-right:1px solid rgba(255,255,255,.025);border-bottom:1px solid rgba(255,255,255,.025)}
+.cell.filled{border-radius:3px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -2px 3px rgba(0,0,0,.25),inset 2px 2px 3px rgba(255,255,255,.08);border:none}
+.cell.filled::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.3)0%,rgba(255,255,255,.05)40%,transparent 55%,rgba(0,0,0,.15)100%);z-index:2;pointer-events:none;border-radius:3px}
 .cell.flash{animation:flashPop .35s ease forwards;z-index:10}
-@keyframes flashPop{
-  0%{transform:scale(1);opacity:1;filter:brightness(1)}
-  35%{transform:scale(1.08);opacity:.8;filter:brightness(2)}
-  100%{transform:scale(0);opacity:0;filter:brightness(3)}
-}
-@keyframes popIn{
-  0%{transform:scale(0) translateY(-8px);opacity:0}
-  65%{transform:scale(1.06)}
-  100%{transform:scale(1) translateY(0);opacity:1}
-}
+@keyframes flashPop{0%{transform:scale(1);opacity:1;filter:brightness(1)}35%{transform:scale(1.08);opacity:.8;filter:brightness(2)}100%{transform:scale(0);opacity:0;filter:brightness(3)}}
+@keyframes popIn{0%{transform:scale(0)translateY(-8px);opacity:0}65%{transform:scale(1.06)}100%{transform:scale(1)translateY(0);opacity:1}}
 .cell.just-placed{animation:popIn .2s ease forwards}
-#ghost{
-  position:absolute;top:5px;left:5px;right:5px;bottom:5px;
-  pointer-events:none;z-index:5;display:none;
-}
+#ghost{position:absolute;top:5px;left:5px;right:5px;bottom:5px;pointer-events:none;z-index:5;display:none}
 #ghost.show{display:block}
-.ghost-cell{
-  position:absolute;border-radius:4px;
-  border:2px solid rgba(255,255,255,.3);
-}
+.ghost-cell{position:absolute;border-radius:4px;border:2px solid rgba(255,255,255,.3)}
 .ghost-cell.invalid{border-color:rgba(255,0,0,.4);opacity:.3!important}
-#drag-float{
-  position:fixed;pointer-events:none;z-index:50;display:none;
-}
-#drag-float.show{display:block}
-#tray{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
-  flex-shrink:0;padding:8px 0 4px;min-height:66px;
-}
+#tray{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0;padding:8px 0 4px;min-height:66px}
 .slot{
-  background:rgba(255,255,255,.035);
-  border:2px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.035);border:2px solid rgba(255,255,255,.06);
   border-radius:12px;display:flex;justify-content:center;align-items:center;
-  cursor:grab;padding:5px;min-height:60px;
+  padding:5px;min-height:60px;cursor:grab;position:relative;z-index:1;
   transition:opacity .2s,border-color .2s;
 }
-.slot.drag-source{opacity:.12;border-color:transparent;transform:scale(.92);transition:opacity .15s,border-color .15s,transform .15s}
-.slot.no-room{opacity:.25;border-color:rgba(255,0,0,.08)}
+.slot.dim{opacity:.15;border-color:transparent;transform:scale(.92)}
+.slot.blocked{opacity:.25;border-color:rgba(255,0,0,.08)}
 .mini-grid{display:grid;gap:1px;pointer-events:none}
 .mini-cell{aspect-ratio:1;border-radius:3px;width:clamp(13px,3.8vw,22px)}
-.mini-cell.fill{
-  box-shadow:inset 0 1px 2px rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.2);
-  border-radius:3px;border:1px solid rgba(255,255,255,.12);
-}
+.mini-cell.fill{box-shadow:inset 0 1px 2px rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.2);border-radius:3px;border:1px solid rgba(255,255,255,.12)}
 .btn-row{display:flex;gap:8px;flex-shrink:0;padding:2px 0}
-.btn{
-  flex:1;padding:10px;border:none;border-radius:12px;
-  font-family:'Inter',sans-serif;font-weight:700;
-  font-size:clamp(.7rem,2.2vw,.85rem);cursor:pointer;
-  transition:transform .1s,opacity .15s;
-}
+.btn{flex:1;padding:10px;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(.7rem,2.2vw,.85rem);cursor:pointer;transition:transform .1s}
 .btn:active{transform:scale(.94)}
 .btn-new{background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;box-shadow:0 4px 15px rgba(255,107,107,.25);font-weight:800}
 .btn-undo{background:rgba(255,255,255,.07);color:#888}
 .btn-undo:disabled{opacity:.2;cursor:not-allowed}
-#overlay{
-  display:none;position:absolute;inset:0;
-  background:rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-radius:28px;z-index:20;justify-content:center;align-items:center;
-  flex-direction:column;gap:6px;animation:fadeIn .35s ease;padding:24px;text-align:center;
-}
+#overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:28px;z-index:20;justify-content:center;align-items:center;flex-direction:column;gap:6px;animation:fadeIn .35s ease;padding:24px;text-align:center}
 #overlay.show{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .overlay-title{font-family:'Fredoka One',cursive;font-size:clamp(1.5rem,7vw,2.2rem)}
 .overlay-score{font-size:clamp(2.2rem,9vw,3.2rem);font-weight:900;color:#ffd93d}
 .overlay-sub{color:#888;font-size:clamp(.8rem,2.5vw,.95rem)}
-.overlay-btn{
-  margin-top:8px;padding:14px 48px;border:none;border-radius:14px;
-  background:linear-gradient(135deg,#6bcb77,#38a3a5);color:#fff;
-  font-weight:800;font-size:1.05rem;cursor:pointer;
-  box-shadow:0 4px 20px rgba(107,203,119,.3);transition:transform .1s;
-}
+.overlay-btn{margin-top:8px;padding:14px 48px;border:none;border-radius:14px;background:linear-gradient(135deg,#6bcb77,#38a3a5);color:#fff;font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 4px 20px rgba(107,203,119,.3)}
 .overlay-btn:active{transform:scale(.94)}
-.flyup{
-  position:fixed;pointer-events:none;z-index:60;
-  font-weight:900;font-size:clamp(1.2rem,4.5vw,1.6rem);
-  color:#ffd93d;text-shadow:0 2px 16px rgba(255,217,61,.35);
-  animation:flyUp .85s ease forwards;
-}
-@keyframes flyUp{
-  0%{opacity:0;transform:translateY(0) scale(.4)}
-  25%{opacity:1;transform:translateY(-12px) scale(1.15)}
-  100%{opacity:0;transform:translateY(-60px) scale(1)}
-}
+.flyup{position:fixed;pointer-events:none;z-index:60;font-weight:900;font-size:clamp(1.2rem,4.5vw,1.6rem);color:#ffd93d;text-shadow:0 2px 16px rgba(255,217,61,.35);animation:flyUp .85s ease forwards}
+@keyframes flyUp{0%{opacity:0;transform:translateY(0)scale(.4)}25%{opacity:1;transform:translateY(-12px)scale(1.15)}100%{opacity:0;transform:translateY(-60px)scale(1)}}
 #hint{text-align:center;font-size:clamp(.45rem,1.4vw,.6rem);color:rgba(255,255,255,.1);padding:1px 0;flex-shrink:0}
-@media(max-width:480px){
-  #app{border-radius:0;width:100%;padding:8px 6px 6px}
-  #overlay{border-radius:0}
-  .slot{min-height:50px;padding:3px}
-  .mini-cell{width:clamp(10px,4.5vw,16px)}
-}
-@media(min-height:800px){
-  .slot{min-height:74px}
-  .mini-cell{width:clamp(15px,3vw,21px)}
-}
+@media(max-width:480px){#app{border-radius:0;width:100%;padding:8px 6px 6px}#overlay{border-radius:0}.slot{min-height:50px;padding:3px}.mini-cell{width:clamp(10px,4.5vw,16px)}}
+@media(min-height:800px){.slot{min-height:74px}.mini-cell{width:clamp(15px,3vw,21px)}}
 </style>
 </head>
 <body>
-
 <div id="app">
   <header>
     <div class="logo">⬡ BLOCK BLAST</div>
@@ -169,7 +91,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
     <div id="grid"></div>
     <div id="ghost"></div>
   </div>
-  <div id="drag-float"></div>
   <div id="tray">
     <div class="slot" data-i="0"></div>
     <div class="slot" data-i="1"></div>
@@ -190,14 +111,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:0 2
 
 <script>
 // ══════════════════════════════════════════════════
-// BLOCK BLAST — drag & drop, mobile-friendly
-// ── NEVER re-render tray during drag ──
+// BLOCK BLAST — uses POINTER EVENTS (unified mouse+touch)
 // ══════════════════════════════════════════════════
 
 const C=10,R=10;
 const HUES=[0,40,120,210,280,25,340,180,50,150,200,330,100,60,250,190,80,300,160,220,20,140,260,30,70,320,10,130,230,290,90,310];
-
-const SHAPES = [
+const SHAPES=[
   [[1]],[[1,1]],[[1,1,1]],[[1,1,1,1]],[[1,1,1,1,1]],
   [[1,1],[1,1]],[[1,0],[1,1]],[[1,1],[0,1]],
   [[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[1,1,1],[1,0,0]],[[1,1,1],[0,0,1]],
@@ -206,8 +125,7 @@ const SHAPES = [
   [[1,0,0,0],[1,1,1,1]],[[0,0,0,1],[1,1,1,1]],[[1,1,1,1],[1,0,0,0]],[[1,1,1,1],[0,0,0,1]],
   [[1,0],[1,0],[1,0],[1,1]],[[0,1],[0,1],[0,1],[1,1]],
   [[1,0,0],[1,1,1],[0,0,1]],[[0,0,1],[1,1,1],[1,0,0]],
-  [[0,1,0],[1,1,1],[0,1,0]],
-  [[1,0,1],[1,1,1]],[[1,1,1],[1,0,1]],
+  [[0,1,0],[1,1,1],[0,1,0]],[[1,0,1],[1,1,1]],[[1,1,1],[1,0,1]],
   [[1,0],[1,1],[0,1]],[[0,1],[1,1],[1,0]],
   [[1,0,0],[1,1,1],[1,0,0]],[[0,0,1],[1,1,1],[0,0,1]],
   [[1,1],[1,0],[1,1]],[[1,1],[0,1],[1,1]],
@@ -216,11 +134,12 @@ const SHAPES = [
 let g=[]; let pieces=[null,null,null];
 let score=0,high=0,dead=false,busy=false,undoSave=null;
 
-let drag={slot:-1,active:false,piece:null};
+// Drag state
+let drag={active:false,slot:-1,piece:null,pid:-1};
 
+// DOM
 const gridEl=document.getElementById('grid');
 const ghostEl=document.getElementById('ghost');
-const dragFloat=document.getElementById('drag-float');
 const slots=document.querySelectorAll('.slot');
 const scoreEl=document.getElementById('score');
 const highEl=document.getElementById('high');
@@ -235,14 +154,14 @@ let _cidx=0;
 function hue(i){return HUES[(i-1)%HUES.length]}
 function nextC(){return 1+(_cidx++%(HUES.length-1))}
 function rnd(n){return Math.floor(Math.random()*n)}
-function pickShape(){return {s:SHAPES[rnd(SHAPES.length)].map(r=>[...r]),c:nextC()}}
+function pickShape(){return{s:SHAPES[rnd(SHAPES.length)].map(r=>[...r]),c:nextC()}}
 
 function buildGrid(){
   gridEl.innerHTML='';
   for(let i=0;i<R*C;i++){const d=document.createElement('div');d.className='cell';gridEl.appendChild(d)}
 }
 function cellAt(r,c){return gridEl.children[r*C+c]}
-function cellGrad(idx){const h=hue(idx);return `linear-gradient(135deg,hsl(${h},72%,70%) 0%,hsl(${h},72%,58%) 45%,hsl(${h},72%,42%) 100%)`}
+function cellGrad(idx){const h=hue(idx);return `linear-gradient(135deg,hsl(${h},72%,70%)0%,hsl(${h},72%,58%)45%,hsl(${h},72%,42%)100%)`}
 function paint(r,c,v){
   const el=cellAt(r,c);if(!el)return;
   if(v){el.style.background=cellGrad(v);el.classList.add('filled')}
@@ -250,13 +169,11 @@ function paint(r,c,v){
 }
 function repaint(){for(let r=0;r<R;r++)for(let c=0;c<C;c++)paint(r,c,g[r][c])}
 
-// ── TRAY (only called when NOT dragging) ──
 function ensurePieces(){for(let i=0;i<3;i++)if(!pieces[i])pieces[i]=pickShape()}
 function renderTray(){
   ensurePieces();
   slots.forEach((sl,i)=>{
-    sl.innerHTML='';
-    const p=pieces[i];if(!p)return;
+    sl.innerHTML='';const p=pieces[i];if(!p)return;
     const rows=p.s.length,cols=p.s[0].length;
     const mg=document.createElement('div');mg.className='mini-grid';
     mg.style.gridTemplateColumns=`repeat(${cols},1fr)`;
@@ -267,8 +184,8 @@ function renderTray(){
       mg.appendChild(mc);
     }
     sl.appendChild(mg);
-    sl.classList.remove('drag-source','no-room');
-    if(validSpots(p.s).length===0)sl.classList.add('no-room');
+    sl.classList.remove('dim','blocked');
+    if(validSpots(p.s).length===0)sl.classList.add('blocked');
   });
 }
 
@@ -283,7 +200,6 @@ function flyUp(pts){
   f.style.left=(r.left+r.width/2-30)+'px';f.style.top=(r.top-30)+'px';
   document.body.appendChild(f);setTimeout(()=>f.remove(),900);
 }
-
 function canPlace(sh,r0,c0){
   for(let r=0;r<sh.length;r++)for(let c=0;c<sh[r].length;c++){
     if(!sh[r][c])continue;
@@ -328,15 +244,14 @@ function animClear(rr,cc,cb){
 }
 function endGame(){dead=true;finalScore.textContent=score;const b=parseInt(localStorage.getItem('bbHigh')||'0');finalMsg.textContent=score>=b&&score>0?'🏆 NEW HIGH SCORE!':score>0?'Nice try!':'Better luck!';overlay.classList.add('show')}
 
-// ── COORDINATES ──
-function gridSnapPos(cx,cy){
-  const gr=ghostEl.getBoundingClientRect();
-  const x=cx-gr.left,y=cy-gr.top;
-  if(x<0||y<0||x>=gr.width||y>=gr.height)return null;
-  return{r:Math.floor(y/(gr.height/R)),c:Math.floor(x/(gr.width/C))};
+// ── GRID COORDINATES (uses ghost element = same space as grid) ──
+function gridPos(cx,cy){
+  const g=ghostEl.getBoundingClientRect();
+  const x=cx-g.left,y=cy-g.top;
+  if(x<0||y<0||x>=g.width||y>=g.height)return null;
+  return{r:Math.floor(y/(g.height/R)),c:Math.floor(x/(g.width/C))};
 }
-
-function showGhostAt(sh,cidx,row,col){
+function showGhost(sh,cidx,row,col){
   ghostEl.innerHTML='';
   const cw=ghostEl.clientWidth/C,ch=ghostEl.clientHeight/R;
   const ok=canPlace(sh,row,col);
@@ -352,95 +267,70 @@ function showGhostAt(sh,cidx,row,col){
 }
 function hideGhost(){ghostEl.classList.remove('show');ghostEl.innerHTML=''}
 
-function showFloat(sh,cidx,cx,cy){
-  const cs=38;dragFloat.innerHTML='';
-  const rows=sh.length,cols=sh[0].length;
-  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
-    if(!sh[r][c])continue;
-    const d=document.createElement('div');
-    d.style.cssText=`position:absolute;left:${c*cs}px;top:${r*cs}px;width:${cs}px;height:${cs}px;border-radius:6px;background:${cellGrad(cidx)};box-shadow:inset 0 2px 4px rgba(255,255,255,.3),inset 0 -3px 5px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.4)`;
-    dragFloat.appendChild(d);
-  }
-  dragFloat.style.width=(cols*cs)+'px';dragFloat.style.height=(rows*cs)+'px';
-  dragFloat.style.left=(cx-cols*cs/2)+'px';dragFloat.style.top=(cy-rows*cs/2)+'px';
-  dragFloat.classList.add('show');
-}
-function hideFloat(){dragFloat.classList.remove('show');dragFloat.innerHTML=''}
+// ══════════════════════════════════════════════════
+// DRAG & DROP via POINTER EVENTS
+// ══════════════════════════════════════════════════
+// We capture pointerdown on slots, then listen to
+// pointermove/pointerup on the whole document.
+// The pointercapture ensures we get ALL events.
 
-// ── DRAG HANDLING ──
-// IMPORTANT: NEVER call renderTray() during drag (avoids DOM mutation that breaks touch)
-
-function startDrag(slotI,cx,cy){
-  if(dead||busy)return;
-  const p=pieces[slotI];if(!p||!validSpots(p.s).length)return;
-  drag={slot:slotI,active:true,piece:{s:p.s.map(r=>[...r]),c:p.c}};
-  showFloat(drag.piece.s,drag.piece.c,cx,cy);
-  // Dim the source slot WITHOUT re-rendering
-  slots[slotI].classList.add('drag-source');
-  // Save current hint
-  document.getElementById('hint').textContent='Drop on the grid';
-}
-function moveDrag(cx,cy){
-  if(!drag.active||!drag.piece)return;
-  const cols=drag.piece.s[0].length,rows=drag.piece.s.length;
-  dragFloat.style.left=(cx-cols*19)+'px';dragFloat.style.top=(cy-rows*19)+'px';
-  const pos=gridSnapPos(cx,cy);
-  if(pos)showGhostAt(drag.piece.s,drag.piece.c,pos.r,pos.c);
-  else hideGhost();
-}
-function endDrag(cx,cy){
-  const wasDrag=drag.active;
-  const slotI=drag.slot;
-  const pieceCopy=drag.piece;
-  // Clean up drag visuals IMMEDIATELY without renderTray
-  if(drag.slot>=0)slots[drag.slot].classList.remove('drag-source');
-  hideFloat();hideGhost();
-  drag={slot:-1,active:false,piece:null};
-  document.getElementById('hint').textContent='Drag a piece onto the grid';
-
-  if(!wasDrag||!pieceCopy)return;
-  const pos=gridSnapPos(cx,cy);
-  if(pos&&canPlace(pieceCopy.s,pos.r,pos.c)){
-    placeFlow(slotI,pos.r,pos.c);
-  }
-}
-
-// ── MOUSE ──
 slots.forEach((sl,i)=>{
-  sl.addEventListener('mousedown',e=>{e.preventDefault();startDrag(i,e.clientX,e.clientY)});
-});
-document.addEventListener('mousemove',e=>{if(drag.active){e.preventDefault();moveDrag(e.clientX,e.clientY)}});
-document.addEventListener('mouseup',e=>{if(drag.active){e.preventDefault();endDrag(e.clientX,e.clientY)}});
-
-// ── TOUCH (simple: always use first touch, no _touchId tracking needed for single-finger) ──
-slots.forEach((sl,i)=>{
-  sl.addEventListener('touchstart',e=>{
+  sl.addEventListener('pointerdown',e=>{
     if(dead||busy)return;
-    const t=e.changedTouches[0];
-    startDrag(i,t.clientX,t.clientY);
-  },{passive:true});
+    const p=pieces[i];if(!p||!validSpots(p.s).length)return;
+
+    // Capture pointer so we get move/up even outside element
+    sl.setPointerCapture(e.pointerId);
+
+    drag={active:true,slot:i,piece:{s:p.s.map(r=>[...r]),c:p.c},pid:e.pointerId};
+    sl.classList.add('dim');
+    document.getElementById('hint').textContent='Drop on the grid';
+    e.preventDefault();
+  });
 });
 
-document.addEventListener('touchmove',e=>{
+// Pointer move on document — always fires while pointer is captured
+document.addEventListener('pointermove',e=>{
   if(!drag.active)return;
-  const t=e.changedTouches[0];
-  if(!t)return;
   e.preventDefault();
-  moveDrag(t.clientX,t.clientY);
-},{passive:false});
 
-document.addEventListener('touchend',e=>{
-  if(!drag.active)return;
-  const t=e.changedTouches[0];
-  if(!t)return;
-  endDrag(t.clientX,t.clientY);
+  // Move ghost to grid position
+  const pos=gridPos(e.clientX,e.clientY);
+  if(pos&&drag.piece)showGhost(drag.piece.s,drag.piece.c,pos.r,pos.c);
+  else hideGhost();
 });
 
-document.addEventListener('touchcancel',()=>{
+// Pointer up on document
+document.addEventListener('pointerup',e=>{
   if(!drag.active)return;
-  if(drag.slot>=0)slots[drag.slot].classList.remove('drag-source');
-  hideFloat();hideGhost();
-  drag={slot:-1,active:false,piece:null};
+  e.preventDefault();
+
+  // Clean up slot
+  if(drag.slot>=0)slots[drag.slot].classList.remove('dim');
+
+  // Attempt placement
+  const pos=gridPos(e.clientX,e.clientY);
+  if(pos&&drag.piece&&canPlace(drag.piece.s,pos.r,pos.c)){
+    const slotI=drag.slot;
+    const sh=drag.piece.s;
+    const ci=drag.piece.c;
+    drag={active:false,slot:-1,piece:null,pid:-1};
+    hideGhost();
+    document.getElementById('hint').textContent='Drag a piece onto the grid';
+    placeFlow(slotI,pos.r,pos.c);
+  } else {
+    drag={active:false,slot:-1,piece:null,pid:-1};
+    hideGhost();
+    document.getElementById('hint').textContent='Drag a piece onto the grid';
+  }
+});
+
+// Pointer cancel (e.g., system gesture interrupts)
+document.addEventListener('pointercancel',e=>{
+  if(!drag.active||e.pointerId!==drag.pid)return;
+  if(drag.slot>=0)slots[drag.slot].classList.remove('dim');
+  drag={active:false,slot:-1,piece:null,pid:-1};
+  hideGhost();
   document.getElementById('hint').textContent='Drag a piece onto the grid';
 });
 
@@ -454,9 +344,8 @@ btnUndo.addEventListener('click',()=>{
 });
 function resetGame(){
   g=Array.from({length:R},()=>Array(C).fill(0));score=0;dead=false;busy=false;undoSave=null;
-  drag={slot:-1,active:false,piece:null};
-  hideFloat();hideGhost();
-  pieces=[pickShape(),pickShape(),pickShape()];
+  drag={active:false,slot:-1,piece:null,pid:-1};
+  hideGhost();pieces=[pickShape(),pickShape(),pickShape()];
   repaint();renderTray();updScore();overlay.classList.remove('show');btnUndo.disabled=true;
   document.getElementById('hint').textContent='Drag a piece onto the grid';
 }
