@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Block Blast 3D</title>
+<title>Block Blast</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@500;700;800;900&display=swap');
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{
   height:100%;overflow:hidden;position:fixed;width:100%;
@@ -15,18 +14,16 @@ html,body{
   user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;
   touch-action:none;-ms-touch-action:none;
 }
-
 #app{
   background:linear-gradient(160deg,#151528,#10101e);
-  border-radius:28px;padding:16px;
+  border-radius:28px;padding:14px;
   width:min(500px,100vw);height:100dvh;height:100svh;
   margin:0 auto;position:relative;
   box-shadow:0 20px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04);
   display:flex;flex-direction:column;overflow:hidden;
 }
-
 /* ── HEADER ── */
-header{display:flex;justify-content:space-between;align-items:center;padding:2px 2px 8px;flex-shrink:0}
+header{display:flex;justify-content:space-between;align-items:center;padding:0 2px 8px;flex-shrink:0}
 .logo{
   font-family:'Fredoka One',cursive;
   font-size:clamp(1rem,3.8vw,1.5rem);
@@ -34,159 +31,108 @@ header{display:flex;justify-content:space-between;align-items:center;padding:2px
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   line-height:1;
 }
-.score-wrap{display:flex;gap:8px;font-size:clamp(.55rem,2vw,.75rem)}
-.score-wrap>div{
-  background:rgba(255,255,255,.05);
-  padding:4px 10px;border-radius:10px;text-align:center;line-height:1.2;
-}
-.score-wrap span{font-weight:800;font-size:1.2em;color:#ffd93d;display:block;margin-top:1px}
+.score-wrap{display:flex;gap:8px;font-size:clamp(.5rem,1.8vw,.7rem)}
+.score-wrap>div{background:rgba(255,255,255,.05);padding:3px 10px;border-radius:10px;text-align:center;line-height:1.2}
+.score-wrap span{font-weight:800;font-size:1.25em;color:#ffd93d;display:block;margin-top:1px}
 .high-score span{color:#6bcb77!important}
-
 /* ── GRID WRAP ── */
 #grid-wrap{
   position:relative;flex:1;min-height:0;
-  background:rgba(0,0,0,.45);
-  border-radius:14px;padding:6px;
-  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.4);
+  border-radius:12px;
 }
-
+/* Grid — fills wrap absolutely */
 #grid{
+  position:absolute;top:5px;left:5px;right:5px;bottom:5px;
   display:grid;grid-template-columns:repeat(10,1fr);
-  width:100%;height:100%;gap:0;
+  overflow:hidden;border-radius:4px;
 }
-
 .cell{
   background:rgba(255,255,255,.03);
-  border-radius:0;
-  position:relative;
-  transition:transform .15s,opacity .2s;
-}
-/* subtle grid lines */
-.cell::after{
-  content:'';position:absolute;inset:0;
-  border:1px solid rgba(255,255,255,.04);
-  border-radius:2px;
-  pointer-events:none;
+  border-right:1px solid rgba(255,255,255,.025);
+  border-bottom:1px solid rgba(255,255,255,.025);
+  position:relative;transition:transform .12s,opacity .15s;
 }
 /* 3D filled block */
 .cell.filled{
-  border-radius:4px;
-  position:relative;
+  border-radius:3px;
   overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 -2px 3px rgba(0,0,0,.25),inset 2px 2px 3px rgba(255,255,255,.08);
+  border:none;
 }
 .cell.filled::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,.08) 40%,transparent 60%,rgba(0,0,0,.2) 100%);
-  z-index:1;
-  border-radius:4px;
-  pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.05) 40%,transparent 55%,rgba(0,0,0,.15) 100%);
+  z-index:2;pointer-events:none;border-radius:3px;
 }
-.cell.filled::after{
-  content:'';position:absolute;inset:0;
-  border-radius:4px;
-  border:1px solid rgba(255,255,255,.15);
-  border-bottom:2px solid rgba(0,0,0,.3);
-  border-right:2px solid rgba(0,0,0,.3);
-  pointer-events:none;
-  z-index:2;
-}
-/* 3D highlight top-left shine */
-.cell.filled .shine{
-  position:absolute;top:2px;left:2px;right:50%;bottom:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,.4),transparent);
-  border-radius:3px 0 0 0;
-  z-index:3;pointer-events:none;
-}
-.cell.filled .shine2{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 30%,transparent 70%,rgba(0,0,0,.15) 100%);
-  z-index:3;pointer-events:none;border-radius:4px;
-}
-
-.cell.flash{animation:flashPop .35s ease forwards;z-index:5}
+.cell.flash{animation:flashPop .35s ease forwards;z-index:10}
 @keyframes flashPop{
-  0%{transform:scale(1);opacity:1;filter:brightness(1)}
-  40%{transform:scale(1.12);opacity:.8;filter:brightness(2)}
-  100%{transform:scale(0);opacity:0;filter:brightness(3)}
+  0%{transform:scale(1);opacity:1;filter:brightness(1);z-index:10}
+  35%{transform:scale(1.08);opacity:.8;filter:brightness(2);z-index:10}
+  100%{transform:scale(0);opacity:0;filter:brightness(3);z-index:10}
 }
 @keyframes popIn{
-  0%{transform:scale(0) translateY(-10px);opacity:0}
-  60%{transform:scale(1.08)}
+  0%{transform:scale(0) translateY(-8px);opacity:0}
+  65%{transform:scale(1.06)}
   100%{transform:scale(1) translateY(0);opacity:1}
 }
 .cell.just-placed{animation:popIn .2s ease forwards}
-
-.cell.ghost-preview{
-  opacity:.25;transform:scale(.85);border-radius:4px;
+/* ── GHOST (absolutely positioned, same coords as grid) ── */
+#ghost{
+  position:absolute;top:5px;left:5px;right:5px;bottom:5px;
+  pointer-events:none;z-index:5;display:none;
 }
-
-/* ── GHOST OVERLAY ── */
-#ghost{position:absolute;inset:6px;pointer-events:none;z-index:5;display:none}
 #ghost.show{display:block}
 .ghost-cell{
   position:absolute;border-radius:4px;
-  border:2px dashed rgba(255,255,255,.35);
-  transition:all .04s;
+  border:2px dashed rgba(255,255,255,.4);
+  transition:all .03s;
 }
-
 /* ── TRAY ── */
 #tray{
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
-  flex-shrink:0;padding:8px 0 4px;min-height:72px;
+  flex-shrink:0;padding:8px 0 4px;min-height:68px;
 }
 .slot{
   background:rgba(255,255,255,.035);
   border:2px solid rgba(255,255,255,.06);
-  border-radius:14px;display:flex;justify-content:center;align-items:center;
-  cursor:pointer;padding:6px;min-height:68px;
-  transition:background .2s,border-color .2s,transform .15s,box-shadow .2s;
-  position:relative;
+  border-radius:12px;display:flex;justify-content:center;align-items:center;
+  cursor:pointer;padding:5px;min-height:62px;
+  transition:background .15s,border-color .15s,transform .15s,box-shadow .2s;
 }
 .slot:active{transform:scale(.94)}
 .slot.active{
   border-color:#ffd93d;
   background:rgba(255,217,61,.08);
-  box-shadow:0 0 24px rgba(255,217,61,.12),inset 0 0 20px rgba(255,217,61,.04);
-  transform:scale(1.03);
+  box-shadow:0 0 20px rgba(255,217,61,.1),inset 0 0 16px rgba(255,217,61,.03);
+  transform:scale(1.04);
 }
-.slot.dim{opacity:.4}
-.slot.unavailable{opacity:.25;border-color:rgba(255,0,0,.15)}
+.slot.selected-other{opacity:.35}
+.slot.no-room{opacity:.2;border-color:rgba(255,0,0,.1)}
 .mini-grid{display:grid;gap:1px}
-.mini-cell{
-  aspect-ratio:1;border-radius:3px;
-  width:clamp(14px,3.8vw,24px);
-  position:relative;
-}
-/* 3D for mini-cell */
+.mini-cell{aspect-ratio:1;border-radius:3px;width:clamp(13px,3.8vw,22px)}
 .mini-cell.fill{
   box-shadow:inset 0 1px 2px rgba(255,255,255,.25),inset 0 -2px 3px rgba(0,0,0,.2);
-  border-radius:3px;
-  border:1px solid rgba(255,255,255,.12);
+  border-radius:3px;border:1px solid rgba(255,255,255,.12);
 }
-
 /* ── BUTTONS ── */
 .btn-row{display:flex;gap:8px;flex-shrink:0;padding:2px 0}
 .btn{
   flex:1;padding:10px;border:none;border-radius:12px;
   font-family:'Inter',sans-serif;font-weight:700;
   font-size:clamp(.7rem,2.2vw,.85rem);cursor:pointer;
-  transition:transform .12s,opacity .2s,box-shadow .2s;
+  transition:transform .1s,opacity .15s;
 }
 .btn:active{transform:scale(.94)}
-.btn-new{
-  background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;
-  box-shadow:0 4px 15px rgba(255,107,107,.25);
-  font-weight:800;
-}
+.btn-new{background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;box-shadow:0 4px 15px rgba(255,107,107,.25);font-weight:800}
 .btn-undo{background:rgba(255,255,255,.07);color:#888}
 .btn-undo:disabled{opacity:.2;cursor:not-allowed}
-
 /* ── OVERLAY ── */
 #overlay{
   display:none;position:absolute;inset:0;
   background:rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-radius:28px;z-index:20;justify-content:center;align-items:center;
-  flex-direction:column;gap:8px;animation:fadeIn .35s ease;padding:24px;text-align:center;
+  flex-direction:column;gap:6px;animation:fadeIn .35s ease;padding:24px;text-align:center;
 }
 #overlay.show{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -194,48 +140,36 @@ header{display:flex;justify-content:space-between;align-items:center;padding:2px
 .overlay-score{font-size:clamp(2.2rem,9vw,3.2rem);font-weight:900;color:#ffd93d}
 .overlay-sub{color:#888;font-size:clamp(.8rem,2.5vw,.95rem)}
 .overlay-btn{
-  margin-top:10px;padding:14px 48px;border:none;border-radius:14px;
+  margin-top:8px;padding:14px 48px;border:none;border-radius:14px;
   background:linear-gradient(135deg,#6bcb77,#38a3a5);color:#fff;
   font-weight:800;font-size:1.05rem;cursor:pointer;
-  box-shadow:0 4px 20px rgba(107,203,119,.3);
-  transition:transform .12s;
+  box-shadow:0 4px 20px rgba(107,203,119,.3);transition:transform .1s;
 }
 .overlay-btn:active{transform:scale(.94)}
-
 /* ── FLYUP ── */
 .flyup{
   position:fixed;pointer-events:none;z-index:30;
-  font-weight:900;font-size:clamp(1.3rem,5vw,1.8rem);
-  color:#ffd93d;text-shadow:0 2px 16px rgba(255,217,61,.35),0 4px 30px rgba(255,217,61,.1);
+  font-weight:900;font-size:clamp(1.2rem,4.5vw,1.6rem);
+  color:#ffd93d;text-shadow:0 2px 16px rgba(255,217,61,.35);
   animation:flyUp .85s ease forwards;
 }
 @keyframes flyUp{
   0%{opacity:0;transform:translateY(0) scale(.4)}
-  25%{opacity:1;transform:translateY(-15px) scale(1.2)}
-  100%{opacity:0;transform:translateY(-70px) scale(1)}
+  25%{opacity:1;transform:translateY(-12px) scale(1.15)}
+  100%{opacity:0;transform:translateY(-60px) scale(1)}
 }
-
-/* ── HINT ── */
-#hint{text-align:center;font-size:clamp(.5rem,1.6vw,.65rem);color:rgba(255,255,255,.12);padding:1px 0;flex-shrink:0}
-
+#hint{text-align:center;font-size:clamp(.45rem,1.4vw,.6rem);color:rgba(255,255,255,.1);padding:1px 0;flex-shrink:0}
 /* ── RESPONSIVE ── */
 @media(max-width:480px){
-  #app{border-radius:0;width:100%;padding:10px 8px 8px}
+  #app{border-radius:0;width:100%;padding:8px 6px 6px}
   #overlay{border-radius:0}
-  .slot{min-height:56px;padding:4px}
-  .mini-cell{width:clamp(11px,4.5vw,17px)}
-  #grid-wrap{padding:4px}
-  #ghost{inset:4px}
+  .slot{min-height:52px;padding:3px}
+  .mini-cell{width:clamp(10px,4.5vw,16px)}
+  #grid{padding:0}
 }
-
 @media(min-height:800px){
-  .slot{min-height:80px}
-  .mini-cell{width:clamp(16px,3.2vw,22px)}
-}
-
-@media(min-width:600px){
-  #app{padding:20px}
-  .slot{min-height:85px}
+  .slot{min-height:76px}
+  .mini-cell{width:clamp(15px,3vw,21px)}
 }
 </style>
 </head>
@@ -266,7 +200,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:2px
     <button class="btn btn-new" id="btnNew">✦ New</button>
   </div>
 
-  <div id="hint">Tap a piece → tap the grid to place it</div>
+  <div id="hint">Tap a piece → tap the grid</div>
 
   <div id="overlay">
     <div class="overlay-title">💥 Game Over</div>
@@ -278,57 +212,60 @@ header{display:flex;justify-content:space-between;align-items:center;padding:2px
 
 <script>
 // ══════════════════════════════════════════════════
-// BLOCK BLAST 3D — mobile-first
+// BLOCK BLAST 3D — fixed ghost targeting
+// Grid & ghost use identical coordinate system (absolute, same inset)
 // ══════════════════════════════════════════════════
 
 const C=10,R=10;
-// 32 color hues — vibrant palette
 const HUES=[0,40,120,210,280,25,340,180,50,150,200,330,100,60,250,190,80,300,160,220,20,140,260,30,70,320,10,130,230,290,90,310];
 
 const SHAPES = [
-  [[1]],                                     // mono
-  [[1,1]],                                   // duo
-  [[1,1,1]],                                 // triple
-  [[1,1,1,1]],                               // line4
-  [[1,1,1,1,1]],                             // line5
+  [[1]],                                     // 1
+  [[1,1]],                                   // 2
+  [[1,1,1]],                                 // 3
+  [[1,1,1,1]],                               // 4
+  [[1,1,1,1,1]],                             // 5
   [[1,1],[1,1]],                             // sq
-  [[1,0],[1,1]],                             // corner3a
-  [[1,1],[0,1]],                             // corner3b
-  [[1,0,0],[1,1,1]],                         // L4a
-  [[0,0,1],[1,1,1]],                         // L4b
-  [[1,1,1],[1,0,0]],                         // L4c
-  [[1,1,1],[0,0,1]],                         // L4d
+  [[1,0],[1,1]],                             // c3
+  [[1,1],[0,1]],                             // c3
+  [[1,0,0],[1,1,1]],                         // L4
+  [[0,0,1],[1,1,1]],                         // L4
+  [[1,1,1],[1,0,0]],                         // L4
+  [[1,1,1],[0,0,1]],                         // L4
   [[1,1,1],[0,1,0]],                         // T4
-  [[0,1,0],[1,1,1]],                         // T4d
+  [[0,1,0],[1,1,1]],                         // T4
   [[0,1,1],[1,1,0]],                         // S
   [[1,1,0],[0,1,1]],                         // Z
-  [[1,0,0,0],[1,1,1,1]],                     // L5a
-  [[0,0,0,1],[1,1,1,1]],                     // L5b
-  [[1,1,1,1],[1,0,0,0]],                     // L5c
-  [[1,1,1,1],[0,0,0,1]],                     // L5d
-  [[1,0],[1,0],[1,0],[1,1]],                 // L5tall
-  [[0,1],[0,1],[0,1],[1,1]],                 // L5tall2
-  [[1,0,0],[1,1,1],[0,0,1]],                 // stair5
-  [[0,0,1],[1,1,1],[1,0,0]],                 // stair5b
-  [[0,1,0],[1,1,1],[0,1,0]],                 // plus
-  [[1,0,1],[1,1,1]],                         // U4
-  [[1,1,1],[1,0,1]],                         // U4d
-  [[1,0],[1,1],[0,1]],                       // zigzag3
-  [[0,1],[1,1],[1,0]],                       // zigzag3b
-  [[1,0,0],[1,1,1],[1,0,0]],                 // C5
-  [[0,0,1],[1,1,1],[0,0,1]],                 // C5b
-  [[1,1],[1,0],[1,1]],                       // weird
-  [[1,1],[0,1],[1,1]],                       // weird2
+  [[1,0,0,0],[1,1,1,1]],                     // L5
+  [[0,0,0,1],[1,1,1,1]],                     // L5
+  [[1,1,1,1],[1,0,0,0]],                     // L5
+  [[1,1,1,1],[0,0,0,1]],                     // L5
+  [[1,0],[1,0],[1,0],[1,1]],                 // L5t
+  [[0,1],[0,1],[0,1],[1,1]],                 // L5t
+  [[1,0,0],[1,1,1],[0,0,1]],                 // st5
+  [[0,0,1],[1,1,1],[1,0,0]],                 // st5
+  [[0,1,0],[1,1,1],[0,1,0]],                 // +
+  [[1,0,1],[1,1,1]],                         // U
+  [[1,1,1],[1,0,1]],                         // U
+  [[1,0],[1,1],[0,1]],                       // zig
+  [[0,1],[1,1],[1,0]],                       // zig
+  [[1,0,0],[1,1,1],[1,0,0]],                 // C
+  [[0,0,1],[1,1,1],[0,0,1]],                 // C
+  [[1,1],[1,0],[1,1]],                       // w
+  [[1,1],[0,1],[1,1]],                       // w
 ];
 
 // ── STATE ──
-let g = [];
-let pieces = [];
-let sel = -1;
-let score = 0, high = 0;
-let dead = false, busy = false;
+let g = [];          // grid[R][C] — 0 or color idx
+let pieces = [];     // [{s,c},{s,c},{s,c}]
+let sel = -1;        // selected tray slot index
+let score = 0;
+let high = 0;
+let dead = false;
+let busy = false;    // animating clears
 let undoSave = null;
 
+// DOM refs
 const gridEl = document.getElementById('grid');
 const ghostEl = document.getElementById('ghost');
 const slots = document.querySelectorAll('.slot');
@@ -340,23 +277,16 @@ const finalMsg = document.getElementById('finalMsg');
 const btnUndo = document.getElementById('btnUndo');
 const btnNew = document.getElementById('btnNew');
 const btnRetry = document.getElementById('btnRetry');
-const gridWrap = document.getElementById('grid-wrap');
 
-// ── HELPERS ──
+// ── COLORS / SHAPES ──
 let _cidx = 0;
-function nextC(){ return 1 + (_cidx++ % (HUES.length-1)) }
+function hue(i){ return HUES[(i-1)%HUES.length] }
+function nextC(){ return 1+(_cidx++%(HUES.length-1)) }
 function rnd(n){ return Math.floor(Math.random()*n) }
-
 function pickShape(){
   const s = SHAPES[rnd(SHAPES.length)];
   return {s:s.map(r=>[...r]), c:nextC()};
 }
-function fillPieces(){ pieces = [pickShape(),pickShape(),pickShape()] }
-function fillOne(i){ pieces[i] = pickShape() }
-
-function getC(idx){ return `hsl(${HUES[(idx-1)%HUES.length]},72%,58%)` }
-function getCLight(idx){ return `hsl(${HUES[(idx-1)%HUES.length]},72%,70%)` }
-function getCDark(idx){ return `hsl(${HUES[(idx-1)%HUES.length]},72%,42%)` }
 
 // ── GRID BUILD ──
 function buildGrid(){
@@ -364,43 +294,44 @@ function buildGrid(){
   for(let i=0;i<R*C;i++){
     const d = document.createElement('div');
     d.className = 'cell';
-    // Add 3D shine elements as children
-    const sh = document.createElement('div');
-    sh.className = 'shine';
-    const sh2 = document.createElement('div');
-    sh2.className = 'shine2';
-    d.appendChild(sh);
-    d.appendChild(sh2);
     gridEl.appendChild(d);
   }
 }
-
 function cellAt(r,c){ return gridEl.children[r*C+c] }
+
+function cellColor(idx){
+  const h = hue(idx);
+  return `hsl(${h},72%,58%)`;
+}
+function cellGrad(idx){
+  const h = hue(idx);
+  return `linear-gradient(135deg, hsl(${h},72%,70%) 0%, hsl(${h},72%,58%) 45%, hsl(${h},72%,42%) 100%)`;
+}
 
 function paint(r,c,v){
   const el = cellAt(r,c);
   if(!el) return;
   if(v){
-    const bg = `linear-gradient(135deg, ${getCLight(v)} 0%, ${getC(v)} 50%, ${getCDark(v)} 100%)`;
-    el.style.background = bg;
+    el.style.background = cellGrad(v);
     el.classList.add('filled');
   } else {
     el.style.background = 'rgba(255,255,255,.03)';
     el.classList.remove('filled','just-placed');
-    // reset ::after border
   }
 }
-
 function repaint(){
   for(let r=0;r<R;r++) for(let c=0;c<C;c++) paint(r,c,g[r][c]);
 }
 
 // ── TRAY ──
 function renderTray(){
+  // Safety: ensure all slots have pieces
+  for(let i=0;i<3;i++) if(!pieces[i]) pieces[i] = pickShape();
+
   slots.forEach((sl,i)=>{
     sl.innerHTML = '';
-    if(i>=pieces.length||!pieces[i]) return;
     const p = pieces[i];
+    if(!p) return;
     const rows = p.s.length, cols = p.s[0].length;
     const mg = document.createElement('div');
     mg.className = 'mini-grid';
@@ -408,14 +339,14 @@ function renderTray(){
     for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
       const mc = document.createElement('div');
       mc.className = 'mini-cell'+(p.s[r][c]?' fill':'');
-      if(p.s[r][c]) mc.style.background = `linear-gradient(135deg,${getCLight(p.c)} 0%,${getC(p.c)} 50%,${getCDark(p.c)} 100%)`;
+      if(p.s[r][c]) mc.style.background = cellGrad(p.c);
       mg.appendChild(mc);
     }
     sl.appendChild(mg);
     sl.classList.toggle('active', i===sel);
-    const hasRoom = validSpots(p.s).length > 0;
-    sl.classList.toggle('dim', sel>=0 && sel!==i);
-    sl.classList.toggle('unavailable', sel<0 && !hasRoom);
+    const room = validSpots(p.s).length > 0;
+    sl.classList.toggle('selected-other', sel>=0 && sel!==i);
+    sl.classList.toggle('no-room', sel<0 && !room);
   });
 }
 
@@ -429,19 +360,17 @@ function flyUp(pts){
   const f = document.createElement('div');
   f.className='flyup'; f.textContent='+'+pts;
   const r = scoreEl.getBoundingClientRect();
-  f.style.left = (r.left+r.width/2-30)+'px';
-  f.style.top = (r.top-40)+'px';
+  f.style.left=(r.left+r.width/2-30)+'px'; f.style.top=(r.top-30)+'px';
   document.body.appendChild(f);
   setTimeout(()=>f.remove(),900);
 }
 
-// ── PLACEMENT ──
+// ── PLACEMENT LOGIC ──
 function canPlace(sh,r0,c0){
   for(let r=0;r<sh.length;r++) for(let c=0;c<sh[r].length;c++){
     if(!sh[r][c]) continue;
     const gr=r0+r, gc=c0+c;
-    if(gr<0||gr>=R||gc<0||gc>=C) return false;
-    if(g[gr][gc]) return false;
+    if(gr<0||gr>=R||gc<0||gc>=C||g[gr][gc]) return false;
   }
   return true;
 }
@@ -455,7 +384,7 @@ function doPlace(sh,cidx,row,col){
     if(sh[r][c]) g[row+r][col+c]=cidx;
 }
 
-// ── CLEARS ──
+// ── LINE CLEARS ──
 function findFull(){
   const rr=[],cc=[];
   for(let r=0;r<R;r++) if(g[r].every(v=>v)) rr.push(r);
@@ -467,16 +396,17 @@ function eraseLines(rr,cc){
   for(const c of cc) for(let r=0;r<R;r++) g[r][c]=0;
 }
 function isDead(){
-  for(const p of pieces) if(p && validSpots(p.s).length>0) return false;
+  for(let i=0;i<3;i++) if(pieces[i] && validSpots(pieces[i].s).length>0) return false;
   return true;
 }
 
-// ── PLACE FLOW ──
+// ── MAIN PLACE FLOW ──
 function placeFlow(slotI,row,col){
   if(dead||busy) return false;
   const p = pieces[slotI];
   if(!p||!canPlace(p.s,row,col)) return false;
 
+  // Save undo state
   undoSave = {g:g.map(r=>[...r]), sc:score, ps:pieces.map(x=>({s:x.s.map(r=>[...r]),c:x.c}))};
   btnUndo.disabled = false;
 
@@ -487,7 +417,7 @@ function placeFlow(slotI,row,col){
   doPlace(p.s,cidx,row,col);
   repaint();
 
-  let clearPts=0,chain=0;
+  let clearPts=0, chain=0;
 
   const resolve = ()=>{
     const {rr,cc}=findFull();
@@ -495,44 +425,48 @@ function placeFlow(slotI,row,col){
       score += blocks*10+clearPts;
       updScore();
       if(clearPts>0) flyUp(clearPts);
-      fillOne(slotI);
+      // Replace used piece immediately
+      pieces[slotI] = pickShape();
+      // Safety: ensure all 3 slots filled
+      for(let i=0;i<3;i++) if(!pieces[i]) pieces[i]=pickShape();
       renderTray();
       sel=-1;
-      ghostEl.classList.remove('show');
+      hideGhost();
+
       if(isDead()) endGame();
       else autoAdvance();
+
       busy=false;
       return;
     }
     chain+=rr.length+cc.length;
     const pts=(rr.length+cc.length)*50*chain;
     clearPts+=pts;
-    animLines(rr,cc,()=>{
+    animClear(rr,cc,()=>{
       eraseLines(rr,cc);
       repaint();
       resolve();
     });
   };
+
   busy=true;
   resolve();
   return true;
 }
 
-function animLines(rr,cc,cb){
+function animClear(rr,cc,cb){
   let total=rr.length*C+cc.length*R;
   if(!total){cb();return}
   for(const r of rr) for(let c=0;c<C;c++){
-    const el=cellAt(r,c);
-    if(el) el.classList.add('flash');
+    const el=cellAt(r,c); if(el) el.classList.add('flash');
   }
   for(const c of cc) for(let r=0;r<R;r++) if(!rr.includes(r)){
-    const el=cellAt(r,c);
-    if(el) el.classList.add('flash');
+    const el=cellAt(r,c); if(el) el.classList.add('flash');
   }
   setTimeout(cb,370);
 }
 
-// ── END ──
+// ── GAME OVER ──
 function endGame(){
   dead=true;
   finalScore.textContent=score;
@@ -544,17 +478,24 @@ function endGame(){
 // ── AUTO ADVANCE ──
 function autoAdvance(){
   if(dead||busy) return;
-  let fits=[];
-  for(let i=0;i<pieces.length;i++) if(pieces[i]){
-    const v=validSpots(pieces[i].s);
+  // Safety: ensure all slots have pieces
+  for(let i=0;i<3;i++) if(!pieces[i]) pieces[i]=pickShape();
+
+  const fits=[];
+  for(let i=0;i<3;i++){
+    const p=pieces[i];
+    if(!p) continue;
+    const v=validSpots(p.s);
     if(v.length) fits.push({i,cnt:v.length,first:v[0]});
   }
   if(!fits.length){endGame();return}
-  // Auto-place: if a piece fits only 1 spot
+
+  // If a piece fits only 1 spot → auto-place
   for(const {i,cnt,first} of fits){
-    if(cnt===1&&pieces[i]){ placeFlow(i,first.r,first.c); return; }
+    if(cnt===1){ placeFlow(i,first.r,first.c); return; }
   }
-  // Auto-select: if only 1 piece has room
+
+  // If only 1 piece has any room → auto-select it
   if(fits.length===1){
     sel=fits[0].i;
     renderTray();
@@ -563,12 +504,11 @@ function autoAdvance(){
   }
 }
 
-// ── GHOST ──
+// ── GHOST (uses same coordinate space as grid: ghostEl's bounding box) ──
 function showGhost(sh,cidx,row,col){
   ghostEl.innerHTML='';
-  const rect=ghostEl.getBoundingClientRect();
-  const gw=rect.width, gh=rect.height;
-  const cw=gw/C, ch=gh/R;
+  const cw=ghostEl.clientWidth/C, ch=ghostEl.clientHeight/R;
+  const ok=canPlace(sh,row,col);
   for(let r=0;r<sh.length;r++) for(let c=0;c<sh[r].length;c++){
     if(!sh[r][c]) continue;
     const d=document.createElement('div');
@@ -577,55 +517,52 @@ function showGhost(sh,cidx,row,col){
     d.style.top=(row+r)*ch+'px';
     d.style.width=cw+'px';
     d.style.height=ch+'px';
-    d.style.background=`linear-gradient(135deg,${getCLight(cidx)} 0%,${getC(cidx)} 50%,${getCDark(cidx)} 100%)`;
-    d.style.opacity=canPlace(sh,row,col)?'.5':'.15';
-    d.style.border=canPlace(sh,row,col)?'2px dashed rgba(255,255,255,.4)':'2px dashed rgba(255,0,0,.3)';
+    d.style.background=cellGrad(cidx);
+    d.style.opacity=ok?'.55':'.12';
+    d.style.border=ok?'2px dashed rgba(255,255,255,.35)':'2px dashed rgba(255,0,0,.3)';
     ghostEl.appendChild(d);
   }
   ghostEl.classList.add('show');
 }
 function hideGhost(){ghostEl.classList.remove('show');ghostEl.innerHTML=''}
 
-// ── GRID POSITION (no-gap math) ──
+// ── GRID POSITION (uses ghostEl's bounding rect for exact match) ──
 function gridPos(cx,cy){
-  const r=gridWrap.getBoundingClientRect();
-  const p=parseFloat(getComputedStyle(gridWrap).padding)||6;
-  const iw=r.width-p*2, ih=r.height-p*2;
-  const x=cx-r.left-p, y=cy-r.top-p;
-  if(x<0||y<0||x>=iw||y>=ih) return null;
-  const col=Math.floor(x/(iw/C));
-  const row=Math.floor(y/(ih/R));
-  if(row<0||row>=R||col<0||col>=C) return null;
-  return {r:row,c:col};
+  const gr=ghostEl.getBoundingClientRect();
+  const x=cx-gr.left, y=cy-gr.top;
+  if(x<0||y<0||x>=gr.width||y>=gr.height) return null;
+  return {r:Math.floor(y/(gr.height/R)), c:Math.floor(x/(gr.width/C))};
 }
 
-// ── TAP PLACE (grid click/touch) ──
-gridWrap.addEventListener('click', e=>{
+// ── EVENTS: grid tap to place selected piece ──
+gridEl.addEventListener('click', e=>{
   if(dead||busy||sel<0) return;
   const pos=gridPos(e.clientX,e.clientY);
   if(pos) if(placeFlow(sel,pos.r,pos.c)) hideGhost();
 });
-gridWrap.addEventListener('touchstart', e=>{
+gridEl.addEventListener('touchstart', e=>{
   if(dead||busy||sel<0) return;
-  const t=e.touches[0];
+  const t=e.changedTouches[0];
   const pos=gridPos(t.clientX,t.clientY);
   if(pos) if(placeFlow(sel,pos.r,pos.c)){hideGhost();e.preventDefault()}
 },{passive:false});
 
-// ── GHOST FOLLOW (mouse) ──
-gridWrap.addEventListener('mousemove', e=>{
+// ── EVENTS: ghost follow (mouse only — touch uses ghost via selection) ──
+gridEl.addEventListener('mousemove', e=>{
   if(dead||sel<0||!pieces[sel]){hideGhost();return}
   const pos=gridPos(e.clientX,e.clientY);
   if(!pos){hideGhost();return}
   showGhost(pieces[sel].s,pieces[sel].c,pos.r,pos.c);
 });
-gridWrap.addEventListener('mouseleave',()=>{if(sel<0)hideGhost()});
+gridEl.addEventListener('mouseleave',()=>{if(sel<0)hideGhost()});
 
-// ── PIECE SELECTION ──
+// ── EVENTS: piece selection ──
 slots.forEach((sl,i)=>{
-  const handler=e=>{
+  const tapHandler=e=>{
     if(dead||busy) return;
-    if(!pieces[i]||!validSpots(pieces[i].s).length) return;
+    // Safety ensure piece exists
+    if(!pieces[i]){pieces[i]=pickShape();renderTray()}
+    if(validSpots(pieces[i].s).length===0) return;
     if(sel===i){sel=-1;hideGhost();renderTray();return}
     sel=i;
     renderTray();
@@ -633,8 +570,8 @@ slots.forEach((sl,i)=>{
     if(v.length) showGhost(pieces[i].s,pieces[i].c,v[0].r,v[0].c);
     e.preventDefault();
   };
-  sl.addEventListener('click',handler);
-  sl.addEventListener('touchstart',handler,{passive:false});
+  sl.addEventListener('click',tapHandler);
+  sl.addEventListener('touchstart',tapHandler,{passive:false});
 });
 
 // ── UNDO ──
@@ -651,11 +588,15 @@ btnUndo.addEventListener('click',()=>{
 function resetGame(){
   g=Array.from({length:R},()=>Array(C).fill(0));
   score=0;sel=-1;dead=false;busy=false;undoSave=null;
-  fillPieces();
+  fillAllPieces();
   repaint();renderTray();updScore();
   overlay.classList.remove('show');
   btnUndo.disabled=true;hideGhost();
-  setTimeout(autoAdvance,150);
+  setTimeout(autoAdvance,100);
+}
+
+function fillAllPieces(){
+  pieces = [pickShape(),pickShape(),pickShape()];
 }
 
 btnNew.addEventListener('click',resetGame);
@@ -671,7 +612,13 @@ function boot(){
 }
 if(document.readyState==='complete') boot();
 else window.addEventListener('load',boot);
-window.addEventListener('resize',()=>{if(!dead) repaint()});
+window.addEventListener('resize',()=>{
+  // Re-render ghost if selected
+  if(sel>=0&&pieces[sel]){
+    const v=validSpots(pieces[sel].s);
+    if(v.length) showGhost(pieces[sel].s,pieces[sel].c,v[0].r,v[0].c);
+  }
+});
 </script>
 </body>
 </html>
