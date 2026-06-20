@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pixel Quest — Memory Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Floating clouds -->
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <div class="cloud cloud-4"></div>
+
+  <!-- Pixel bushes -->
+  <div class="bush bush-left"></div>
+  <div class="bush bush-right"></div>
+
+  <div class="game-wrapper">
+    <header class="game-header">
+      <h1 class="title">
+        <span class="title-icon">🏰</span>
+        Pixel Quest
+        <span class="title-icon">🏰</span>
+      </h1>
+      <p class="subtitle">Match the pairs!</p>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-icon">👆</span>
+          <span class="stat-label">Moves</span>
+          <span class="stat-value" id="moves">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">✅</span>
+          <span class="stat-label">Matched</span>
+          <span class="stat-value" id="matches">0</span>
+          <span class="stat-sep">/</span>
+          <span class="stat-value stat-total">8</span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon">⏱️</span>
+          <span class="stat-label">Time</span>
+          <span class="stat-value" id="timer">00:00</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="board-container">
+      <div class="board-scenery board-scenery-left">
+        <div class="tree tree-1"></div>
+        <div class="tree tree-2"></div>
+      </div>
+
+      <div class="game-board" id="gameBoard"></div>
+
+      <div class="board-scenery board-scenery-right">
+        <div class="tree tree-3"></div>
+        <div class="tree tree-4"></div>
+      </div>
+    </div>
+
+    <button class="restart-btn" id="restartBtn">🔄 New Game</button>
+
+    <footer class="game-footer">
+      <span>⬆️ ⬇️ ⬅️ ➡️</span>
+      <span>Press START to play!</span>
+      <span>🅰️ 🅱️</span>
+    </footer>
+  </div>
+
+  <!-- Ground decorations -->
+  <div class="ground">
+    <div class="grass-row"></div>
+    <div class="dirt-row"></div>
+    <div class="dirt-row"></div>
+    <div class="stone-row"></div>
+  </div>
+
+  <!-- Underground decorations -->
+  <div class="underground-gems">
+    <span class="gem gem-1">💎</span>
+    <span class="gem gem-2">⭐</span>
+    <span class="gem gem-3">💰</span>
+  </div>
+
+  <!-- Win Modal -->
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-content">
+      <div class="modal-stars">⭐ 🌟 ⭐ 🌟 ⭐</div>
+      <h2 class="modal-title">🎉 Level Complete! 🎉</h2>
+      <div class="modal-trophy">🏆</div>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <span class="modal-stat-icon">👆</span>
+          <span>Moves</span>
+          <span class="modal-stat-value" id="finalMoves">0</span>
+        </div>
+        <div class="modal-stat">
+          <span class="modal-stat-icon">⏱️</span>
+          <span>Time</span>
+          <span class="modal-stat-value" id="finalTime">00:00</span>
+        </div>
+        <div class="modal-stat">
+          <span class="modal-stat-icon">⭐</span>
+          <span>Rating</span>
+          <span class="modal-stat-value" id="finalRating">★★★</span>
+        </div>
+      </div>
+      <p class="modal-message">You're a pixel legend!</p>
+      <button class="modal-btn" onclick="restartGame()">🔄 Play Again</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
